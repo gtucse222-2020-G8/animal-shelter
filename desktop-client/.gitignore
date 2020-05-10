@@ -1,0 +1,10 @@
+# Gradle
+.gradle
+
+# Builds
+/build/
+*.class
+
+# Intellij IDEA
+.idea
+
