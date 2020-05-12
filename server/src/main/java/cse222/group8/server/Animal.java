@@ -1,9 +1,10 @@
 package cse222.group8.server;
 
+import java.io.File;
 import java.util.Queue;
 
-public abstract class Animal {
-
+public class Animal implements Comparable<Animal> {
+    /* city town shelter*/
     private int id;
     private String name;
     private String kind;
@@ -13,10 +14,10 @@ public abstract class Animal {
     private boolean neutered;
     private String info;
     private boolean adopted;
-    private String imgPath;
+    private File imgPath;
 
     //Shelter date field needed
-    
+
     AdoptionRequest mainRequest;
     Queue<AdoptionRequest> requestQueue;
 
@@ -25,8 +26,12 @@ public abstract class Animal {
         return null;
     }
 
-    public void updateRequests() {}
+    @Override
+    public int compareTo(Animal o) {
+        return Integer.compare(id, o.getId());
+    }
 
+    public void updateRequests() {}
 
     public char getGender() {
         return gender;

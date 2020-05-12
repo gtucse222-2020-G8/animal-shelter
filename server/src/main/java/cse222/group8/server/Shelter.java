@@ -1,23 +1,34 @@
 package cse222.group8.server;
 
-import java.util.List;
+import cse222.group8.server.DataStructures.BinarySearchTree;
+import org.jetbrains.annotations.NotNull;
 
-public class Shelter {
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class Shelter implements Comparable<Shelter> {
 
     private String name;
     private String address;
     private String phoneNumber;
-    private String shelterId;
     private String password;
-    private int capacity;
-    private List<Dog> dogs;
-    private List<Cat> cats;
+    private int catCapacity;
+    private int dogCapacity;
+    private BinarySearchTree<Animal> dogs;
+    private BinarySearchTree<Animal> cats;
     private List<Animal> adopteds;
     private List<AdoptionRequest> adoptionRequests;
     private List<Task> tasks;
-    
+    private PriorityQueue<Disease> diseasedAnimals;
     
     // change cap request method needed
+
+    public Animal getDog(int animalId){
+
+    }
+    public Animal getCat(int animalId){
+
+    }
 
     public int getTotalAnimal() {
         return dogs.size() + cats.size();
@@ -37,14 +48,6 @@ public class Shelter {
 
     public void setAddresss(String address) {
         this.address = address;
-    }
-
-    public String getShelterId() {
-        return shelterId;
-    }
-
-    public void setShelterId(String shelterId) {
-        this.shelterId = shelterId;
     }
 
     public String getPassword() {
@@ -112,4 +115,8 @@ public class Shelter {
 	}
 
 
+    @Override
+    public int compareTo(Shelter o) {
+        return 0;
+    }
 }
