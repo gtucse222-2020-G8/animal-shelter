@@ -1,7 +1,6 @@
 package cse222.group8.server;
 
 import cse222.group8.server.DataStructures.BinarySearchTree;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.PriorityQueue;
@@ -21,18 +20,42 @@ public class Shelter implements Comparable<Shelter> {
     private List<Task> tasks;
     private PriorityQueue<Disease> diseasedAnimals;
     
-    // change cap request method needed
+    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
+    	//TODO
+    	return null;
+    }
+    
+    public void addDiseasedAnimal(int animalId) {
+    	//TODO
+    }
+    
+    public void addTask(Task task) {
+    	//TODO
+    }
 
     public Animal getDog(int animalId){
-
+    	//TODO
+    	return null;
     }
+    
     public Animal getCat(int animalId){
-
+    	//TODO
+    	return null;
     }
 
     public int getTotalAnimal() {
-        return dogs.size() + cats.size();
+        //return dogs.size() + cats.size();
+    	//tree does not have size method
+    	//TODO
+    	return -1;
     }
+    
+    @Override
+    public int compareTo(Shelter o) {
+    	//TODO
+        return -1;
+    }
+    
 
     public String getName() {
         return name;
@@ -58,52 +81,18 @@ public class Shelter implements Comparable<Shelter> {
         this.password = password;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public List<Dog> getDogs() {
-        return dogs;
-    }
-
-    public void setDogs(List<Dog> dogs) {
-        this.dogs = dogs;
-    }
-
-    public List<Cat> getCats() {
-        return cats;
-    }
-
-    public void setCats(List<Cat> cats) {
-        this.cats = cats;
-    }
-
     public List<Animal> getAdopteds() {
         return adopteds;
     }
 
-    public void setAdopteds(List<Animal> adopteds) {
-        this.adopteds = adopteds;
-    }
 
     public List<AdoptionRequest> getAdoptionRequests() {
         return adoptionRequests;
     }
 
-    public void setAdoptionRequests(List<AdoptionRequest> adoptionRequests) {
-        this.adoptionRequests = adoptionRequests;
-    }
 
     public List<Task> getTasks() {
         return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
 
 	public String getPhoneNumber() {
@@ -114,9 +103,44 @@ public class Shelter implements Comparable<Shelter> {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public String getAddress() {
+		return address;
+	}
 
-    @Override
-    public int compareTo(Shelter o) {
-        return 0;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getCatCapacity() {
+		return catCapacity;
+	}
+
+	public void setCatCapacity(int catCapacity) {
+		this.catCapacity = catCapacity;
+	}
+
+	public int getDogCapacity() {
+		return dogCapacity;
+	}
+
+	public void setDogCapacity(int dogCapacity) {
+		this.dogCapacity = dogCapacity;
+	}
+
+	public BinarySearchTree<Animal> getDogs() {
+		return dogs;
+	}
+
+
+	public BinarySearchTree<Animal> getCats() {
+		return cats;
+	}
+
+	public PriorityQueue<Disease> getDiseasedAnimals() {
+		return diseasedAnimals;
+	}
+
+	public void setDiseasedAnimals(PriorityQueue<Disease> diseasedAnimals) {
+		this.diseasedAnimals = diseasedAnimals;
+	}
 }

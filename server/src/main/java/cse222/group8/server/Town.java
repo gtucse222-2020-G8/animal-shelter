@@ -1,6 +1,6 @@
 package cse222.group8.server;
 
-import cse222.group8.server.DataStructures.BinarySearchTree;
+
 import java.util.List;
 
 
@@ -11,12 +11,13 @@ public class Town implements Comparable<Town> {
     private List<Shelter> shelters;
 
     public Shelter getShelter(String name){
-
+    	//TODO
+    	return null;
     }
 
     public List<Shelter> getShelters() {
             return shelters;
-        }
+    }
 
     @Override
     public int compareTo(Town o) {

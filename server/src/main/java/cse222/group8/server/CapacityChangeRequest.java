@@ -6,4 +6,9 @@ public class CapacityChangeRequest {
     Shelter shelter;
     int dogCapacity;
     int catCapacity;
+    
+    public CapacityChangeRequest(String city, String town, Shelter shelter, int dogCap, int catCap) {
+		// TODO Auto-generated constructor stub
+	}
+    
 }
