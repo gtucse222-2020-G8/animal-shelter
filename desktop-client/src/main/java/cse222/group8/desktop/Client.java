@@ -516,4 +516,78 @@ public class Client {
             throw new ConnectionError();
         }
     }
+    public void addDiseasedAnimal(Token token, int animalId, int priority) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"shelter/diseases");
+        Gson gson = new Gson();
+        String body = gson.toJson(priority);
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(body))
+                .setHeader("Content-Type", "application/json")
+                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("AnimalId", String.valueOf(animalId))
+                .uri(uri)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
+    public DiseasedAnimalData getDiseasedAnimal(Token token) throws ConnectionError{
+        URI uri = URI.create(baseUrl+"shelter/diseases");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .setHeader("Content-Type", "application/json")
+                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .uri(uri)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+                Gson gson = new Gson();
+                return gson.fromJson(jsonBody, DiseasedAnimalData.class);
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+
+    }
+    public DiseasedAnimalData[] getAllDiseasedAnimals(Token token) throws ConnectionError{
+        URI uri = URI.create(baseUrl+"shelter/diseases/all");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .setHeader("Content-Type", "application/json")
+                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .uri(uri)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+                Gson gson = new Gson();
+                return gson.fromJson(jsonBody, DiseasedAnimalData[].class);
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
 }
