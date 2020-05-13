@@ -2,23 +2,23 @@ package cse222.group8.server;
 
 
 import  cse222.group8.server.DataStructures.BinarySearchTree;
-import java.util.List;
 
 public class City implements Comparable<City>{
 
     private String name;
     BinarySearchTree<Town> towns;
+    
+    public City(String cityName){
+
+    }
 
     public BinarySearchTree<Town> getTowns() {
         return towns;
     }
 
     public Town getTown(String townName){
-
-    }
-
-    public City(String cityName){
-
+    	//TODO
+    	return null;
     }
 
     @Override

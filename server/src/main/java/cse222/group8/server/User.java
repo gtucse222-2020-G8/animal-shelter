@@ -1,10 +1,10 @@
 package cse222.group8.server;
 
+import java.util.Date;
 import java.util.List;
 
 public class User implements Comparable<User> {
 
-    // sign up date field needed
     private String name;
     private String surname;
     private String username;
@@ -14,8 +14,27 @@ public class User implements Comparable<User> {
     private Town town;
     private List<AdoptionRequest> requests;
     private List<Animal> favorites;
+    private Date signUpDate;
+    
+    
+    public AdoptionRequest createARequest(Animal animal) {
+    	//TODO
+    	return null;
+    }
 
-    // update
+    public void updateUser(User user) {
+    	/* param can change */
+    	//TODO
+    }
+    
+    public void addToFavs(Animal animal) {
+    	//TODO
+    }
+    
+    @Override
+    public int compareTo(User o) {
+        return 0;
+    }
 
     public String getName() {
         return name;
@@ -81,12 +100,16 @@ public class User implements Comparable<User> {
         this.requests = requests;
     }
 
-    @Override
-    public int compareTo(User o) {
-        return 0;
-    }
+	public List<Animal> getFavorites() {
+		return favorites;
+	}
 
-    /* create request */
+	public void setFavorites(List<Animal> favorites) {
+		this.favorites = favorites;
+	}
 
+	public Date getSignUpDate() {
+		return signUpDate;
+	}
 
 }
