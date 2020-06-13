@@ -4,6 +4,7 @@
 # Builds
 /build/
 *.class
+/out/
 
 # Intellij IDEA
 .idea
