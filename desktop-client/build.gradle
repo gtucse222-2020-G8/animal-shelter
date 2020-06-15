@@ -12,6 +12,7 @@ plugins {
     id 'java'
 }
 apply plugin: "org.openjfx.javafxplugin"
+apply plugin: 'application'
 javafx {
     sdk = './libs/javafx-sdk-11.0.2'
     modules = [ 'javafx.controls', 'javafx.fxml' ]
