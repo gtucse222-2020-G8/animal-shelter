@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #FFCB31;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cse222.group8.desktop.RegisterPageController">
+    <ImageView fitHeight="250.0" fitWidth="250.0">
+        <Image url="@shelter-logo.jpg" />
+    </ImageView>
+    <Text fx:id="registerShelterName" text="ShelterName">
+        <VBox.margin>
+            <Insets top="5.0" />
+        </VBox.margin>
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font></Text>
+    <PasswordField fx:id="passwordField" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" promptText="Password">
+        <VBox.margin>
+            <Insets top="5.0" />
+        </VBox.margin>
+    </PasswordField>
+   <TextField fx:id="phoneNumberField" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" promptText="Phone Number">
+      <VBox.margin>
+         <Insets top="5.0" />
+      </VBox.margin>
+   </TextField>
+   <TextField fx:id="catCapacityField" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" promptText="Cat Capacity">
+      <VBox.margin>
+         <Insets top="5.0" />
+      </VBox.margin>
+   </TextField>
+   <TextField fx:id="dogCapacityField" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" promptText="Dog Capacity">
+      <VBox.margin>
+         <Insets top="6.0" />
+      </VBox.margin>
+   </TextField>
+   <TextArea fx:id="addressField" maxHeight="-Infinity" maxWidth="200.0" minHeight="-Infinity" minWidth="200.0" prefHeight="50.0" prefWidth="200.0" promptText="Address">
+      <VBox.margin>
+         <Insets top="5.0" />
+      </VBox.margin>
+   </TextArea>
+    <HBox maxWidth="200.0" prefHeight="100.0" prefWidth="200.0">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+        <Button fx:id="loginButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" prefWidth="96.0" text="Login">
+            <HBox.margin>
+                <Insets right="4.0" />
+            </HBox.margin>
+        </Button>
+        <Button fx:id="cancelButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" onAction="#onCancelButtonAction" prefWidth="96.0" text="Cancel">
+            <HBox.margin>
+                <Insets left="4.0" />
+            </HBox.margin>
+        </Button>
+    </HBox>
+</VBox>
