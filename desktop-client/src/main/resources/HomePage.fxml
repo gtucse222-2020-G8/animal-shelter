@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cse222.group8.desktop.HomePageController">
+    <top>
+        <fx:include source="TopPanel.fxml" />
+    </top>
+    <left>
+        <fx:include prefWidth="200.0" source="LeftMenuPanel.fxml" />
+    </left>
+   <center>
+       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0">
+               <HBox.margin>
+                   <Insets bottom="20.0" left="50.0" right="20.0" top="20.0" />
+               </HBox.margin>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Tasks">
+                   <font>
+                       <Font size="25.0" />
+                   </font>
+               </Text>
+               <ScrollPane minWidth="300.0" prefWidth="300.0">
+                   <VBox.margin>
+                       <Insets top="20.0" />
+                   </VBox.margin>
+                   <VBox fx:id="dailyTaskVBox" prefWidth="300.0" />
+               </ScrollPane>
+           </VBox>
+           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <HBox.margin>
+                   <Insets left="20.0"/>
+               </HBox.margin>
+               <VBox alignment="TOP_CENTER" prefWidth="100.0">
+                   <StackPane>
+                       <Circle fx:id="adoptionRequestsCircle" fill="#54f374" radius="40.0" stroke="BLACK"
+                               strokeType="INSIDE"/>
+                       <Text fx:id="adoptionRequestsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                             text="Text">
+                           <font>
+                               <Font name="System Bold" size="18.0"/>
+                           </font>
+                       </Text>
+                   </StackPane>
+                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adoption Requests">
+                       <font>
+                           <Font size="11.0"/>
+                       </font>
+                   </Text>
+               </VBox>
+               <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                   <children>
+                       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                               <StackPane prefHeight="150.0" prefWidth="200.0">
+                                   <children>
+                                       <Circle fx:id="catsCircle" fill="#54f374" radius="60.0" stroke="BLACK"
+                                               strokeType="INSIDE">
+                                           <StackPane.margin>
+                                               <Insets right="5.0"/>
+                                           </StackPane.margin>
+                                       </Circle>
+                                       <Text fx:id="catsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                                             text="Text">
+                                           <font>
+                                               <Font name="System Bold" size="31.0"/>
+                                           </font>
+                                       </Text>
+                                   </children>
+                               </StackPane>
+                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cats">
+                                   <font>
+                                       <Font size="15.0"/>
+                                   </font>
+                               </Text>
+                           </children>
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <StackPane prefHeight="150.0" prefWidth="200.0">
+                               <Circle fx:id="dogsCircle" fill="#54f374" radius="60.0" stroke="BLACK"
+                                       strokeType="INSIDE">
+                                   <StackPane.margin>
+                                       <Insets left="5.0"/>
+                                   </StackPane.margin>
+                               </Circle>
+                               <Text fx:id="dogsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                                     text="Text">
+                                   <font>
+                                       <Font name="System Bold" size="31.0"/>
+                                   </font>
+                               </Text>
+                           </StackPane>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dogs">
+                               <font>
+                                   <Font size="15.0"/>
+                               </font>
+                           </Text>
+                       </VBox>
+                   </children>
+                   <VBox.margin>
+                       <Insets top="20.0"/>
+                   </VBox.margin>
+               </HBox>
+           </VBox>
+       </HBox>
+   </center>
+</BorderPane>
