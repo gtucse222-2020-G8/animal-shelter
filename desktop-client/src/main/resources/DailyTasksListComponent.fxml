@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane maxHeight="350.0" maxWidth="300.0" prefHeight="350.0" prefWidth="300.0"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cse222.group8.desktop.DailyTasksListComponentController">
+   <content>
+      <VBox fx:id="dailyTasksVBox" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" />
+   </content>
+</ScrollPane>
