@@ -20,6 +20,7 @@ public class Shelter implements Comparable<Shelter> {
     private List<Task> tasks;
     private PriorityQueue<Disease> diseasedAnimals;
     
+    
     public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
     	//TODO
     	return null;
