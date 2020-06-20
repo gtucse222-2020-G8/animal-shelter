@@ -6,6 +6,7 @@ import java.util.Scanner;
 /**
  * Class for a binary tree that stores type E objects.  @param <E>  the type parameter
  */
+@SuppressWarnings("serial")
 public class BinaryTree<E> implements Serializable {
 
     /**

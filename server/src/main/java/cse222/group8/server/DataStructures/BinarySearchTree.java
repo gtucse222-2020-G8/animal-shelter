@@ -5,6 +5,7 @@ package cse222.group8.server.DataStructures;
  *
  * @param <E> the type parameter
  */
+@SuppressWarnings("serial")
 public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> implements SearchTree<E> {
 	// Data Fields
     /**
