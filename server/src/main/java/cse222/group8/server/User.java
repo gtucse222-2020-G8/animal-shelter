@@ -17,14 +17,16 @@ public class User implements Comparable<User> {
     private Date signUpDate;
     
     
-    public AdoptionRequest createARequest(Animal animal) {
+    public boolean createARequest(Animal animal) {
     	//TODO
-    	return null;
+    	// calls animals method
+    	return false;
     }
 
-    public void updateUser(User user) {
+    public boolean updateUser(User user) {
     	/* param can change */
     	//TODO
+    	return false;
     }
     
     public void addToFavs(Animal animal) {

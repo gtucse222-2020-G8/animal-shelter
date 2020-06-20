@@ -5,14 +5,23 @@ import  cse222.group8.server.DataStructures.BinarySearchTree;
 
 public class City implements Comparable<City>{
 
+	private int cityId;
     private String name;
     BinarySearchTree<Town> towns;
     
-    public City(String cityName){
-
+    public City(String cityName, int cityId){
+    	// TODO
     }
 
-    public BinarySearchTree<Town> getTowns() {
+    public int getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
+	public BinarySearchTree<Town> getTowns() {
         return towns;
     }
 
