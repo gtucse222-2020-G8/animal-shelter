@@ -46,12 +46,12 @@
         <VBox.margin>
             <Insets top="10.0" />
         </VBox.margin>
-        <Button fx:id="loginButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" prefWidth="96.0" text="Login">
+        <Button fx:id="submitButton" defaultButton="true" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" onAction="#onSubmitButtonAction" prefWidth="96.0" text="Submit">
             <HBox.margin>
                 <Insets right="4.0" />
             </HBox.margin>
         </Button>
-        <Button fx:id="cancelButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" onAction="#onCancelButtonAction" prefWidth="96.0" text="Cancel">
+        <Button fx:id="cancelButton" cancelButton="true" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" onAction="#onCancelButtonAction" prefWidth="96.0" text="Cancel">
             <HBox.margin>
                 <Insets left="4.0" />
             </HBox.margin>

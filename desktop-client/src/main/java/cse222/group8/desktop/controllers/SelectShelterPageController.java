@@ -3,6 +3,7 @@ package cse222.group8.desktop.controllers;
 import cse222.group8.desktop.Helpers;
 import cse222.group8.desktop.client.Client;
 import cse222.group8.desktop.client.ConnectionError;
+import cse222.group8.desktop.models.RegisterPageModel;
 import cse222.group8.desktop.models.SelectShelterPageModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -68,13 +69,23 @@ public class SelectShelterPageController {
             String[] shelters = Client.getShelters(model.getCurrentCity(),model.getCurrentTown());
             Parent root;
             if(Helpers.arrayContains(shelters,model.getCurrentShelterName())) {
-                root = FXMLLoader.load(getClass().getClassLoader().getResource("./views/LoginPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/LoginPage.fxml"));
+                root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                LoginPageController controller = loader.<LoginPageController>getController();
+                controller.setCity(model.getCurrentCity());
+                controller.setTown(model.getCurrentTown());
+                controller.setLoginShelterName(model.getCurrentShelterName());
             }
             else {
-                root = FXMLLoader.load(getClass().getClassLoader().getResource("./views/RegisterPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/RegisterPage.fxml"));
+                root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                RegisterPageController controller = loader.<RegisterPageController>getController();
+                controller.setFields(model.getCurrentShelterName(),model.getCurrentCity(),model.getCurrentTown());
             }
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
             stage.show();
         }catch (IOException ignore){
             System.out.println("FXML path error");

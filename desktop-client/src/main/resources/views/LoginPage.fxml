@@ -26,7 +26,7 @@
         <VBox.margin>
             <Insets top="10.0" />
         </VBox.margin>
-        <Button fx:id="loginButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" prefWidth="96.0" text="Login">
+        <Button fx:id="loginButton" maxWidth="96.0" minWidth="96.0" mnemonicParsing="false" onAction="#onLoginButtonAction" prefWidth="96.0" text="Login">
            <HBox.margin>
                <Insets right="4.0" />
            </HBox.margin>

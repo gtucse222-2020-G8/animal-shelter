@@ -161,7 +161,7 @@ public class Client {
             throw new ConnectionError();
         }
     }
-    public static Token login(String city, String town, String shelterName, String password) throws ConnectionError {
+    public static Token login(String city, String town, String shelterName, String password) throws ConnectionError, WrongPasswordException {
         URI uri = URI.create(baseUrl+"shelters/login");
         Gson gson = new Gson();
         String body = gson.toJson(new LoginShelterData(city,town,shelterName,password));
@@ -175,6 +175,9 @@ public class Client {
             if (response.statusCode()==200){
                 String jsonBody = response.body();
                 return gson.fromJson(jsonBody, Token.class);
+            }
+            else if(response.statusCode()==403){
+                throw new WrongPasswordException();
             }
             else {
                 System.out.println(response.statusCode());
