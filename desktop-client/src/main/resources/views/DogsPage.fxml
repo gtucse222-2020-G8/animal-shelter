@@ -4,12 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cse222.group8.desktop.controllers.CatsPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cse222.group8.desktop.controllers.DogsPageController">
     <top>
         <fx:include source="TopPanel.fxml" />
     </top>
     <left>
-        <fx:include prefWidth="200.0" source="LeftMenuPanel.fxml" />
+        <fx:include fx:id="leftMenu" prefWidth="200.0" source="LeftMenuPanel.fxml" />
     </left>
     <center>
         <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">

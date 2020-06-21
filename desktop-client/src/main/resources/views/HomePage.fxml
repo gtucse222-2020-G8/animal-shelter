@@ -11,7 +11,7 @@
         <fx:include source="TopPanel.fxml" />
     </top>
     <left>
-        <fx:include prefWidth="200.0" source="LeftMenuPanel.fxml" />
+        <fx:include fx:id="leftMenu" prefWidth="200.0" source="LeftMenuPanel.fxml" />
     </left>
    <center>
        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -24,7 +24,7 @@
                        <Font size="25.0" />
                    </font>
                </Text>
-               <ScrollPane minWidth="300.0" prefWidth="300.0">
+               <ScrollPane hbarPolicy="NEVER" minWidth="300.0" prefWidth="300.0">
                    <VBox.margin>
                        <Insets top="20.0" />
                    </VBox.margin>
@@ -33,22 +33,20 @@
            </VBox>
            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <HBox.margin>
-                   <Insets left="20.0"/>
+                   <Insets left="20.0" />
                </HBox.margin>
                <VBox alignment="TOP_CENTER" prefWidth="100.0">
                    <StackPane>
-                       <Circle fx:id="adoptionRequestsCircle" fill="#54f374" radius="40.0" stroke="BLACK"
-                               strokeType="INSIDE"/>
-                       <Text fx:id="adoptionRequestsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
-                             text="Text">
+                       <Circle fx:id="adoptionRequestsCircle" fill="#54f374" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                       <Text fx:id="adoptionRequestsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                            <font>
-                               <Font name="System Bold" size="18.0"/>
+                               <Font name="System Bold" size="18.0" />
                            </font>
                        </Text>
                    </StackPane>
                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adoption Requests">
                        <font>
-                           <Font size="11.0"/>
+                           <Font size="11.0" />
                        </font>
                    </Text>
                </VBox>
@@ -58,51 +56,47 @@
                            <children>
                                <StackPane prefHeight="150.0" prefWidth="200.0">
                                    <children>
-                                       <Circle fx:id="catsCircle" fill="#54f374" radius="60.0" stroke="BLACK"
-                                               strokeType="INSIDE">
+                                       <Circle fx:id="catsCircle" fill="#54f374" radius="60.0" stroke="BLACK" strokeType="INSIDE">
                                            <StackPane.margin>
-                                               <Insets right="5.0"/>
+                                               <Insets right="5.0" />
                                            </StackPane.margin>
                                        </Circle>
-                                       <Text fx:id="catsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
-                                             text="Text">
+                                       <Text fx:id="catsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                                            <font>
-                                               <Font name="System Bold" size="31.0"/>
+                                               <Font name="System Bold" size="31.0" />
                                            </font>
                                        </Text>
                                    </children>
                                </StackPane>
                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cats">
                                    <font>
-                                       <Font size="15.0"/>
+                                       <Font size="15.0" />
                                    </font>
                                </Text>
                            </children>
                        </VBox>
                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <StackPane prefHeight="150.0" prefWidth="200.0">
-                               <Circle fx:id="dogsCircle" fill="#54f374" radius="60.0" stroke="BLACK"
-                                       strokeType="INSIDE">
+                               <Circle fx:id="dogsCircle" fill="#54f374" radius="60.0" stroke="BLACK" strokeType="INSIDE">
                                    <StackPane.margin>
-                                       <Insets left="5.0"/>
+                                       <Insets left="5.0" />
                                    </StackPane.margin>
                                </Circle>
-                               <Text fx:id="dogsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
-                                     text="Text">
+                               <Text fx:id="dogsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                                    <font>
-                                       <Font name="System Bold" size="31.0"/>
+                                       <Font name="System Bold" size="31.0" />
                                    </font>
                                </Text>
                            </StackPane>
                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dogs">
                                <font>
-                                   <Font size="15.0"/>
+                                   <Font size="15.0" />
                                </font>
                            </Text>
                        </VBox>
                    </children>
                    <VBox.margin>
-                       <Insets top="20.0"/>
+                       <Insets top="20.0" />
                    </VBox.margin>
                </HBox>
            </VBox>

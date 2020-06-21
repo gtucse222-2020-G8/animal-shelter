@@ -9,7 +9,7 @@
         <fx:include source="TopPanel.fxml" />
     </top>
     <left>
-        <fx:include prefWidth="200.0" source="LeftMenuPanel.fxml" />
+        <fx:include fx:id="leftMenu" prefWidth="200.0" source="LeftMenuPanel.fxml" />
     </left>
     <center>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="40.0" BorderPane.alignment="CENTER">

@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cse222.group8.desktop.controllers.AnimalPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cse222.group8.desktop.controllers.AnimalsPageController">
     <top>
         <fx:include source="TopPanel.fxml" />
     </top>
     <left>
-        <fx:include prefWidth="200.0" source="LeftMenuPanel.fxml" />
+        <fx:include fx:id="leftMenu" prefWidth="200.0" source="LeftMenuPanel.fxml" />
     </left>
    <center>
        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
