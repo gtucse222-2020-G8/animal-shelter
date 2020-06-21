@@ -5,6 +5,7 @@ import cse222.group8.desktop.client.ConnectionError;
 import cse222.group8.desktop.client.WrongPasswordException;
 import cse222.group8.desktop.client.models.Token;
 import cse222.group8.desktop.models.LoginPageModel;
+import cse222.group8.desktop.models.PageWithTokenModel;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginPageController {
+public class LoginPageController{
     public Text loginShelterName;
     public PasswordField passwordField;
     public Button loginButton;
@@ -38,10 +39,6 @@ public class LoginPageController {
     @FXML public void initialize(){
         model = new LoginPageModel();
         passwordField.textProperty().addListener((observableValue, s, t1) -> {
-            System.out.println(model.getCity());
-            System.out.println(model.getTown());
-            System.out.println(loginShelterName.getText());
-
             if(t1==null || t1.length()==0){
                 loginButton.setDisable(true);
             }

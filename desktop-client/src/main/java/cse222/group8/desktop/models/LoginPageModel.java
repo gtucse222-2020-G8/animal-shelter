@@ -1,6 +1,6 @@
 package cse222.group8.desktop.models;
 
-public class LoginPageModel {
+public class LoginPageModel{
     private String password;
     private String city;
     private String town;
