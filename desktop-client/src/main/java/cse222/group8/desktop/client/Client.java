@@ -93,7 +93,7 @@ public class Client {
                 .GET()
                 .uri(uri)
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -193,7 +193,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .setHeader("AnimalId", String.valueOf(animalId))
                 .uri(uri)
                 .build();
@@ -220,7 +220,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -248,7 +248,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .setHeader("AnimalId",String.valueOf(animalId))
                 .uri(uri)
                 .build();
@@ -271,7 +271,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -303,7 +303,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -333,7 +333,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -357,7 +357,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -381,7 +381,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -403,7 +403,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -429,7 +429,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -451,7 +451,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -477,7 +477,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
@@ -501,7 +501,7 @@ public class Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
-                .setHeader("Authentication", "Bearer "+token.accessToken)
+                .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();
         try {
