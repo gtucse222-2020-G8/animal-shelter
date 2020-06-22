@@ -58,6 +58,14 @@ public class AddCatPageController implements PageWithTokenController {
         ages.add("3-5");
         ages.add("+5");
         ageCombo.setItems(FXCollections.observableArrayList(ages));
+        genderCombo.valueProperty().addListener((observableValue, character, t1) -> {
+            model.setGender(t1);
+        });
+        ageCombo.valueProperty().addListener(((observableValue, s, t1) -> {
+            model.setAge(t1);
+        }));
+        genderCombo.valueProperty().setValue(genders.get(0));
+        ageCombo.valueProperty().setValue(ages.get(0));
         nameField.textProperty().addListener((observableValue, s, t1) -> {
             model.setName(t1);
         });

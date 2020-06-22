@@ -17,8 +17,9 @@ import java.io.IOException;
 public class AnimalsPageController implements PageWithTokenController{
     public VBox catsVBox;
     public VBox dogsVBox;
-    public Button addNewAnimalButton;
     public VBox leftMenu;
+    public Button addNewCatButton;
+    public Button addNewDogButton;
     private AnimalsPageModel model;
     @FXML public LeftMenuPanelController leftMenuController;
 
@@ -50,8 +51,11 @@ public class AnimalsPageController implements PageWithTokenController{
         controller.setToken(model.getToken());
         stage.show();
     }
-    public void onAddNewAnimalButtonAction(Event e){
-        commonButtonAction(e, "views/AddDogPage.fxml");
+    public void onAddNewCatButtonAction(Event e){
+        commonButtonAction(e, "./views/AddCatPage.fxml");
+    }
+    public void onAddNewDogButtonAction(Event e){
+        commonButtonAction(e, "./views/AddDogPage.fxml");
     }
     public void onCatsVBoxClicked(Event e){
         commonButtonAction(e,"./views/CatsPage.fxml");

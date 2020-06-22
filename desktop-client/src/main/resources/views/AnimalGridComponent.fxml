@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="stackPane" prefHeight="260.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cse222.group8.desktop.controllers.AnimalGridComponentController">
+<StackPane fx:id="stackPane" prefHeight="260.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="200.0" spacing="5.0" style="-fx-border-color: #AAAAAA; -fx-border-width: 1;">
          <children>

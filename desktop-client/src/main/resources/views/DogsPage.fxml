@@ -25,7 +25,6 @@
                         <RowConstraints minHeight="260.0" prefHeight="260.0" vgrow="ALWAYS" />
                     </rowConstraints>
                     <children>
-                        <fx:include source="AnimalGridComponent.fxml" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     </children>
                     <padding>
                         <Insets left="40.0" />
