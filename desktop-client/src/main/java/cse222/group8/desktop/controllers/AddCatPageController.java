@@ -93,6 +93,14 @@ public class AddCatPageController implements PageWithTokenController {
         try {
             AnimalDataWithImage data = Client.getAnimal(model.getToken(),id);
             model.setAnimalData(data);
+            nameField.textProperty().setValue(model.getName());
+            genderCombo.valueProperty().setValue(model.getGender());
+            ageCombo.valueProperty().setValue(model.getAge());
+            neuteredCheck.selectedProperty().setValue(model.isNeutered());
+            vacInfoField.textProperty().setValue(model.getVaccination());
+            infoField.textProperty().setValue(model.getInfo());
+            speciesField.textProperty().setValue(model.getKind());
+            animalImageView.setImage(model.getImageAsImage());
         } catch (ConnectionError connectionError) {
             System.out.println("Connection Error");
             System.exit(-1);
@@ -113,9 +121,8 @@ public class AddCatPageController implements PageWithTokenController {
             FileInputStream imageInFile = new FileInputStream(selectedFile);
             byte[] imageData = new byte[(int) selectedFile.length()];
             imageInFile.read(imageData);
-            Image image = new Image(imageInFile);
-            animalImageView.setImage(image);
             model.setImage(Base64.getEncoder().encodeToString(imageData));
+            animalImageView.setImage(model.getImageAsImage());
             if(model.isEditing()){
                 Client.updateAnimalPicture(model.getToken(),model.getAnimalId(),model.getImage());
             }

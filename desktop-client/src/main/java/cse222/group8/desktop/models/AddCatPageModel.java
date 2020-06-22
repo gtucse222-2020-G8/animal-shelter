@@ -2,6 +2,10 @@ package cse222.group8.desktop.models;
 
 import cse222.group8.desktop.client.models.AnimalData;
 import cse222.group8.desktop.client.models.AnimalDataWithImage;
+import javafx.scene.image.Image;
+
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
 
 public class AddCatPageModel extends PageWithTokenModel{
     private Character gender;
@@ -32,6 +36,12 @@ public class AddCatPageModel extends PageWithTokenModel{
     }
     public AnimalData getAnimalData(){
         return new AnimalData(animalId,name,"cat",kind,gender,age,vaccination,neutered,info,false);
+    }
+
+    public Image getImageAsImage(){
+        byte[] img = Base64.getDecoder().decode(image);
+        ByteArrayInputStream bais = new ByteArrayInputStream(img);
+        return new Image(bais);
     }
 
     public boolean isEditing(){

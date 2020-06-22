@@ -8,10 +8,13 @@ import cse222.group8.desktop.models.DogsPageModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -66,6 +69,25 @@ public class DogsPageController implements PageWithTokenController {
         StackPane node = loader.load(getClass().getClassLoader().getResource("./views/AnimalGridComponent.fxml").openStream());
         //FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/AnimalGridComponent.fxml"));
         //StackPane node = loader.load();
+        node.setOnMouseClicked(mouseEvent -> {
+            Node _node=(Node) mouseEvent.getSource();
+            Stage stage=(Stage) _node.getScene().getWindow();
+            FXMLLoader _loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/AddDogPage.fxml"));
+            Parent root = null;
+            try {
+                root = _loader.load();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+                System.out.println("File not found");
+                System.exit(-1);
+            }
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            AddDogPageController controller = _loader.<AddDogPageController>getController();
+            controller.setToken(model.getToken());
+            controller.setAnimalID(data.id);
+            stage.show();
+        });
         VBox vbox = (VBox) node.getChildren().get(0);
         List<Node> children = vbox.getChildren();
         ImageView imageView = (ImageView) children.get(0);

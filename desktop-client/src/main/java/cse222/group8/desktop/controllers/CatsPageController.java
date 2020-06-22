@@ -71,11 +71,11 @@ public class CatsPageController implements PageWithTokenController {
         //StackPane node = loader.load();
         node.setOnMouseClicked(mouseEvent -> {
             Node _node=(Node) mouseEvent.getSource();
-            Stage stage=(Stage) node.getScene().getWindow();
-            FXMLLoader _loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/AddDogPage.fxml"));
+            Stage stage=(Stage) _node.getScene().getWindow();
+            FXMLLoader _loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/AddCatPage.fxml"));
             Parent root = null;
             try {
-                root = loader.load();
+                root = _loader.load();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
                 System.out.println("File not found");
@@ -83,7 +83,7 @@ public class CatsPageController implements PageWithTokenController {
             }
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            AddCatPageController controller = loader.<AddCatPageController>getController();
+            AddCatPageController controller = _loader.<AddCatPageController>getController();
             controller.setToken(model.getToken());
             controller.setAnimalID(data.id);
             stage.show();
