@@ -8,6 +8,7 @@ import cse222.group8.desktop.models.HomePageModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -26,7 +27,6 @@ public class HomePageController implements PageWithTokenController {
 
     @FXML
     public void initialize(){
-        System.out.println("Initialized home");
         model = new HomePageModel();
         leftMenuController.changeFocus(0);
         model.addListenerToTaskNames(change -> {
@@ -37,7 +37,6 @@ public class HomePageController implements PageWithTokenController {
     }
 
     public void setToken(Token token){
-        System.out.println("Set token home");
         model.setToken(token);
         try {
             GeneralShelterData generalShelterData = Client.getGeneralShelterData(model.getToken());
@@ -60,6 +59,41 @@ public class HomePageController implements PageWithTokenController {
             System.exit(-1);
         }
         leftMenuController.setToken(model.getToken());
+        postInit();
+    }
+
+    private void postInit(){
+        String greyCircle = "#AAAAAA";
+        String greenCircle = "#00CCCC";
+        String redCircle = "#FF3333";
+        String yellowCircle = "#DDDD00";
+        double denseLowerLimit = 0.4;
+        if(model.getCatCapacity()<=0){
+            catsCircle.setFill(Paint.valueOf(greenCircle));
+        }
+        else if(((double)model.getCatCount()/(double)model.getCatCapacity()) > denseLowerLimit){
+            catsCircle.setFill(Paint.valueOf(redCircle));
+        }
+        else{
+            catsCircle.setFill(Paint.valueOf(greenCircle));
+        }
+
+        if(model.getDogCapacity()<=0){
+            dogsCircle.setFill(Paint.valueOf(greyCircle));
+        }
+        else if(((double)model.getDogCount()/(double)model.getDogCapacity()) > denseLowerLimit){
+            dogsCircle.setFill(Paint.valueOf(redCircle));
+        }
+        else{
+            dogsCircle.setFill(Paint.valueOf(greenCircle));
+        }
+
+        if(model.getAdoptionRequestsCount()==0){
+            adoptionRequestsCircle.setFill(Paint.valueOf(greenCircle));
+        }
+        else{
+            adoptionRequestsCircle.setFill(Paint.valueOf(yellowCircle));
+        }
     }
 
 }

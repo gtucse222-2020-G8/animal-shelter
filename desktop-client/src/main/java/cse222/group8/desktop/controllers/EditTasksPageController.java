@@ -16,14 +16,12 @@ public class EditTasksPageController implements PageWithTokenController {
 
     @FXML
     private void initialize(){
-        System.out.println("Initialized edit tasks");
         model = new EditTasksPageModel();
         leftMenuController.changeFocus(4);
     }
 
     @Override
     public void setToken(Token token) {
-        System.out.println("Set token edit tasks");
         model.setToken(token);
         leftMenuController.setToken(token);
     }

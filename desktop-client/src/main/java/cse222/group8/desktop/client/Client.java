@@ -188,7 +188,7 @@ public class Client {
             throw new ConnectionError();
         }
     }
-    public static AnimalDataWithImage getAnimal(Token token, String city, String town, int animalId) throws ConnectionError {
+    public static AnimalDataWithImage getAnimal(Token token, int animalId) throws ConnectionError {
         URI uri = URI.create(baseUrl+"shelters/animals");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -241,10 +241,10 @@ public class Client {
         // TODO
         return "";
     }
-    public static void updateAnimalPicture(Token token, int animalId, File imageFile) throws ConnectionError {
+    public static void updateAnimalPicture(Token token, int animalId, String image) throws ConnectionError {
         URI uri = URI.create(baseUrl+"shelters/animals/update/picture");
         Gson gson = new Gson();
-        String body = gson.toJson(convertImageFileToBase64(imageFile));
+        String body = gson.toJson(image);
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
@@ -266,7 +266,7 @@ public class Client {
             throw new ConnectionError();
         }
     }
-    private static AnimalData[] getAnimals(Token token, String animal) throws ConnectionError {
+    private static AnimalDataWithImage[] getAnimals(Token token, String animal) throws ConnectionError {
         URI uri = URI.create(baseUrl+"shelters/animals/"+animal);
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -279,7 +279,7 @@ public class Client {
             if (response.statusCode()==200){
                 String jsonBody = response.body();
                 Gson gson = new Gson();
-                return gson.fromJson(jsonBody, AnimalData[].class);
+                return gson.fromJson(jsonBody, AnimalDataWithImage[].class);
             }
             else {
                 System.out.println(response.statusCode());
@@ -290,16 +290,16 @@ public class Client {
             throw new ConnectionError();
         }
     }
-    public static AnimalData[] getCats(Token token) throws ConnectionError {
+    public static AnimalDataWithImage[] getCats(Token token) throws ConnectionError {
         return getAnimals(token,"cats");
     }
-    public static AnimalData[] getDogs(Token token) throws ConnectionError {
+    public static AnimalDataWithImage[] getDogs(Token token) throws ConnectionError {
         return getAnimals(token,"dogs");
     }
-    private static void addAnimal(Token token, AnimalData animalData, File imageFile,String animal) throws ConnectionError {
+    private static void addAnimal(Token token, AnimalData animalData, String imageFile,String animal) throws ConnectionError {
         URI uri = URI.create(baseUrl+"shelters/animals/"+animal);
         Gson gson = new Gson();
-        String body = gson.toJson(new AnimalDataWithImage(animalData,convertImageFileToBase64(imageFile)));
+        String body = gson.toJson(new AnimalDataWithImage(animalData,imageFile));
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
@@ -320,10 +320,10 @@ public class Client {
             throw new ConnectionError();
         }
     }
-    public static void addCat(Token token, AnimalData animalData, File imageFile) throws ConnectionError {
+    public static void addCat(Token token, AnimalData animalData, String imageFile) throws ConnectionError {
         addAnimal(token,animalData,imageFile,"cats");
     }
-    public static void addDog(Token token, AnimalData animalData, File imageFile) throws ConnectionError {
+    public static void addDog(Token token, AnimalData animalData, String imageFile) throws ConnectionError {
         addAnimal(token,animalData,imageFile,"dogs");
     }
     public static void updatePassword(Token token, String password) throws ConnectionError {

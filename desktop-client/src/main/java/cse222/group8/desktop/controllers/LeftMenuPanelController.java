@@ -50,14 +50,12 @@ public class LeftMenuPanelController implements PageWithTokenController {
 
     @FXML
     public void initialize(){
-        System.out.println("Initialize left menu panel");
         model = new LeftMenuPanelModel();
         focused = 0;
         menuHomeButton.setStyle(focusedBackgroundStyle);
     }
 
     public void setToken(Token token){
-        System.out.println("Set token left menu panel");
         model.setToken(token);
     }
 
@@ -66,6 +64,10 @@ public class LeftMenuPanelController implements PageWithTokenController {
             Objects.requireNonNull(getButtonByIndex(focused)).setStyle(unfocusedBackgroundStyle);
             Objects.requireNonNull(getButtonByIndex(i)).setStyle(focusedBackgroundStyle);
             focused = i;
+            if(i!=1 && i!=2 && i!=3){
+                menuVBox.getChildren().remove(2);
+                menuVBox.getChildren().remove(2);
+            }
         }
     }
     private void commonButtonAction(Event e, String path){

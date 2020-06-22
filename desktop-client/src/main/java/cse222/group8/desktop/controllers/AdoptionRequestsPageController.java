@@ -1,7 +1,6 @@
 package cse222.group8.desktop.controllers;
 
 import cse222.group8.desktop.client.models.Token;
-import cse222.group8.desktop.models.AddAnimalPageModel;
 import cse222.group8.desktop.models.AdoptionRequestsPageModel;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;

@@ -16,7 +16,7 @@
    <center>
        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-               <VBox fx:id="catsVBox" alignment="TOP_CENTER" maxWidth="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: #AAAAAA;">
+               <VBox fx:id="catsVBox" alignment="TOP_CENTER" maxWidth="200.0" minWidth="200.0" onMouseClicked="#onCatsVBoxClicked" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: #AAAAAA;">
                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cats">
                        <font>
                            <Font size="20.0" />
@@ -35,7 +35,7 @@
                   <Insets />
                </VBox.margin>
                </VBox>
-               <VBox fx:id="dogsVBox" alignment="TOP_CENTER" maxWidth="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: #AAAAAA;">
+               <VBox fx:id="dogsVBox" alignment="TOP_CENTER" maxWidth="200.0" minWidth="200.0" onMouseClicked="#onDogsVBoxClicked" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: #AAAAAA;">
                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dogs">
                        <font>
                            <Font size="20.0" />
@@ -58,7 +58,7 @@
                </HBox.margin>
                </VBox>
            </HBox>
-           <Button fx:id="addNewAnimalButton" minHeight="35.0" minWidth="420.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: #AAAAAA;" text="Add New Animal">
+           <Button fx:id="addNewAnimalButton" minHeight="35.0" minWidth="420.0" mnemonicParsing="false" onAction="#onAddNewAnimalButtonAction" style="-fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: #AAAAAA;" text="Add New Animal">
             <VBox.margin>
                <Insets top="20.0" />
             </VBox.margin>
