@@ -15,7 +15,7 @@ public class Animal implements Comparable<Animal> {
 	private boolean neutered;
 	private String info;
 	private boolean adopted;
-	private File imgPath;
+	private String imageString;
 	private Date shelterDate;
 	private int diseased;
 
@@ -39,11 +39,20 @@ public class Animal implements Comparable<Animal> {
 	}
 
 	public boolean updateAnimal(Animal animal) {
-
-		// TODO
-
+		if(animal.id == id){
+			this.name = animal.name;
+			this.kind = animal.kind;
+			this.gender = animal.gender;
+			this.age = animal.age;
+			this.vaccination = animal.vaccination;
+			this.neutered = animal.neutered;
+			this.info = animal.info;
+			this.imageString = animal.imageString;
+			this.shelterDate = animal.shelterDate;
+			this.diseased = animal.diseased;
+			return true;
+		}
 		return false;
-
 	}
 
 	public int getDiseased() {
@@ -165,12 +174,12 @@ public class Animal implements Comparable<Animal> {
 		this.adopted = adopted;
 	}
 
-	public File getImgPath() {
-		return imgPath;
+	public String getImageString() {
+		return imageString;
 	}
 
-	public void setImgPath(File imgPath) {
-		this.imgPath = imgPath;
+	public void setImageString(String imageString) {
+		this.imageString = imageString;
 	}
 
 	public Date getShelterDate() {
