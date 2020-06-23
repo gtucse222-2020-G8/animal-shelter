@@ -13,6 +13,9 @@ public class Shelter implements Comparable<Shelter> {
     private String address;
     private String phoneNumber;
     private String password;
+    private City city;
+    private Town town;
+    private ShelterSystem shelterSystem;
     private int catCapacity;
     private int dogCapacity;
     private AVLTree<Animal> dogs;
@@ -21,20 +24,100 @@ public class Shelter implements Comparable<Shelter> {
     private List<AdoptionRequest> adoptionRequests;
     private List<Task> tasks;
     private PriorityQueue<Disease> diseasedAnimals;
+    private int catSize;
+    private int dogSize;
 
+	
     public Shelter(){
+    	this.catCapacity = 10;
+    	this.dogCapacity = 10;
+    	this.catSize = 0;
+    	this.dogSize = 0;
+    	cats = new AVLTree<Animal>();
+        dogs = new AVLTree<Animal>();
+        adopteds = new LinkedList<Animal>();
+        adoptionRequests = new LinkedList<AdoptionRequest>();
+        tasks = new LinkedList<Task>();
+    }
+
+    public Shelter(String name, City city, Town town, ShelterSystem system){
+        this.name = name;
+        this.city = city;
+        this.town = town;
+	this.catSize = 0;
+        this.dogSize = 0;
+        this.catCapacity = 10;
+        this.dogCapacity = 10;
+        shelterSystem = system;
         cats = new AVLTree<Animal>();
         dogs = new AVLTree<Animal>();
         adopteds = new LinkedList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
     }
-    
-    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
-    	//TODO
-    	return null;
+
+    public boolean addCat(Animal cat){
+       if(catSize < catCapacity) {
+    	   cats.add(cat);
+           catSize++;
+           return true;
+       }
+       return false;
+    }
+
+    public boolean addDog(Animal dog){
+       if(dogSize < dogCapacity) {
+            dogs.add(dog);
+            dogSize++;
+            return true;
+        }
+        return false;
+    }
+	
+    public int getCatSize() {
+    	return catSize;
+    }
+   
+    public int getDogSize() {
+    	return dogSize;
     }
     
+    public void setDogSize(int size) {
+    	dogSize = size;
+    }
+    
+    public void setCatSize(int size) {
+    	catSize = size;
+    }
+	
+    public boolean removeCat(Animal cat) {
+    	Animal animal = cats.find(cat);
+    	
+    	if(animal != null) {
+    		cats.remove(cat);
+    		catSize--;
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean removeDog(Animal dog) {
+    	Animal animal = dogs.find(dog);
+    	
+    	if(animal != null) {
+    		dogs.remove(dog);
+    		dogSize--;
+    		return true;
+    	}
+    	return false;
+    }
+	
+    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
+        CapacityChangeRequest newChangeRequest = new CapacityChangeRequest(city.getName(),town.getName(),this,dogCap,catCap);
+        shelterSystem.addCapChangeRequest(newChangeRequest);
+    	return newChangeRequest;
+    }
+
     public void addDiseasedAnimal(int animalId, int diseased) {
     	Animal dog = getDog(animalId);
     	if(dog != null)
@@ -63,10 +146,7 @@ public class Shelter implements Comparable<Shelter> {
     }
 
     public int getTotalAnimal() {
-        //return dogs.size() + cats.size();
-    	//tree does not have size method
-    	//TODO
-    	return -1;
+         return getDogSize() + getCatSize();
     }
     
     @Override

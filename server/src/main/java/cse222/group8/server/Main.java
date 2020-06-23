@@ -20,17 +20,18 @@ public class Main {
 	
 	private static void testCities() {
 		
-		BinarySearchTree<City> cities = new BinarySearchTree<City>();
-		TreeMap<Integer, City> cityIds = new TreeMap<Integer, City>();
-		// number of vertex must be 81 + 1  
-		// graph is directed
-		ListGraph borderCities = new ListGraph(82, true);	
+		//its a dummy system for test	
+		ShelterSystem system = new ShelterSystem();
+		BinarySearchTree<City> cities 	= system.getCitiesBST();
+		TreeMap<Integer, City> cityIds	= system.getCityIdsMap();
+		ListGraph borderCities 			= system.getBorderCities();
 		
 		
-		readCityInfo(cities, cityIds, borderCities);
+
+		readCityInfo(system);
 		
 		
-		City city = cities.find(new City("Mersin", 0));
+		City city = cities.find(new City("Mersin", 0,null));
 		System.out.println(city.getCityId());
 		
 		System.out.println(cityIds.get(city.getCityId()).getName());
@@ -52,7 +53,12 @@ public class Main {
 	}
 	
 	
-	protected static void readCityInfo(BinarySearchTree<City> cities, TreeMap<Integer, City> cityIds, ListGraph borderCities) {
+	protected static void readCityInfo(ShelterSystem system) {
+		
+		BinarySearchTree<City> cities 	= system.getCitiesBST();
+		TreeMap<Integer, City> cityIds	= system.getCityIdsMap();
+		ListGraph borderCities 			= system.getBorderCities();
+		
 		
 		File file = new File("Cities.txt");
 		
@@ -66,7 +72,7 @@ public class Main {
 				String[] keys = str.split(" ");
 				
 				int cityID = Integer.parseInt(keys[0]);
-				City city = new City( keys[1], cityID );
+				City city = new City( keys[1], cityID, system );
 				
 				
 				cities.add(city);

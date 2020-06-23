@@ -1,6 +1,7 @@
 package cse222.group8.server;
 
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class AdoptionRequest {
@@ -16,7 +17,13 @@ public class AdoptionRequest {
         this.requestDate = requestDate;
         this.requester = requester;
         this.requestedAnimal = requestedAnimal;
-
+        Calendar c = Calendar.getInstance();
+        c.setTime(requestDate);
+        c.add(Calendar.DATE, 7);
+        expirationDate = c.getTime();
+    }
+    public AdoptionRequest(User requester, Animal requestedAnimal){
+        this(new Date(),requester,requestedAnimal);
     }
 
     public AdoptionRequest(Date requestDate, Date expirationDate, User requester, Animal requestedAnimal){

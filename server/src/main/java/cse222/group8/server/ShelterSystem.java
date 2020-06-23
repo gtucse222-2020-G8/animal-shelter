@@ -1,7 +1,9 @@
 package cse222.group8.server;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.TreeMap;
@@ -9,15 +11,6 @@ import cse222.group8.server.DataStructures.*;
 
 public class ShelterSystem {
 
-    public class Admin{
-
-        void addShelter() {}
-
-        void removeShelter() {}
-
-        void changeShelterCap() {}
-
-    }
     
     //location fields.
     /**  Binary search tree to keep cities.  */
@@ -48,7 +41,89 @@ public class ShelterSystem {
     
     
     
+    
+    // Constructor
+    
+    /**
+     * Constructor for ShelterSystem
+     * 
+     * Initializes fields.
+     */
+    public ShelterSystem() {
+    	
+		this.cities 		= 	new AVLTree<City>();
+		this.cityIds		=	new TreeMap<Integer, City>();
+		this.borderCities	= 	new ListGraph(82, true);
+		this.users			= 	new AVLTree<User>();
+		
+		
+		this.capacityChangeRequests	= new LinkedList<CapacityChangeRequest>();
+		this.newShelterRequests		= new LinkedList<ShelterRequest>();
+		this.removeShelterRequests	= new LinkedList<ShelterRequest>();
+		
+	}
+    
+    
+    
+    
     /* SERVICE METHODS */
+    
+    
+    
+    
+    /**
+     * Returns all cities as collection
+     * 
+     * @return City collection
+     */
+    public Collection<City> getAllCities(){
+    	
+    	return cityIds.values();
+    	
+    }
+    
+    
+    
+    
+    /** Adds new request to queue
+	 * @param request
+	 * @return True if succeed
+	 */
+    public boolean addCapChangeRequest( CapacityChangeRequest request ) {
+    	
+    	return capacityChangeRequests.add(request);
+    	
+    }
+    
+    
+    
+    
+    
+    /** Adds new request to queue
+	 * @param request
+	 * @return True if succeed
+	 */
+	public boolean addNewShleterRequest( ShelterRequest request ) {
+    	
+    	return newShelterRequests.add(request);
+    	
+    }
+	
+	
+	
+	
+	/** Adds new request to queue
+	 * @param request
+	 * @return True if succeed
+	 */
+	public boolean addRemoveShelterRequest( ShelterRequest request ) {
+    	
+    	return removeShelterRequests.add(request);
+    	
+    }
+    
+    
+	
     
     /**
      * Returns list of cities which are has a border
@@ -58,7 +133,7 @@ public class ShelterSystem {
      * @return List of cities
      */
     public List<City> getBorderCities(String cityName){
-    	City city = cities.find(new City(cityName, 0));	
+    	City city = cities.find(new City(cityName, 0,this));
     	if( city == null) {
     		return null;
     	}
@@ -113,7 +188,7 @@ public class ShelterSystem {
      */
     public boolean addShelter(ShelterRequest requestedShelter) {
     	
-    	City city = cities.find(new City(requestedShelter.city, 0));
+    	City city = cities.find(new City(requestedShelter.city, 0,this));
     	if(city == null) {
     		return false;
     	}
@@ -148,7 +223,7 @@ public class ShelterSystem {
      * @return true if succeed
      */
     public boolean removeShelter(ShelterRequest shelter) {
-    	City city = cities.find(new City(shelter.city, 0));
+    	City city = cities.find(new City(shelter.city, 0,this));
     	if(city == null) {
     		return false;
     	}
@@ -172,7 +247,7 @@ public class ShelterSystem {
      * @return Shelter reference if succeed, else null.
      */
     public Shelter getShelter(String cityName, String townName, String shelterName) {
-    	City city = cities.find(new City(cityName, 0));
+    	City city = cities.find(new City(cityName, 0,this));
     	if(city == null) {
     		return null;
     	}
@@ -184,6 +259,42 @@ public class ShelterSystem {
     	
     	return town.getShelter(shelterName);
     }
+    
+    
+    
+    
+    
+    
+    /**
+     * Returns a city with specifed info
+     * 
+     * @param cityName City name
+     * @return City reference
+     */
+    public City getCity(String cityName) {
+    	
+    	return cities.find(new City(cityName,0,this));
+    	
+    }
+    
+    
+    
+    
+    
+    /**
+     * Returns a user with specifed info
+     * 
+     * @param username User name
+     * @return User reference
+     */
+    public User getUser(String username) {
+    	
+    	return users.find(new User(username));
+    	
+    }
+    
+    
+    
     
     
     
@@ -237,9 +348,9 @@ public class ShelterSystem {
      * 
      * @param animal Cat to add
      */
-    public void addCat(Animal animal) {
+    public boolean addCat(Animal animal) {
     	Shelter shelter = animal.getShelter();
-    	shelter.getDogs().add(animal);
+    	return shelter.addCat(animal);
     }
     
     
@@ -249,10 +360,41 @@ public class ShelterSystem {
      * 
      * @param animal Dog to add
      */
-    public void addDog(Animal animal) {
+    public boolean addDog(Animal animal) {
     	Shelter shelter = animal.getShelter();
-    	shelter.getDogs().add(animal);
+    	return shelter.addDog(animal);
     }
+    
+    
+    
+    
+    
+    
+    /**
+     * Removes cat from the system
+     * 
+     * @param animal Cat to remove
+     */
+    public boolean removeCat(Animal animal) {
+    	Shelter shelter = animal.getShelter();
+    	return shelter.removeCat(animal);
+    }
+    
+    
+    
+    /**
+     * Removes dog to the system
+     * 
+     * @param animal Dog to remove
+     */
+    public boolean removeDog(Animal animal) {
+    	Shelter shelter = animal.getShelter();
+    	return shelter.removeDog(animal);
+    }
+    
+    
+    
+    
     
     
     /**
@@ -265,11 +407,13 @@ public class ShelterSystem {
     public boolean updateAnimal(Animal animal) {
     	Shelter shelter = animal.getShelter();
     	
-    	if( shelter.getCats().delete(animal) != null) {
-    		return shelter.getCats().add(animal);
+    	Animal temp;
+    	
+    	if( ( temp = shelter.getCats().find(animal) ) != null) {
+    		return temp.updateAnimal(animal);
     	}
-    	else if( shelter.getDogs().delete(animal) != null ) {
-    		 return shelter.getDogs().add(animal);
+    	else if( ( temp = shelter.getDogs().find(animal) ) != null) {
+    		return temp.updateAnimal(animal);
     	}
     	
     	return false;
@@ -376,8 +520,53 @@ public class ShelterSystem {
      * @return True if succeed
      */
     public boolean removeAdoptionRequest(AdoptionRequest request) {
-    	return request.getRequester().getRequests().remove(request)
-    			&& request.getRequestedAnimal().getRequestQueue().remove(request);
+    	request.getRequestedAnimal().setAdoptionRequest(null);
+    	return request.getRequester().getRequests().remove(request);
     }
 
+
+
+
+
+	/**
+	 * Getter for cities BST
+	 * 
+	 * @return BST
+	 */
+	public BinarySearchTree<City> getCitiesBST() {
+		return cities;
+	}
+
+
+	
+	
+
+	/**
+	 * Getter for CityIds Map
+	 * 
+	 * @return Map
+	 */
+	public TreeMap<Integer, City> getCityIdsMap() {
+		return cityIds;
+	}
+
+
+
+	
+	
+
+	/**
+	 * Getter for BorderCities graph
+	 * 
+	 * @return Graph
+	 */
+	public ListGraph getBorderCities() {
+		return borderCities;
+	}
+
+
+
+    
+    
+    
 }
