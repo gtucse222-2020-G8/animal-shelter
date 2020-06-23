@@ -1,16 +1,17 @@
 package cse222.group8.server;
 
-public class JavalinServer implements Runnable {
+import io.javalin.Javalin;
 
+public class JavalinServer implements Runnable {
 	@Override
 	public void run() {
-		 Javalin.create(config -> {
-            config.registerPlugin(getConfiguredOpenApiPlugin());
-            config.defaultContentType = "application/json";
+	    Javalin.create(javalinConfig -> {
+	        javalinConfig.registerPlugin(getConfiguredOpenApiPlugin());
+            javalinConfig.defaultContentType = "application/json";
         }).routes(() -> {
             path("users", () -> {
                 path("login", () -> {
-                   // post(UserController::create);
+                    // post(UserController::create);
 
                 });
                 path("register", () -> {
@@ -20,59 +21,43 @@ public class JavalinServer implements Runnable {
                 path("ownages", () -> {
                     path("get", () -> {
                         //get(UserController::getAll);
-
                     });
                     path("request", () -> {
-                            path("add", () -> {
-                               // post(UserController::create2);
-
-                            });
-                            path("get", () -> {
-                                //get(UserController::getOne);
-
-                            });
-
-
-
+                        path("add", () -> {
+                            // post(UserController::create2);
+                        });
+                        path("get", () -> {
+                            //get(UserController::getOne);
+                        });
                     });
 
                 });
                 path("account", () -> {
                     path("update", () -> {
                         //post(UserController::create);
-
                     });
 
                 });
                 path("favoritePets", () -> {
-                   // post(UserController::create);
-
+                    // post(UserController::create);
                 });
-
-
             });
             path("animal", () -> {
                 path("filter", () -> {
                     path("get", () -> {
-                       // get(UserController::getOne1);
-
+                        // get(UserController::getOne1);
                     });
-
                 });
-
             });
             path("shelters", () -> {
                 get(UserController::getShelt);
-               // post(UserController::create);
+                // post(UserController::create);
                 path("daily-task", () -> {
                     get(UserController::getTask);
                     post(UserController::createTask);
                     path("approve", () -> {
-
                         //post(UserController::create6);
-
                     });
-
                 });
                 path("registeration", () -> {
 
@@ -86,13 +71,13 @@ public class JavalinServer implements Runnable {
                 });
                 path("animals", () -> {
 
-                   // get(UserController::getOne);
+                    // get(UserController::getOne);
                     path("update", () -> {
 
                         post(UserController::upAnimal);
                         path("picture", () -> {
 
-                          //  post(UserController::create);
+                            //  post(UserController::create);
 
                         });
 
@@ -131,12 +116,12 @@ public class JavalinServer implements Runnable {
                     });
                     path("capacity", () -> {
 
-                       // post(UserController::create);
+                        // post(UserController::create);
 
                     });
                     path("name", () -> {
 
-                      //  post(UserController::create);
+                        //  post(UserController::create);
 
                     });
 
@@ -157,8 +142,6 @@ public class JavalinServer implements Runnable {
                 });
 
             });
-
-
         }).start(7019);
 
         System.out.println("Check out ReDoc docs at http://localhost:7019/redoc");
