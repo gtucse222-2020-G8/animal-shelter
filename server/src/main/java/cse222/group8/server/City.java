@@ -26,8 +26,11 @@ public class City implements Comparable<City>{
     }
 
     public Town getTown(String townName){
-    	//TODO
-    	return null;
+    	Town town = towns.find(new Town(townName));
+    	if(town == null)
+    		return null;
+    	
+    	return town;
     }
 
     @Override
