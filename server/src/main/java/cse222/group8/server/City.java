@@ -29,7 +29,7 @@ public class City implements Comparable<City>{
     }
 
     public Town getTown(String townName){
-    	Town town = towns.find(new Town(townName,this));
+    	Town town = towns.find(new Town(townName,this,shelterSystem));
     	if(town == null)
     		return null;
     	return town;

@@ -46,7 +46,7 @@ public class Shelter implements Comparable<Shelter> {
     }
     public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
         CapacityChangeRequest newChangeRequest = new CapacityChangeRequest(city.getName(),town.getName(),this,dogCap,catCap);
-        shelterSystem.addCapacityChangeRequest(newChangeRequest);
+        shelterSystem.addCapChangeRequest(newChangeRequest);
     	return newChangeRequest;
     }
 

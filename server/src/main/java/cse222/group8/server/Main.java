@@ -30,7 +30,7 @@ public class Main {
 		readCityInfo(cities, cityIds, borderCities);
 		
 		
-		City city = cities.find(new City("Mersin", 0));
+		City city = cities.find(new City("Mersin", 0,null));
 		System.out.println(city.getCityId());
 		
 		System.out.println(cityIds.get(city.getCityId()).getName());
@@ -66,7 +66,7 @@ public class Main {
 				String[] keys = str.split(" ");
 				
 				int cityID = Integer.parseInt(keys[0]);
-				City city = new City( keys[1], cityID );
+				City city = new City( keys[1], cityID , null);
 				
 				
 				cities.add(city);
