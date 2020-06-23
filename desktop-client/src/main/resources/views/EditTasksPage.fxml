@@ -23,7 +23,7 @@
                  <VBox fx:id="dailyTasksVBox" alignment="CENTER" maxWidth="300.0" minWidth="300.0" />
             </content>
          </ScrollPane>
-           <Button fx:id="addTaskButton" maxWidth="300.0" minWidth="300.0" mnemonicParsing="false" prefWidth="300.0" text="+" />
+           <Button fx:id="addTaskButton" maxWidth="300.0" minWidth="300.0" mnemonicParsing="false" onAction="#onAddTaskButtonAction" prefWidth="300.0" text="+" />
        </VBox>
    </center>
 </BorderPane>

@@ -1,14 +1,22 @@
 package cse222.group8.desktop.controllers;
 
+import cse222.group8.desktop.client.Client;
+import cse222.group8.desktop.client.ConnectionError;
 import cse222.group8.desktop.client.models.AnimalDataWithImage;
+import cse222.group8.desktop.client.models.TaskData;
 import cse222.group8.desktop.client.models.Token;
 import cse222.group8.desktop.models.EditTasksPageModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -41,43 +49,105 @@ public class EditTasksPageController implements PageWithTokenController {
         model.setToken(token);
         leftMenuController.setToken(token);
     }
-    private Node createAnimalGridComponent(AnimalDataWithImage data) throws IOException {
+    private void reload(Event e){
+        Node node=(Node) e.getSource();
+        Stage stage=(Stage) node.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/EditTasksPage.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            System.out.println("File not found");
+            System.exit(-1);
+        }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        PageWithTokenController controller = loader.<PageWithTokenController>getController();
+        controller.setToken(model.getToken());
+        stage.show();
+    }
+    public void onAddTaskButtonAction(Event e){
+        TextInputDialog td = new TextInputDialog();
+        td.setContentText("Enter new task");
+        td.showAndWait();
+        String text = td.getEditor().getText();
+        if(text.length()<3){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid text", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+        else{
+            TaskData newTask = new TaskData();
+            newTask.text = text;
+            newTask.status = false;
+            newTask.id = -1;
+            try {
+                Client.createTask(model.getToken(),newTask);
+            } catch (ConnectionError connectionError) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Connection Error", ButtonType.OK);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    alert.close();
+                }
+            }
+        }
+    }
+    private Node createTaskListComponent(TaskData data) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         HBox node = loader.load(getClass().getClassLoader().getResource("./views/DailyTasksListComponent.fxml").openStream());
         //FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/AnimalGridComponent.fxml"));
         //StackPane node = loader.load();
-        node.setOnMouseClicked(mouseEvent -> {
-            Node _node=(Node) mouseEvent.getSource();
-            Stage stage=(Stage) _node.getScene().getWindow();
-            FXMLLoader _loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/AddCatPage.fxml"));
-            Parent root = null;
+        Label taskText = (Label) node.getChildren().get(0);
+        taskText.setText(data.text);
+        CheckBox taskCheck = (CheckBox) node.getChildren().get(1);
+        taskCheck.selectedProperty().setValue(data.status);
+        taskCheck.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
             try {
-                root = _loader.load();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-                System.out.println("File not found");
-                System.exit(-1);
+                Client.updateTask(model.getToken(),data);
+                data.status = t1;
+            } catch (ConnectionError connectionError) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Connection Error", ButtonType.OK);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    alert.close();
+                }
+                taskCheck.selectedProperty().setValue(aBoolean);
             }
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            AddCatPageController controller = _loader.<AddCatPageController>getController();
-            controller.setToken(model.getToken());
-            controller.setAnimalID(data.id);
-            stage.show();
         });
-        Vbox vbox = (VBox) node.getChildren().get(0);
-        List<Node> children = vbox.getChildren();
-        ImageView imageView = (ImageView) children.get(0);
-        byte[] img = Base64.getDecoder().decode(data.image);
-        ByteArrayInputStream bais = new ByteArrayInputStream(img);
-        Image image = new Image(bais);
-        imageView.setImage(image);
-        Text breed = (Text) children.get(1);
-        breed.setText(data.name);
-        Text age = (Text) children.get(2);
-        age.setText(data.age);
-        Text date = (Text) children.get(3);
-        date.setText(data.date);
+        Button taskEditButton = (Button) node.getChildren().get(2);
+        taskEditButton.setOnAction(e -> {
+            TextInputDialog td = new TextInputDialog();
+            td.setContentText("Enter new text");
+            td.getEditor().setText(data.text);
+            td.showAndWait();
+            try {
+                Client.updateTask(model.getToken(),data);
+                data.text = td.getEditor().getText();
+                taskText.setText(data.text);
+            } catch (ConnectionError connectionError) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Connection Error", ButtonType.OK);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    alert.close();
+                }
+            }
+        });
+        Button taskDeleteButton = (Button) node.getChildren().get(3);
+        taskDeleteButton.setOnAction(e -> {
+            try {
+                Client.deleteTask(model.getToken(),data.id);
+                reload(e);
+            } catch (ConnectionError connectionError) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"Connection Error", ButtonType.OK);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    alert.close();
+                }
+            }
+        });
         return node;
     }
 }

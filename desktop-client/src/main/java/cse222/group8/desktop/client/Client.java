@@ -237,10 +237,6 @@ public class Client {
             throw new ConnectionError();
         }
     }
-    private static String convertImageFileToBase64(File imageFile){
-        // TODO
-        return "";
-    }
     public static void updateAnimalPicture(Token token, int animalId, String image) throws ConnectionError {
         URI uri = URI.create(baseUrl+"shelters/animals/update/picture");
         Gson gson = new Gson();
@@ -472,6 +468,55 @@ public class Client {
     }
     public static void createTask(Token token, TaskData task) throws ConnectionError {
         URI uri = URI.create(baseUrl+"shelters/daily-tasks");
+        Gson gson = new Gson();
+        String body = gson.toJson(task);
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(body))
+                .setHeader("Content-Type", "application/json")
+                .setHeader("Authorization", "Bearer "+token.accessToken)
+                .uri(uri)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
+    public static void deleteTask(Token token, int taskId) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"shelters/daily-tasks/delete");
+        Gson gson = new Gson();
+        String body = gson.toJson(taskId);
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(body))
+                .setHeader("Content-Type", "application/json")
+                .setHeader("Authorization", "Bearer "+token.accessToken)
+                .uri(uri)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
+
+    public static void updateTask(Token token, TaskData task) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"shelters/daily-tasks/update");
         Gson gson = new Gson();
         String body = gson.toJson(task);
         HttpRequest request = HttpRequest.newBuilder()
