@@ -30,7 +30,8 @@ public class User implements Comparable<User> {
     }
     
     public void addToFavs(Animal animal) {
-    	//TODO
+    	if(!favorites.contains(animal))
+    		favorites.add(animal);
     }
     
     @Override
