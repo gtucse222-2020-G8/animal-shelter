@@ -1,165 +1,45 @@
 package cse222.group8.server;
 
 import io.javalin.Javalin;
+import io.javalin.apibuilder.EndpointGroup;
 
 public class JavalinServer implements Runnable {
-	@Override
-	public void run() {
-	    Javalin.create(javalinConfig -> {
-	        javalinConfig.registerPlugin(getConfiguredOpenApiPlugin());
-            javalinConfig.defaultContentType = "application/json";
-        }).routes(() -> {
-            path("users", () -> {
-                path("login", () -> {
-                    // post(UserController::create);
 
-                });
-                path("register", () -> {
-                    //post(UserController::create);
+    private Javalin app;
 
-                });
-                path("ownages", () -> {
-                    path("get", () -> {
-                        //get(UserController::getAll);
-                    });
-                    path("request", () -> {
-                        path("add", () -> {
-                            // post(UserController::create2);
-                        });
-                        path("get", () -> {
-                            //get(UserController::getOne);
-                        });
-                    });
-
-                });
-                path("account", () -> {
-                    path("update", () -> {
-                        //post(UserController::create);
-                    });
-
-                });
-                path("favoritePets", () -> {
-                    // post(UserController::create);
-                });
-            });
-            path("animal", () -> {
-                path("filter", () -> {
-                    path("get", () -> {
-                        // get(UserController::getOne1);
-                    });
-                });
-            });
-            path("shelters", () -> {
-                get(UserController::getShelt);
-                // post(UserController::create);
-                path("daily-task", () -> {
-                    get(UserController::getTask);
-                    post(UserController::createTask);
-                    path("approve", () -> {
-                        //post(UserController::create6);
-                    });
-                });
-                path("registeration", () -> {
-
-                    //get(UserController::getOne);
-
-                });
-                path("login", () -> {
-
-                    //get(UserController::getOne);
-
-                });
-                path("animals", () -> {
-
-                    // get(UserController::getOne);
-                    path("update", () -> {
-
-                        post(UserController::upAnimal);
-                        path("picture", () -> {
-
-                            //  post(UserController::create);
-
-                        });
-
-
-                    });
-
-                    path("cats", () -> {
-                        post(UserController::createCat);
-                        get(UserController::getCa);
-
-                    });
-                    path("dogs", () -> {
-                        post(UserController::createDog);
-                        get(UserController::getDo);
-
-                    });
-
-
-                });
-                path("adoption-request", () -> {
-
-                    get(UserController::getAdopReq);
-                    path("approve", () -> {
-
-                        //post(UserController::create);
-
-                    });
-
-                });
-                path("update", () -> {
-
-                    path("password", () -> {
-
-                        //post(UserController::create);
-
-                    });
-                    path("capacity", () -> {
-
-                        // post(UserController::create);
-
-                    });
-                    path("name", () -> {
-
-                        //  post(UserController::create);
-
-                    });
-
-                });
-                path("diseases", () -> {
-                    get(UserController::getDiseases);
-                    post(UserController:: createDisease);
-
-                });
-
-            });
-            path("cities", () -> {
-                get(UserController::getCit);
-                path("towns", () -> {
-                    get(UserController::getTow);
-
-
-                });
-
-            });
-        }).start(7019);
-
-        System.out.println("Check out ReDoc docs at http://localhost:7019/redoc");
-        System.out.println("Check out Swagger UI docs at http://localhost:7019/swagger-ui");
-		
-	}
-	private static OpenApiPlugin getConfiguredOpenApiPlugin() {
-        Info info = new Info().version("1.0").title("User API").description("Demo API with 5 operations");
-        OpenApiOptions options = new OpenApiOptions(info)
-                .activateAnnotationScanningFor("io.javalin.example.java")
-                .path("/swagger-docs") // endpoint for OpenAPI json
-                .swagger(new SwaggerOptions("/swagger-ui")) // endpoint for swagger-ui
-                .reDoc(new ReDocOptions("/redoc")) // endpoint for redoc
-                .defaultDocumentation(doc -> {
-                    doc.json("500", ErrorResponse.class);
-                    doc.json("503", ErrorResponse.class);
-                });
-        return new OpenApiPlugin(options);
+    public void initRoutes(){
+        app.get("/cities",this::getCities);
+        app.get("/cities/towns",this::getTowns);
+        app.get("/cities/towns/shelters",this::getShelters);
+        app.get("/shelters",this::getGeneralShelterData);
+        app.post("/shelters",this::createShelter);
+        app.get("/shelters/registeration",this::getShelterRegisterationStatus);
+        app.post("/shelters/login",this::shelterLogin);
+        app.get("/shelters/animals",this::getAnimal);
+        app.post("/shelters/animals/update",this::updateAnimalData);
+        app.post("/shelters/animals/update/picture",this::updateAnimalPicture);
+        app.get("/shelters/animals/cats",this::getShelterCats);
+        app.get("/shelters/animals/dogs",this::getShelterDogs);
+        app.post("/shelters/animals/cats",this::addNewCat);
+        app.post("/shelters/animals/dogs",this::addNewDog);
+        app.post("/shelters/update/password",this::shelterUpdatePassword);
+        app.post("/shelters/update/capacity",this::shelterUpdateCapacity);
+        app.post("/shelters/update/name",this::shelterUpdateName);
+        app.get("/shelters/adoption-requests",this::getShelterAdoptionRequest);
+        app.post("/shelters/adoption-requests/approve",this::approveAdoptionRequest);
+        app.get("/shelters/daily-tasks",this::getDailyTasks);
+        app.post("/shelters/daily-tasks",this::createDailyTask);
+        app.post("/shelters/daily-tasks/delete",this::deleteDailyTask);
+        app.post("/shelters/daily-tasks/update",this::updateDailyTask);
+        app.post("/shelters/daily-tasks/approve",this::approveDailyTask);
     }
 
+	@Override
+	public void run() {
+        app = Javalin.create(javalinConfig -> {
+            javalinConfig.defaultContentType = "application/json";
+        });
+        initRoutes();
+        app.start(8080);
+	}
 }
