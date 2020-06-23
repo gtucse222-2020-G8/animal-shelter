@@ -17,6 +17,15 @@ public class User implements Comparable<User> {
     private Date signUpDate;
     
     
+    protected User(String userName) {
+    	
+    }
+    
+    
+    // public constr needed
+    
+    
+    
     public boolean createARequest(Animal animal) {
     	//TODO
     	// calls animals method
@@ -44,6 +53,7 @@ public class User implements Comparable<User> {
     
     @Override
     public int compareTo(User o) {
+    	// with username
         return 0;
     }
 
