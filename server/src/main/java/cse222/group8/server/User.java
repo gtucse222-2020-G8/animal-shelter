@@ -24,9 +24,17 @@ public class User implements Comparable<User> {
     }
 
     public boolean updateUser(User user) {
-    	/* param can change */
-    	//TODO
-    	return false;
+        this.setName(user.name);
+        this.setSurname(user.surname);
+        this.setUsername(user.username);
+        this.setPassword(user.password);
+        this.setEmail(user.email);
+        this.setCity(user.city);
+        this.setTown(user.town);
+        this.setRequests(user.requests);
+        this.setFavorites(user.favorites);
+
+        return true;
     }
     
     public void addToFavs(Animal animal) {

@@ -2,14 +2,14 @@ package cse222.group8.server;
 
 public class DailyExecutions {
 	
-	System system;
+	ShelterSystem system;
 	
-	public DailyExecutions(System system) {
+	public DailyExecutions(ShelterSystem system) {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void resetDailyTasks() {
-		
+		// TODO reset daily tasks
 	}
 	
 	public void dropExpiredAdoptionRequests() {

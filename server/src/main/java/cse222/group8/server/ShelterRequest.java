@@ -6,7 +6,9 @@ public class ShelterRequest {
     Shelter shelter;
     
     public ShelterRequest(String city, String town, Shelter shelter) {
-    	//TODO
+        this.city = city;
+        this.town = town;
+        this.shelter = shelter;
     }
     
 }

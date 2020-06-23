@@ -13,10 +13,17 @@ public class AdoptionRequest {
     private boolean result;
 
     public AdoptionRequest(Date requestDate, User requester, Animal requestedAnimal){
+        this.requestDate = requestDate;
+        this.requester = requester;
+        this.requestedAnimal = requestedAnimal;
 
     }
-    public AdoptionRequest(Date requestDate, Date expirationDate, User requester, Animal requestedAnimal){
 
+    public AdoptionRequest(Date requestDate, Date expirationDate, User requester, Animal requestedAnimal){
+        this.requestDate = requestDate;
+        this.requester = requester;
+        this.requestedAnimal = requestedAnimal;
+        this.expirationDate = expirationDate;
     }
 
     public Date getExpirationDate() {

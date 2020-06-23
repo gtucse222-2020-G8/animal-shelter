@@ -48,7 +48,26 @@ public class Animal implements Comparable<Animal> {
     }
 	
     public AdoptionRequest makeARequest(User requester) {
-        //TODO
+
+        if(mainRequest == null) {
+            mainRequest = new AdoptionRequest(null, requester,this);
+            //Change null date!
+        }
+
+        else {
+            AdoptionRequest temp = new AdoptionRequest(null, requester,this);
+            //Change null date!
+
+            if((getRequestQueue().contains(temp))) {
+                System.out.println("This user is already exist in the request queue for this animal.");
+                return null;
+            }
+
+            getRequestQueue().add(temp);
+            System.out.println("Your request has been received.");
+            return temp;
+        }
+
         return null;
     }
 
@@ -57,7 +76,9 @@ public class Animal implements Comparable<Animal> {
         return Integer.compare(id, o.getId());
     }
 
-    public void updateRequests() {}
+    public void updateRequests() {
+        //Date check!
+    }
 
 
     public City getCity() {

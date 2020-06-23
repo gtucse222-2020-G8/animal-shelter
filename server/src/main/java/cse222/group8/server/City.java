@@ -10,7 +10,8 @@ public class City implements Comparable<City>{
     BinarySearchTree<Town> towns;
     
     public City(String cityName, int cityId){
-    	// TODO
+        this.name = cityName;
+        this.cityId = cityId;
     }
 
     public int getCityId() {
@@ -29,7 +30,6 @@ public class City implements Comparable<City>{
     	Town town = towns.find(new Town(townName));
     	if(town == null)
     		return null;
-    	
     	return town;
     }
 

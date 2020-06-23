@@ -8,7 +8,11 @@ public class CapacityChangeRequest {
     int catCapacity;
     
     public CapacityChangeRequest(String city, String town, Shelter shelter, int dogCap, int catCap) {
-		// TODO Auto-generated constructor stub
+        this.city = city;
+        this.town = town;
+        this.shelter = shelter;
+        this.dogCapacity = dogCap;
+        this.catCapacity = catCap;
 	}
     
 }

@@ -10,9 +10,17 @@ public class Town implements Comparable<Town> {
 
     private List<Shelter> shelters;
 
+    public Town(String name) {
+        this.name = name;
+    }
+
     public Shelter getShelter(String name){
-    	//TODO
-    	return null;
+        for(int i=0; i<getShelters().size(); ++i) {
+            if (getShelters().get(i).getName().equals(name) )
+                return getShelters().get(i);
+        }
+
+        return null;
     }
 
     public List<Shelter> getShelters() {

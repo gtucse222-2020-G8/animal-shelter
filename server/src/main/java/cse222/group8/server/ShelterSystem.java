@@ -7,7 +7,7 @@ import java.util.Queue;
 import java.util.TreeMap;
 import cse222.group8.server.DataStructures.*;
 
-public class System {
+public class ShelterSystem {
 
     public class Admin{
 

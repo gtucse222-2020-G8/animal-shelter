@@ -26,7 +26,7 @@ public class Shelter implements Comparable<Shelter> {
     	return null;
     }
     
-    public void addDiseasedAnimal(int animalId) {
+    public void addDiseasedAnimal(int animalId, int diseased) {
     	Animal dog = getDog(animalId);
     	if(dog != null)
     		diseasedAnimals.add(new Disease(dog, diseased));
@@ -39,7 +39,8 @@ public class Shelter implements Comparable<Shelter> {
     }
     
     public void addTask(Task task) {
-    	//TODO
+        if(!(getTasks().contains(task)))
+            tasks.add(task);
     }
 
     public Animal getDog(int animalId){
