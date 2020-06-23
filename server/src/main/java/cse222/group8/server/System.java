@@ -338,7 +338,7 @@ public class System {
     public void addDiseasedAnimal(Disease diseasedAnimal) {
     	Animal animal = diseasedAnimal.getAnimal();
     	
-    	animal.getShelter().addDiseasedAnimal(animal.getId());
+    	animal.getShelter().addDiseasedAnimal(animal.getId(), animal.getDiseased());
     }
     
     /**
