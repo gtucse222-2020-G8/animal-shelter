@@ -1,7 +1,9 @@
 package cse222.group8.server;
 
+import cse222.group8.server.DataStructures.AVLTree;
 import cse222.group8.server.DataStructures.BinarySearchTree;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -13,13 +15,20 @@ public class Shelter implements Comparable<Shelter> {
     private String password;
     private int catCapacity;
     private int dogCapacity;
-    private BinarySearchTree<Animal> dogs;
-    private BinarySearchTree<Animal> cats;
+    private AVLTree<Animal> dogs;
+    private AVLTree<Animal> cats;
     private List<Animal> adopteds;
     private List<AdoptionRequest> adoptionRequests;
     private List<Task> tasks;
     private PriorityQueue<Disease> diseasedAnimals;
-    
+
+    public Shelter(){
+        cats = new AVLTree<Animal>();
+        dogs = new AVLTree<Animal>();
+        adopteds = new LinkedList<Animal>();
+        adoptionRequests = new LinkedList<AdoptionRequest>();
+        tasks = new LinkedList<Task>();
+    }
     
     public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
     	//TODO
@@ -140,7 +149,6 @@ public class Shelter implements Comparable<Shelter> {
 	public BinarySearchTree<Animal> getDogs() {
 		return dogs;
 	}
-
 
 	public BinarySearchTree<Animal> getCats() {
 		return cats;
