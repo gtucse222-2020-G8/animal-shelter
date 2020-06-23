@@ -1,7 +1,9 @@
 package cse222.group8.server;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.TreeMap;
@@ -39,7 +41,46 @@ public class ShelterSystem {
     
     
     
+    
+    // Constructor
+    
+    /**
+     * Constructor for ShelterSystem
+     * 
+     * Initializes fields.
+     */
+    public ShelterSystem() {
+    	
+		this.cities 		= 	new AVLTree<City>();
+		this.cityIds		=	new TreeMap<Integer, City>();
+		this.borderCities	= 	new ListGraph(82, true);
+		this.users			= 	new AVLTree<User>();
+		
+		
+		this.capacityChangeRequests	= new LinkedList<CapacityChangeRequest>();
+		this.newShelterRequests		= new LinkedList<ShelterRequest>();
+		this.removeShelterRequests	= new LinkedList<ShelterRequest>();
+		
+	}
+    
+    
+    
+    
     /* SERVICE METHODS */
+    
+    
+    
+    
+    /**
+     * Returns all cities as collection
+     * 
+     * @return City collection
+     */
+    public Collection<City> getAllCities(){
+    	
+    	return cityIds.values();
+    	
+    }
     
     
     
@@ -307,9 +348,9 @@ public class ShelterSystem {
      * 
      * @param animal Cat to add
      */
-    public void addCat(Animal animal) {
+    public boolean addCat(Animal animal) {
     	Shelter shelter = animal.getShelter();
-    	shelter.addCat(animal);
+    	return shelter.addCat(animal);
     }
     
     
@@ -319,10 +360,41 @@ public class ShelterSystem {
      * 
      * @param animal Dog to add
      */
-    public void addDog(Animal animal) {
+    public boolean addDog(Animal animal) {
     	Shelter shelter = animal.getShelter();
-    	shelter.addDog(animal);
+    	return shelter.addDog(animal);
     }
+    
+    
+    
+    
+    
+    
+    /**
+     * Removes cat from the system
+     * 
+     * @param animal Cat to remove
+     */
+    public boolean removeCat(Animal animal) {
+    	Shelter shelter = animal.getShelter();
+    	return shelter.removeCat(animal);
+    }
+    
+    
+    
+    /**
+     * Removes dog to the system
+     * 
+     * @param animal Dog to remove
+     */
+    public boolean removeDog(Animal animal) {
+    	Shelter shelter = animal.getShelter();
+    	return shelter.removeDog(animal);
+    }
+    
+    
+    
+    
     
     
     /**
@@ -452,4 +524,49 @@ public class ShelterSystem {
     	return request.getRequester().getRequests().remove(request);
     }
 
+
+
+
+
+	/**
+	 * Getter for cities BST
+	 * 
+	 * @return BST
+	 */
+	public BinarySearchTree<City> getCitiesBST() {
+		return cities;
+	}
+
+
+	
+	
+
+	/**
+	 * Getter for CityIds Map
+	 * 
+	 * @return Map
+	 */
+	public TreeMap<Integer, City> getCityIdsMap() {
+		return cityIds;
+	}
+
+
+
+	
+	
+
+	/**
+	 * Getter for BorderCities graph
+	 * 
+	 * @return Graph
+	 */
+	public ListGraph getBorderCities() {
+		return borderCities;
+	}
+
+
+
+    
+    
+    
 }
