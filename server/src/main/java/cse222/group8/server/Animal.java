@@ -6,212 +6,210 @@ import java.util.Queue;
 
 public class Animal implements Comparable<Animal> {
 
-    private int id;
-    private String name;
-    private String kind;
-    private char gender;
-    private int age;
-    private String vaccination;
-    private boolean neutered;
-    private String info;
-    private boolean adopted;
-    private File imgPath;
-    private Date shelterDate;
-    private int diseased;
+	private int id;
+	private String name;
+	private String kind;
+	private char gender;
+	private int age;
+	private String vaccination;
+	private boolean neutered;
+	private String info;
+	private boolean adopted;
+	private File imgPath;
+	private Date shelterDate;
+	private int diseased;
 
-    AdoptionRequest mainRequest;
-    Queue<AdoptionRequest> requestQueue;
-    
-    /* address infos */
-    private City city;
-    private Town town;
-    private Shelter shelter;
-    
-    public Animal(int id) {
-    	this.id = id;
-    }
+	AdoptionRequest mainRequest;
+	Queue<AdoptionRequest> requestQueue;
 
-    public Animal(int id, String name, String kind, int age) {
-    	this.id = id;
-    	this.name = name;
-    	this.kind = kind;
-    	this.age = age;
-    	this.diseased = 0;
-    }
+	/* address infos */
+	private City city;
+	private Town town;
+	private Shelter shelter;
 
-    public int getDiseased() {
-    	return diseased;
-    }
-   	
-    public void setDiseased(int diseased) {
-    	this.diseased = diseased;
-    }
-	
-    public AdoptionRequest makeARequest(User requester) {
+	public Animal(int id) {
+		this.id = id;
+	}
 
-        if(mainRequest == null) {
-            mainRequest = new AdoptionRequest(null, requester,this);
-            //Change null date!
-        }
+	public Animal(int id, String name, String kind, int age) {
+		this.id = id;
+		this.name = name;
+		this.kind = kind;
+		this.age = age;
+		this.diseased = 0;
+	}
 
-        else {
-            AdoptionRequest temp = new AdoptionRequest(null, requester,this);
-            //Change null date!
+	public boolean updateAnimal(Animal animal) {
 
-            if((getRequestQueue().contains(temp))) {
-                System.out.println("This user is already exist in the request queue for this animal.");
-                return null;
-            }
+		// TODO
 
-            getRequestQueue().add(temp);
-            System.out.println("Your request has been received.");
-            return temp;
-        }
+		return false;
 
-        return null;
-    }
+	}
 
-    @Override
-    public int compareTo(Animal o) {
-        return Integer.compare(id, o.getId());
-    }
+	public int getDiseased() {
+		return diseased;
+	}
 
-    public void updateRequests() {
-        //Date check!
-    }
+	public void setDiseased(int diseased) {
+		this.diseased = diseased;
+	}
 
+	public AdoptionRequest makeARequest(User requester) {
 
-    public City getCity() {
-	return city;
-    }
+		if (mainRequest == null) {
+			mainRequest = new AdoptionRequest(null, requester, this);
+			// Change null date!
+		}
 
-    public void setCity(City city) {
-	this.city = city;
-    }
+		else {
+			AdoptionRequest temp = new AdoptionRequest(null, requester, this);
+			// Change null date!
 
-    public Town getTown() {
-	return town;
-    }
+			if ((getRequestQueue().contains(temp))) {
+				System.out.println("This user is already exist in the request queue for this animal.");
+				return null;
+			}
 
-    public void setTown(Town town) {
-	this.town = town;
-    }
+			getRequestQueue().add(temp);
+			System.out.println("Your request has been received.");
+			return temp;
+		}
 
-    public Shelter getShelter() {
-	return shelter;
-    }
+		return null;
+	}
 
-    public void setShelter(Shelter shelter) {
-	this.shelter = shelter;
-    }
+	@Override
+	public int compareTo(Animal o) {
+		return Integer.compare(id, o.getId());
+	}
 
-    public int getId() {
-	return id;
-    }
+	public void updateRequests() {
+		// Date check!
+	}
 
-    public void setId(int id) {
-	this.id = id;
-    }
+	public City getCity() {
+		return city;
+	}
 
-    public String getName() {
-	return name;
-    }
+	public void setCity(City city) {
+		this.city = city;
+	}
 
-    public void setName(String name) {
-	this.name = name;
-    }
+	public Town getTown() {
+		return town;
+	}
 
-    public String getKind() {
-	return kind;
-    }
+	public void setTown(Town town) {
+		this.town = town;
+	}
 
-    public void setKind(String kind) {
-	this.kind = kind;
-    }
+	public Shelter getShelter() {
+		return shelter;
+	}
 
-    public char getGender() {
-	return gender;
-    }
+	public void setShelter(Shelter shelter) {
+		this.shelter = shelter;
+	}
 
-    public void setGender(char gender) {
-	this.gender = gender;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public int getAge() {
-	return age;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setAge(int age) {
-	this.age = age;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getVaccination() {
-	return vaccination;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setVaccination(String vaccination) {
-	this.vaccination = vaccination;
-    }
+	public String getKind() {
+		return kind;
+	}
 
-    public boolean isNeutered() {
-	return neutered;
-    }
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 
-    public void setNeutered(boolean neutered) {
-	this.neutered = neutered;
-    }
+	public char getGender() {
+		return gender;
+	}
 
-    public String getInfo() {
-	return info;
-    }
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
 
-    public void setInfo(String info) {
-	this.info = info;
-    }
+	public int getAge() {
+		return age;
+	}
 
-    public boolean isAdopted() {
-	return adopted;
-    }
+	public void setAge(int age) {
+		this.age = age;
+	}
 
-    public void setAdopted(boolean adopted) {
-	this.adopted = adopted;
-    }
+	public String getVaccination() {
+		return vaccination;
+	}
 
-    public File getImgPath() {
-	return imgPath;
-    }
+	public void setVaccination(String vaccination) {
+		this.vaccination = vaccination;
+	}
 
-    public void setImgPath(File imgPath) {
-	this.imgPath = imgPath;
-    }
+	public boolean isNeutered() {
+		return neutered;
+	}
 
-    public Date getShelterDate() {
-	return shelterDate;
-    }
+	public void setNeutered(boolean neutered) {
+		this.neutered = neutered;
+	}
 
-    public void setShelterDate(Date shelterDate) {
-	this.shelterDate = shelterDate;
-    }
+	public String getInfo() {
+		return info;
+	}
 
-    public AdoptionRequest getMainRequest() {
-	return mainRequest;
-    }
+	public void setInfo(String info) {
+		this.info = info;
+	}
 
-    public void setMainRequest(AdoptionRequest mainRequest) {	
-        this.mainRequest = mainRequest;
-    }
+	public boolean isAdopted() {
+		return adopted;
+	}
 
-    public Queue<AdoptionRequest> getRequestQueue() {
-	return requestQueue;
-    }
+	public void setAdopted(boolean adopted) {
+		this.adopted = adopted;
+	}
 
+	public File getImgPath() {
+		return imgPath;
+	}
 
-   
+	public void setImgPath(File imgPath) {
+		this.imgPath = imgPath;
+	}
 
- 
+	public Date getShelterDate() {
+		return shelterDate;
+	}
 
-   
+	public void setShelterDate(Date shelterDate) {
+		this.shelterDate = shelterDate;
+	}
 
-	
+	public AdoptionRequest getMainRequest() {
+		return mainRequest;
+	}
+
+	public void setMainRequest(AdoptionRequest mainRequest) {
+		this.mainRequest = mainRequest;
+	}
+
+	public Queue<AdoptionRequest> getRequestQueue() {
+		return requestQueue;
+	}
 
 }
