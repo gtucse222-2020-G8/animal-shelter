@@ -309,7 +309,7 @@ public class ShelterSystem {
      */
     public void addCat(Animal animal) {
     	Shelter shelter = animal.getShelter();
-    	shelter.getDogs().add(animal);
+    	shelter.addCat(animal);
     }
     
     
@@ -321,7 +321,7 @@ public class ShelterSystem {
      */
     public void addDog(Animal animal) {
     	Shelter shelter = animal.getShelter();
-    	shelter.getDogs().add(animal);
+    	shelter.addDog(animal);
     }
     
     
