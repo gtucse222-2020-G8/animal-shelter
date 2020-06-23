@@ -56,7 +56,7 @@ public class Shelter implements Comparable<Shelter> {
         tasks = new LinkedList<Task>();
     }
 
-    public void addCat(Animal cat){
+    public boolean addCat(Animal cat){
        if(catSize < catCapacity) {
     	   cats.add(cat);
            catSize++;
@@ -65,7 +65,7 @@ public class Shelter implements Comparable<Shelter> {
        return false;
     }
 
-    public void addDog(Animal dog){
+    public boolean addDog(Animal dog){
        if(dogSize < dogCapacity) {
             dogs.add(dog);
             dogSize++;
