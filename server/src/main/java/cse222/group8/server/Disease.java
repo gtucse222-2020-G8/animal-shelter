@@ -5,7 +5,8 @@ public class Disease implements Comparable<Disease>{
     private int priority;
 
     public Disease(Animal animal, int priority){
-
+        this.animal = animal;
+    	this.priority = priority;
     }
 
     @Override
