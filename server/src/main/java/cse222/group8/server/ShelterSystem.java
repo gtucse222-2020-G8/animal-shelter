@@ -9,6 +9,7 @@ import cse222.group8.server.DataStructures.*;
 
 public class ShelterSystem {
 
+    
     //location fields.
     /**  Binary search tree to keep cities.  */
     private BinarySearchTree<City> cities;
@@ -40,6 +41,49 @@ public class ShelterSystem {
     
     /* SERVICE METHODS */
     
+    
+    
+    
+    /** Adds new request to queue
+	 * @param request
+	 * @return True if succeed
+	 */
+    public boolean addCapChangeRequest( CapacityChangeRequest request ) {
+    	
+    	return capacityChangeRequests.add(request);
+    	
+    }
+    
+    
+    
+    
+    
+    /** Adds new request to queue
+	 * @param request
+	 * @return True if succeed
+	 */
+	public boolean addNewShleterRequest( ShelterRequest request ) {
+    	
+    	return newShelterRequests.add(request);
+    	
+    }
+	
+	
+	
+	
+	/** Adds new request to queue
+	 * @param request
+	 * @return True if succeed
+	 */
+	public boolean addRemoveShelterRequest( ShelterRequest request ) {
+    	
+    	return removeShelterRequests.add(request);
+    	
+    }
+    
+    
+	
+    
     /**
      * Returns list of cities which are has a border
      * to specified city.
@@ -63,17 +107,7 @@ public class ShelterSystem {
     	
     	return borderCities;
     }
-
-    public void addCapChangeRequest(CapacityChangeRequest req){
-        capacityChangeRequests.add(req);
-    }
-    public void addNewShelterRequest(ShelterRequest req){
-        newShelterRequests.add(req);
-    }
-    public void addRemoveShelterRequest(ShelterRequest req){
-        removeShelterRequests.add(req);
-    }
-
+    
     /**
      * Returns next CapacityChangeRequest
      * 
@@ -187,6 +221,42 @@ public class ShelterSystem {
     
     
     
+    
+    
+    
+    /**
+     * Returns a city with specifed info
+     * 
+     * @param cityName City name
+     * @return City reference
+     */
+    public City getCity(String cityName) {
+    	
+    	return cities.find(new City(cityName,0,this));
+    	
+    }
+    
+    
+    
+    
+    
+    /**
+     * Returns a user with specifed info
+     * 
+     * @param username User name
+     * @return User reference
+     */
+    public User getUser(String username) {
+    	
+    	return users.find(new User(username));
+    	
+    }
+    
+    
+    
+    
+    
+    
     /**
      * Adds a user to system
      * 
@@ -239,7 +309,7 @@ public class ShelterSystem {
      */
     public void addCat(Animal animal) {
     	Shelter shelter = animal.getShelter();
-    	shelter.getDogs().add(animal);
+    	shelter.addCat(animal);
     }
     
     
@@ -251,7 +321,7 @@ public class ShelterSystem {
      */
     public void addDog(Animal animal) {
     	Shelter shelter = animal.getShelter();
-    	shelter.getDogs().add(animal);
+    	shelter.addDog(animal);
     }
     
     
@@ -265,11 +335,13 @@ public class ShelterSystem {
     public boolean updateAnimal(Animal animal) {
     	Shelter shelter = animal.getShelter();
     	
-    	if( shelter.getCats().delete(animal) != null) {
-    		return shelter.getCats().add(animal);
+    	Animal temp;
+    	
+    	if( ( temp = shelter.getCats().find(animal) ) != null) {
+    		return temp.updateAnimal(animal);
     	}
-    	else if( shelter.getDogs().delete(animal) != null ) {
-    		 return shelter.getDogs().add(animal);
+    	else if( ( temp = shelter.getDogs().find(animal) ) != null) {
+    		return temp.updateAnimal(animal);
     	}
     	
     	return false;
@@ -376,7 +448,7 @@ public class ShelterSystem {
      * @return True if succeed
      */
     public boolean removeAdoptionRequest(AdoptionRequest request) {
-        request.getRequestedAnimal().setAdoptionRequest(null);
+    	request.getRequestedAnimal().setAdoptionRequest(null);
     	return request.getRequester().getRequests().remove(request);
     }
 

@@ -27,7 +27,8 @@ public class Main {
 		ListGraph borderCities = new ListGraph(82, true);	
 		
 		
-		readCityInfo(cities, cityIds, borderCities);
+		// this null is just for test. It has to be "actual system" in Run.
+		readCityInfo(cities, cityIds, borderCities, null);
 		
 		
 		City city = cities.find(new City("Mersin", 0,null));
@@ -52,7 +53,7 @@ public class Main {
 	}
 	
 	
-	protected static void readCityInfo(BinarySearchTree<City> cities, TreeMap<Integer, City> cityIds, ListGraph borderCities) {
+	protected static void readCityInfo(BinarySearchTree<City> cities, TreeMap<Integer, City> cityIds, ListGraph borderCities, ShelterSystem system) {
 		
 		File file = new File("Cities.txt");
 		
@@ -66,7 +67,7 @@ public class Main {
 				String[] keys = str.split(" ");
 				
 				int cityID = Integer.parseInt(keys[0]);
-				City city = new City( keys[1], cityID , null);
+				City city = new City( keys[1], cityID, system );
 				
 				
 				cities.add(city);
