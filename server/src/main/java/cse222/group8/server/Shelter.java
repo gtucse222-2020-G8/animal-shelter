@@ -27,7 +27,15 @@ public class Shelter implements Comparable<Shelter> {
     }
     
     public void addDiseasedAnimal(int animalId) {
-    	//TODO
+    	Animal dog = getDog(animalId);
+    	if(dog != null)
+    		diseasedAnimals.add(new Disease(dog, diseased));
+    	else {
+    		Animal cat = getCat(animalId);
+    		if(cat != null) {
+    			diseasedAnimals.add(new Disease(cat, diseased));
+    		}
+    	}
     }
     
     public void addTask(Task task) {
@@ -35,13 +43,13 @@ public class Shelter implements Comparable<Shelter> {
     }
 
     public Animal getDog(int animalId){
-    	//TODO
-    	return null;
+    	Animal animal = dogs.find(new Animal(animalId));
+    	return animal;
     }
     
     public Animal getCat(int animalId){
-    	//TODO
-    	return null;
+    	Animal animal = cats.find(new Animal(animalId));
+    	return animal;
     }
 
     public int getTotalAnimal() {
