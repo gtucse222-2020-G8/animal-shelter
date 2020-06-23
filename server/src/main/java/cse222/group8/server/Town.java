@@ -7,11 +7,14 @@ import java.util.List;
 public class Town implements Comparable<Town> {
 
     private String name;
-
+    private City city;
+    private ShelterSystem shelterSystem;
     private List<Shelter> shelters;
 
-    public Town(String name) {
+    public Town(String name, City city, ShelterSystem shelterSystem) {
         this.name = name;
+        this.city = city;
+        this.shelterSystem = shelterSystem;
     }
 
     public Shelter getShelter(String name){

@@ -9,16 +9,6 @@ import cse222.group8.server.DataStructures.*;
 
 public class ShelterSystem {
 
-    public class Admin{
-
-        void addShelter() {}
-
-        void removeShelter() {}
-
-        void changeShelterCap() {}
-
-    }
-    
     //location fields.
     /**  Binary search tree to keep cities.  */
     private BinarySearchTree<City> cities;
@@ -58,7 +48,7 @@ public class ShelterSystem {
      * @return List of cities
      */
     public List<City> getBorderCities(String cityName){
-    	City city = cities.find(new City(cityName, 0));	
+    	City city = cities.find(new City(cityName, 0,this));
     	if( city == null) {
     		return null;
     	}
@@ -73,7 +63,17 @@ public class ShelterSystem {
     	
     	return borderCities;
     }
-    
+
+    public void addCapChangeRequest(CapacityChangeRequest req){
+        capacityChangeRequests.add(req);
+    }
+    public void addNewShelterRequest(ShelterRequest req){
+        newShelterRequests.add(req);
+    }
+    public void addRemoveShelterRequest(ShelterRequest req){
+        removeShelterRequests.add(req);
+    }
+
     /**
      * Returns next CapacityChangeRequest
      * 
@@ -113,7 +113,7 @@ public class ShelterSystem {
      */
     public boolean addShelter(ShelterRequest requestedShelter) {
     	
-    	City city = cities.find(new City(requestedShelter.city, 0));
+    	City city = cities.find(new City(requestedShelter.city, 0,this));
     	if(city == null) {
     		return false;
     	}
@@ -148,7 +148,7 @@ public class ShelterSystem {
      * @return true if succeed
      */
     public boolean removeShelter(ShelterRequest shelter) {
-    	City city = cities.find(new City(shelter.city, 0));
+    	City city = cities.find(new City(shelter.city, 0,this));
     	if(city == null) {
     		return false;
     	}
@@ -172,7 +172,7 @@ public class ShelterSystem {
      * @return Shelter reference if succeed, else null.
      */
     public Shelter getShelter(String cityName, String townName, String shelterName) {
-    	City city = cities.find(new City(cityName, 0));
+    	City city = cities.find(new City(cityName, 0,this));
     	if(city == null) {
     		return null;
     	}
@@ -376,8 +376,8 @@ public class ShelterSystem {
      * @return True if succeed
      */
     public boolean removeAdoptionRequest(AdoptionRequest request) {
-    	return request.getRequester().getRequests().remove(request)
-    			&& request.getRequestedAnimal().getRequestQueue().remove(request);
+        request.getRequestedAnimal().setAdoptionRequest(null);
+    	return request.getRequester().getRequests().remove(request);
     }
 
 }

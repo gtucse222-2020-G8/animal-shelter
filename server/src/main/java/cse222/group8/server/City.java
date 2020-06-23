@@ -7,11 +7,13 @@ public class City implements Comparable<City>{
 
 	private int cityId;
     private String name;
+    private ShelterSystem shelterSystem;
     BinarySearchTree<Town> towns;
     
-    public City(String cityName, int cityId){
+    public City(String cityName, int cityId, ShelterSystem system){
         this.name = cityName;
         this.cityId = cityId;
+        shelterSystem = system;
     }
 
     public int getCityId() {
@@ -27,7 +29,7 @@ public class City implements Comparable<City>{
     }
 
     public Town getTown(String townName){
-    	Town town = towns.find(new Town(townName));
+    	Town town = towns.find(new Town(townName,this));
     	if(town == null)
     		return null;
     	return town;

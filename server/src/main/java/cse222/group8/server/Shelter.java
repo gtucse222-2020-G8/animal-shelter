@@ -13,6 +13,9 @@ public class Shelter implements Comparable<Shelter> {
     private String address;
     private String phoneNumber;
     private String password;
+    private City city;
+    private Town town;
+    private ShelterSystem shelterSystem;
     private int catCapacity;
     private int dogCapacity;
     private AVLTree<Animal> dogs;
@@ -22,19 +25,31 @@ public class Shelter implements Comparable<Shelter> {
     private List<Task> tasks;
     private PriorityQueue<Disease> diseasedAnimals;
 
-    public Shelter(){
+    public Shelter(String name, City city, Town town, ShelterSystem system){
+        this.name = name;
+        this.city = city;
+        this.town = town;
+        shelterSystem = system;
         cats = new AVLTree<Animal>();
         dogs = new AVLTree<Animal>();
         adopteds = new LinkedList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
     }
-    
-    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
-    	//TODO
-    	return null;
+
+    public void addCat(Animal cat){
+        cats.add(cat);
     }
-    
+
+    public void addDog(Animal dog){
+        dogs.add(dog);
+    }
+    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
+        CapacityChangeRequest newChangeRequest = new CapacityChangeRequest(city.getName(),town.getName(),this,dogCap,catCap);
+        shelterSystem.addCapacityChangeRequest(newChangeRequest);
+    	return newChangeRequest;
+    }
+
     public void addDiseasedAnimal(int animalId, int diseased) {
     	Animal dog = getDog(animalId);
     	if(dog != null)
