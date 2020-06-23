@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-width: 1; -fx-border-style: hidden hidden solid hidden;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label maxWidth="173.0" minWidth="173.0" prefWidth="173.0" text="Label">
          <font>
@@ -12,7 +12,7 @@
          </font>
       </Label>
       <CheckBox maxWidth="17.0" minWidth="17.0" mnemonicParsing="false" prefWidth="17.0" />
-      <Button alignment="CENTER" maxHeight="40.0" maxWidth="55.0" minHeight="40.0" minWidth="55.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: #000000; -fx-border-style: solid hidden solid solid;" text="Edit" />
-      <Button alignment="CENTER" maxHeight="40.0" maxWidth="55.0" minHeight="40.0" minWidth="55.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="55.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-width: 1;" text="Delete" />
+      <Button alignment="CENTER" maxHeight="40.0" maxWidth="53.0" minHeight="40.0" minWidth="53.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="53.0" style="-fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: #CCCCCC; -fx-border-style: solid hidden solid solid;" text="Edit" />
+      <Button alignment="CENTER" maxHeight="40.0" maxWidth="53.0" minHeight="40.0" minWidth="53.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="53.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-width: 1;" text="Delete" />
    </children>
 </HBox>

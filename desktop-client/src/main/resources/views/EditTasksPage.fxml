@@ -12,15 +12,15 @@
         <fx:include fx:id="leftMenu" prefWidth="200.0" source="LeftMenuPanel.fxml" />
     </left>
    <center>
-       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Tasks">
               <font>
                   <Font size="30.0" />
               </font>
            </Text>
-         <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="300.0">
+         <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF;">
             <content>
-                 <VBox fx:id="dailyTasksVBox" alignment="CENTER" maxWidth="300.0" minWidth="300.0" />
+                 <VBox fx:id="dailyTasksVBox" alignment="CENTER" maxWidth="300.0" minWidth="300.0" style="-fx-background-color: #FFFFFF;" />
             </content>
          </ScrollPane>
            <Button fx:id="addTaskButton" maxWidth="300.0" minWidth="300.0" mnemonicParsing="false" onAction="#onAddTaskButtonAction" prefWidth="300.0" text="+" />

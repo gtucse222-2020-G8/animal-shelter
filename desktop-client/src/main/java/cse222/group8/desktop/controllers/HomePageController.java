@@ -12,6 +12,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
+import java.util.LinkedList;
+
 public class HomePageController implements PageWithTokenController {
     public Circle adoptionRequestsCircle;
     public Text adoptionRequestsText;
@@ -30,9 +32,11 @@ public class HomePageController implements PageWithTokenController {
         model = new HomePageModel();
         leftMenuController.changeFocus(0);
         model.addListenerToTaskNames(change -> {
-            for(String text : model.getTaskNames()){
-                dailyTaskVBox.getChildren().add(new Label(text));
+            LinkedList<Label> labels = new LinkedList<Label>();
+            for(String text : model.getActiveTasks()){
+                labels.add(new Label(text));
             }
+            dailyTaskVBox.getChildren().setAll(labels);
         });
     }
 

@@ -8,6 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class HomePageModel extends PageWithTokenModel {
     private IntegerProperty adoptionRequestsCount;
     private IntegerProperty catCapacity;
@@ -17,6 +21,7 @@ public class HomePageModel extends PageWithTokenModel {
 
     ObservableList<TaskData> tasks = FXCollections.observableArrayList();
     ObservableList<String> taskNames = FXCollections.observableArrayList();
+
     public void setTasks(TaskData[] tasks) {
         this.tasks.setAll(tasks);
         for(TaskData task : tasks){
@@ -25,6 +30,15 @@ public class HomePageModel extends PageWithTokenModel {
     }
     public ObservableList<String> getTaskNames(){
         return taskNames;
+    }
+    public List<String> getActiveTasks(){
+        List<String> ret = new LinkedList<String>();
+        for(TaskData task : tasks){
+            if(!task.status){
+                ret.add(task.text);
+            }
+        }
+        return ret;
     }
     public void addListenerToTaskNames(ListChangeListener<String> listener){
         taskNames.addListener(listener);

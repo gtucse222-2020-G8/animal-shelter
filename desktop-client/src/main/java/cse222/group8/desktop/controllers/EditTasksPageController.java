@@ -17,23 +17,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Base64;
-import java.util.List;
 
 public class EditTasksPageController implements PageWithTokenController {
     public Button addTaskButton;
-    public VBox adoptionRequestListVBox;
     public VBox leftMenu;
+    public VBox dailyTasksVBox;
     private EditTasksPageModel model;
     @FXML
     public LeftMenuPanelController leftMenuController;
@@ -48,6 +40,21 @@ public class EditTasksPageController implements PageWithTokenController {
     public void setToken(Token token) {
         model.setToken(token);
         leftMenuController.setToken(token);
+        try {
+            TaskData[] data = Client.getTasks(token);
+            for(TaskData td:data){
+                dailyTasksVBox.getChildren().add(createTaskListComponent(td));
+            }
+        } catch (ConnectionError connectionError) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Connection Error", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(-1);
+        }
     }
     private void reload(Event e){
         Node node=(Node) e.getSource();
@@ -69,6 +76,8 @@ public class EditTasksPageController implements PageWithTokenController {
     }
     public void onAddTaskButtonAction(Event e){
         TextInputDialog td = new TextInputDialog();
+        td.setHeaderText(null);
+        td.setGraphic(null);
         td.setContentText("Enter new task");
         td.showAndWait();
         String text = td.getEditor().getText();
@@ -121,6 +130,8 @@ public class EditTasksPageController implements PageWithTokenController {
         taskEditButton.setOnAction(e -> {
             TextInputDialog td = new TextInputDialog();
             td.setContentText("Enter new text");
+            td.setHeaderText(null);
+            td.setGraphic(null);
             td.getEditor().setText(data.text);
             td.showAndWait();
             try {
