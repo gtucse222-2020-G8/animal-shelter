@@ -24,8 +24,6 @@ public class User implements Comparable<User> {
     
     // public constr needed
     
-    
-    
     public boolean createARequest(Animal animal) {
     	//TODO
     	// calls animals method

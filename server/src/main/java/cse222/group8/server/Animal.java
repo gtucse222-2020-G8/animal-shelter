@@ -19,8 +19,7 @@ public class Animal implements Comparable<Animal> {
 	private Date shelterDate;
 	private int diseased;
 
-	AdoptionRequest mainRequest;
-	Queue<AdoptionRequest> requestQueue;
+	private AdoptionRequest adoptionRequest;
 
 	/* address infos */
 	private City city;
@@ -56,27 +55,9 @@ public class Animal implements Comparable<Animal> {
 	}
 
 	public AdoptionRequest makeARequest(User requester) {
-
-		if (mainRequest == null) {
-			mainRequest = new AdoptionRequest(null, requester, this);
-			// Change null date!
-		}
-
-		else {
-			AdoptionRequest temp = new AdoptionRequest(null, requester, this);
-			// Change null date!
-
-			if ((getRequestQueue().contains(temp))) {
-				System.out.println("This user is already exist in the request queue for this animal.");
-				return null;
-			}
-
-			getRequestQueue().add(temp);
-			System.out.println("Your request has been received.");
-			return temp;
-		}
-
-		return null;
+		adoptionRequest = new AdoptionRequest(null, requester, this);
+		adoptionRequest.setRequestDate(new Date());
+		return adoptionRequest;
 	}
 
 	@Override
@@ -200,16 +181,11 @@ public class Animal implements Comparable<Animal> {
 		this.shelterDate = shelterDate;
 	}
 
-	public AdoptionRequest getMainRequest() {
-		return mainRequest;
+	public AdoptionRequest getAdoptionRequest() {
+		return adoptionRequest;
 	}
 
-	public void setMainRequest(AdoptionRequest mainRequest) {
-		this.mainRequest = mainRequest;
+	public void setAdoptionRequest(AdoptionRequest mainRequest) {
+		this.adoptionRequest = mainRequest;
 	}
-
-	public Queue<AdoptionRequest> getRequestQueue() {
-		return requestQueue;
-	}
-
 }
