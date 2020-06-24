@@ -134,8 +134,7 @@ public class Animal implements Comparable<Animal> {
 	 * @return the adoption request
 	 */
 	public AdoptionRequest makeARequest(User requester) {
-		adoptionRequest = new AdoptionRequest(null, requester, this);
-		adoptionRequest.setRequestDate(new Date());
+		adoptionRequest = new AdoptionRequest( requester, this);
 		return adoptionRequest;
 	}
 

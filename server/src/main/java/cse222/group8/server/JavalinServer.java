@@ -75,12 +75,17 @@ public class JavalinServer implements Runnable {
         return false;
     }
     private DecodedJWT verifyBearer(String str){
-        String token = str.substring(str.indexOf("rer "));
+        System.out.println("##"+str);
+        String token = str.substring(str.indexOf("rer ")+4);
+        System.out.println("##"+token);
         try {
             DecodedJWT jwt = verifier.verify(token);
             return jwt;
         } catch (JWTVerificationException exception){
             System.out.println(exception);
+            return null;
+        }catch (Exception e){
+            System.out.println(e);
             return null;
         }
     }
@@ -143,15 +148,15 @@ public class JavalinServer implements Runnable {
 	}
 
 	private void getCities(Context ctx){
-        Collection<City> cities = system.getAllCities();
-        String[] cityNames = new String[cities.size()];
-        int i = 0;
+        BinarySearchTree<City> cities = system.getCitiesBST();
+        List<String> cityNames = new LinkedList<String>();
         for(City city : cities){
-            cityNames[i] = city.getName();
-            ++i;
+            cityNames.add(city.getName());
         }
         ctx.status(200);
-        ctx.json(cityNames);
+        String[] listToArr = new String[cityNames.size()];
+        cityNames.toArray(listToArr);
+        ctx.json(listToArr);
     }
 
     private void getTowns(Context ctx){
@@ -162,7 +167,10 @@ public class JavalinServer implements Runnable {
         for(Town town : towns){
             townNames.add(town.getName());
         }
-        ctx.json((String[])townNames.toArray());
+        ctx.status(200);
+        String[] listToArr = new String[townNames.size()];
+        townNames.toArray(listToArr);
+        ctx.json(listToArr);
     }
     private void getShelters(Context ctx){
         String cityName = ctx.header("City");
@@ -174,6 +182,10 @@ public class JavalinServer implements Runnable {
         for(Shelter shelter : shelters){
             shelterNames.add(shelter.getName());
         }
+        String[] listToArr = new String[shelterNames.size()];
+        shelterNames.toArray(listToArr);
+        ctx.status(200);
+        ctx.json(listToArr);
     }
     private void getGeneralShelterData(Context ctx){
         if(hasJwt(ctx)){
@@ -213,6 +225,7 @@ public class JavalinServer implements Runnable {
             City city = system.getCity(data.city);
             Town town = city.getTown(data.town);
             system.addNewShelterRequest(new ShelterRequest(data.city,data.town,new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password,system)));
+            ctx.status(200);
         } catch (Exception e) {
             ctx.status(432);
             return;
@@ -234,15 +247,17 @@ public class JavalinServer implements Runnable {
             City city = system.getCity(data.city);
             Town town = city.getTown(data.town);
             Shelter shelter = town.getShelter(data.shelterName);
-            if(shelter.getPassword() == data.password){
+            if(shelter.getPassword().equals(data.password)){
                 Token token = new Token();
                 token.accessToken = createShelterToken(data.city,data.town,data.shelterName);
                 ctx.status(200);
                 ctx.json(token);
             }else{
+                System.out.println(shelter.getPassword()+"|-|"+data.password);
                 ctx.status(403);
             }
         } catch (Exception e) {
+            System.out.println(e);
             ctx.status(432);
             return;
         }
@@ -265,6 +280,11 @@ public class JavalinServer implements Runnable {
                             animal = shelter.getDog(animalId);
                             species = "Dog";
                         }
+                        if(animal == null){
+                            ctx.status(404);
+                            return;
+                        }
+                        ctx.status(200);
                         ctx.json(new AnimalData(animal.getId(),animal.getName(),species,animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
                     }catch (NumberFormatException ignore){
                         ctx.status(432);
@@ -387,7 +407,9 @@ public class JavalinServer implements Runnable {
                         data.add(new AnimalDataWithImage(cat.getId(),cat.getName(),"cat",cat.getKind(),cat.getGender(),cat.getAge(),cat.getVaccination(),cat.isNeutered(),cat.getInfo(),cat.getAdoptionRequest()!=null,cat.getImageString()));
                     }
                     ctx.status(200);
-                    ctx.json((AnimalDataWithImage[])data.toArray());
+                    AnimalDataWithImage[] listToArr = new AnimalDataWithImage[data.size()];
+                    data.toArray(listToArr);
+                    ctx.json(listToArr);
                 }
                 else{
                     ctx.status(403);
@@ -416,7 +438,9 @@ public class JavalinServer implements Runnable {
                         data.add(new AnimalDataWithImage(dog.getId(),dog.getName(),"dog",dog.getKind(),dog.getGender(),dog.getAge(),dog.getVaccination(),dog.isNeutered(),dog.getInfo(),dog.getAdoptionRequest()!=null,dog.getImageString()));
                     }
                     ctx.status(200);
-                    ctx.json((AnimalDataWithImage[])data.toArray());
+                    AnimalDataWithImage[] listToArr = new AnimalDataWithImage[data.size()];
+                    data.toArray(listToArr);
+                    ctx.json(listToArr);
                 }
                 else{
                     ctx.status(403);
@@ -449,6 +473,7 @@ public class JavalinServer implements Runnable {
                         cat.setVaccination(data.vaccination);
                         cat.setNeutered(data.neutered);
                         shelter.addCat(cat);
+                        ctx.status(200);
                     }catch (Exception ignore){
                         ctx.status(403);
                     }
@@ -515,6 +540,7 @@ public class JavalinServer implements Runnable {
                     try {
                         data = mapper.readValue(ctx.body(), String.class);
                         shelter.setPassword(data);
+                        ctx.status(200);
                     }catch (Exception ignore){
                         ctx.status(432);
                     }
@@ -551,6 +577,7 @@ public class JavalinServer implements Runnable {
                         else if(animalType == "Dog"){
                             shelter.makeCapChangeRequest(shelter.getCatCapacity(),data);
                         }
+                        ctx.status(200);
                     }catch (Exception ignore){
                         ctx.status(432);
                     }
@@ -581,6 +608,7 @@ public class JavalinServer implements Runnable {
                     try {
                         data = mapper.readValue(ctx.body(), String.class);
                         shelter.setName(data);
+                        ctx.status(200);
                     }catch (Exception ignore){
                         ctx.status(432);
                     }
@@ -646,8 +674,12 @@ public class JavalinServer implements Runnable {
                     int data;
                     try {
                         data = mapper.readValue(ctx.body(), int.class);
-                        shelter.approveAdoptionRequest(data);
-                        ctx.status(200);
+                        if(shelter.approveAdoptionRequest(data)){
+                            ctx.status(200);
+                        }
+                        else{
+                            ctx.status(404);
+                        }
                     }catch (Exception ignore){
                         ctx.status(432);
                     }
@@ -849,9 +881,13 @@ public class JavalinServer implements Runnable {
             if(jwt!=null){
                 if(jwt.getClaim("IsShelter").asBoolean()) {
                     Shelter shelter = getShelterFromJWT(jwt);
-                    Animal animal = shelter.getDiseasedAnimals().peek().getAnimal();
-                    ctx.json(new AnimalData(animal.getId(),animal.getName(),animal.getId()%2==1?"Cat":"Dog",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
-                    ctx.status(200);
+                    try {
+                        Animal animal = shelter.getDiseasedAnimals().peek().getAnimal();
+                        ctx.json(new AnimalData(animal.getId(), animal.getName(), animal.getId() % 2 == 1 ? "Cat" : "Dog", animal.getKind(), animal.getGender(), animal.getAge(), animal.getVaccination(), animal.isNeutered(), animal.getInfo(), animal.getAdoptionRequest() != null));
+                        ctx.status(200);
+                    }catch (NullPointerException ignore){
+                        ctx.status(404);
+                    }
                 }
                 else{
                     ctx.status(403);
@@ -1058,7 +1094,9 @@ public class JavalinServer implements Runnable {
                 }
             }
             ctx.status(200);
-            ctx.json((AnimalData[])data.toArray());
+            AnimalDataWithImage[] listToArr = new AnimalDataWithImage[data.size()];
+            data.toArray(listToArr);
+            ctx.json(listToArr);
         }catch (Exception ignore){
             ctx.status(432);
         }
@@ -1082,7 +1120,9 @@ public class JavalinServer implements Runnable {
                 data.add(new AnimalData(animal.getId(),animal.getName(),species,animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
             }
             ctx.status(200);
-            ctx.json((AnimalData[])data.toArray());
+            AnimalDataWithImage[] listToArr = new AnimalDataWithImage[data.size()];
+            data.toArray(listToArr);
+            ctx.json(listToArr);
         }catch (Exception ignore){
             ctx.status(432);
         }
@@ -1123,7 +1163,9 @@ public class JavalinServer implements Runnable {
                         request.getRequestedAnimal().getId()+" Expires at: " + request.getExpirationDate().toString());
             }
             ctx.status(200);
-            ctx.json((String[])data.toArray());
+            String[] listToArr = new String[data.size()];
+            data.toArray(listToArr);
+            ctx.json(listToArr);
         }catch (Exception ignore){
             ctx.status(432);
         }
@@ -1157,7 +1199,6 @@ public class JavalinServer implements Runnable {
                 }
                 animal.makeARequest(system.getUser(username));
                 ctx.status(200);
-                ctx.json(createUserToken(username));
             }else{
                 ctx.status(304);
             }

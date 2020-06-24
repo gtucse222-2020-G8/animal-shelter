@@ -2,6 +2,7 @@ package cse222.group8.desktop.controllers;
 
 import cse222.group8.desktop.client.Client;
 import cse222.group8.desktop.client.ConnectionError;
+import cse222.group8.desktop.client.NotFound;
 import cse222.group8.desktop.client.models.AnimalDataWithImage;
 import cse222.group8.desktop.client.models.Token;
 import cse222.group8.desktop.models.AddDogPageModel;
@@ -146,8 +147,10 @@ public class AddDogPageController implements PageWithTokenController {
             vacInfoField.textProperty().setValue(model.getVaccination());
             infoField.textProperty().setValue(model.getInfo());
             speciesField.textProperty().setValue(model.getKind());
-            animalImageView.setImage(model.getImageAsImage());
-        } catch (ConnectionError connectionError) {
+            try {
+                animalImageView.setImage(model.getImageAsImage());
+            }catch (Exception ignore){}
+        } catch (ConnectionError | NotFound connectionError) {
             System.out.println("Connection Error");
             System.exit(-1);
         }

@@ -109,10 +109,12 @@ public class DogsPageController implements PageWithTokenController {
         VBox vbox = (VBox) node.getChildren().get(0);
         List<Node> children = vbox.getChildren();
         ImageView imageView = (ImageView) children.get(0);
-        byte[] img = Base64.getDecoder().decode(data.image);
-        ByteArrayInputStream bais = new ByteArrayInputStream(img);
-        Image image = new Image(bais);
-        imageView.setImage(image);
+        try {
+            byte[] img = Base64.getDecoder().decode(data.image);
+            ByteArrayInputStream bais = new ByteArrayInputStream(img);
+            Image image = new Image(bais);
+            imageView.setImage(image);
+        }catch (Exception ignore){}
         Text breed = (Text) children.get(1);
         breed.setText(data.name);
         Text age = (Text) children.get(2);

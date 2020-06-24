@@ -2,6 +2,7 @@ package cse222.group8.desktop.controllers;
 
 import cse222.group8.desktop.client.Client;
 import cse222.group8.desktop.client.ConnectionError;
+import cse222.group8.desktop.client.NotFound;
 import cse222.group8.desktop.client.models.AdoptionRequestData;
 import cse222.group8.desktop.client.models.TaskData;
 import cse222.group8.desktop.client.models.Token;
@@ -116,6 +117,12 @@ public class AdoptionRequestsPageController implements PageWithTokenController {
                     Client.approveAdoption(model.getToken(), data.requestId);
                 } catch (ConnectionError connectionError) {
                     Alert alert1 = new Alert(Alert.AlertType.ERROR, "Connection Error", ButtonType.OK);
+                    alert1.showAndWait();
+                    if (alert1.getResult() == ButtonType.OK) {
+                        alert1.close();
+                    }
+                } catch (NotFound notFound) {
+                    Alert alert1 = new Alert(Alert.AlertType.ERROR, "Something went wrong, adoption request not found", ButtonType.OK);
                     alert1.showAndWait();
                     if (alert1.getResult() == ButtonType.OK) {
                         alert1.close();

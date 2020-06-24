@@ -28,9 +28,14 @@ public class Main {
 		Town kadikoy = new Town("kadikoy",istanbul,system);
 		Shelter dogaevi = new Shelter("dogaevi", istanbul, kagithane, 23, 11, "Sultan selim mah. No 3", "+902122222415", "stockpass", system);
 		kagithane.getShelters().add(dogaevi);
+		dogaevi.register();
 		dogaevi.addCat(new Animal("korpe","tekir",3,true));
 		dogaevi.addCat(new Animal("sari","sarman",6,true));
 		dogaevi.addDog(new Animal("pasa","kangal",12,false));
+		User user = new User();
+		user.setUsername("ismltpn");
+		user.setName("ismail tapan");
+		user.createARequest(dogaevi.getCat(1));
 		istanbul.getTowns().add(kagithane);
 		istanbul.getTowns().add(uskudar);
 		istanbul.getTowns().add(kadikoy);

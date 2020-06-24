@@ -1,5 +1,6 @@
 package cse222.group8.desktop;
 
+import cse222.group8.desktop.client.NotFound;
 import cse222.group8.desktop.client.Client;
 import cse222.group8.desktop.client.ConnectionError;
 import cse222.group8.desktop.client.WrongPasswordException;
@@ -11,7 +12,7 @@ import cse222.group8.desktop.client.models.Token;
 import java.util.Scanner;
 
 /**
- * The type Console uı.
+ * Console UI for shelter employee
  */
 public class ConsoleUI {
     private Scanner scanner;
@@ -29,6 +30,7 @@ public class ConsoleUI {
         return getYN(message);
     }
     private void login() throws ConnectionError {
+        System.out.println("Login");
         System.out.print("Enter city: ");
         String city = scanner.nextLine();
         if(Client.cityExists(city)){
@@ -53,9 +55,9 @@ public class ConsoleUI {
                             tryAgain = getYN("Do you want to try again?(y/n): ");
                         }
                     }while(tryAgain);
-                }
-            }
-        }
+                }else System.out.println("Shelter doesn't exists");
+            }else System.out.println("Town doesn't exists");
+        }else System.out.println("City doesn't exists");
         login();
     }
     private void printMainMenu(){
@@ -83,13 +85,19 @@ public class ConsoleUI {
         AdoptionRequestData[] adoptionRequests = Client.getAdoptionRequests(token);
         System.out.println("Active Adoption Requests:");
         for(AdoptionRequestData adoptionRequest : adoptionRequests){
-            System.out.println("ID: " + adoptionRequest.requestId + " Requester: " + adoptionRequest.requester +" Animal ID: "+adoptionRequest.animalId+" Animal Name: "+Client.getAnimal(token,adoptionRequest.animalId).name);
+            try {
+                System.out.println("ID: " + adoptionRequest.requestId + " Requester: " + adoptionRequest.requester +" Animal ID: "+adoptionRequest.animalId+" Animal Name: "+Client.getAnimal(token,adoptionRequest.animalId).name);
+            } catch (NotFound ignore) {}
         }
     }
     private void approveAdoptionRequest() throws ConnectionError {
         getAdoptionRequests();
         System.out.println("Enter adoption request id:");
-        Client.approveAdoption(token, scanner.nextInt());
+        try {
+            Client.approveAdoption(token, scanner.nextInt());
+        } catch (NotFound notFound) {
+            System.out.println("Adoption request not found");
+        }
 
     }
     private void capacityChangeRequest() throws ConnectionError {
@@ -125,9 +133,14 @@ public class ConsoleUI {
         login();
     }
     private void getMostDiseasedAnimal() throws ConnectionError {
-        AnimalData animal = Client.getMostDiseasedAnimal(token);
-        System.out.print("Most diseased animal is: ");
-        System.out.println("ID: "+animal.id+" Name "+animal.name+" Animal Type: "+animal.breed+ " Kind: "+animal.kind);
+        AnimalData animal = null;
+        try {
+            animal = Client.getMostDiseasedAnimal(token);
+            System.out.print("Most diseased animal is: ");
+            System.out.println("ID: " + animal.id + " Name " + animal.name + " Animal Type: " + animal.breed + " Kind: " + animal.kind);
+        } catch (NotFound notFound) {
+            System.out.println("There is no diseased animal");
+        }
     }
     private void addDiseasedAnimal() throws ConnectionError {
         System.out.print("Diseased animal's id: ");
@@ -148,27 +161,35 @@ public class ConsoleUI {
         switch (getMenuChoice()){
             case 0:
                 getAdoptionRequests();
+                menu();
                 return;
             case 1:
                 approveAdoptionRequest();
+                menu();
                 return;
             case 2:
                 capacityChangeRequest();
+                menu();
                 return;
             case 3:
                 changeName();
+                menu();
                 return;
             case 4:
                 changePassword();
+                menu();
                 return;
             case 5:
                 getMostDiseasedAnimal();
+                menu();
                 return;
             case 6:
                 addDiseasedAnimal();
+                menu();
                 return;
             case 7:
                 cureMostDiseasedAnimal();
+                menu();
                 return;
             case 8:
                 logout();
