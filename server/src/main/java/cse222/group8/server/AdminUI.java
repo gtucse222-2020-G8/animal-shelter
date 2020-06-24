@@ -3,35 +3,49 @@ package cse222.group8.server;
 import java.util.Scanner;
 
 
+/**
+ * The type Admin uı.
+ */
 public class AdminUI {
-	
+
+	/**
+	 * The System.
+	 */
 	ShelterSystem system_;
-	
+
+	/**
+	 * The Scan.
+	 */
 	Scanner scan;
-	
-	
-	
-	
+
+
+	/**
+	 * Instantiates a new Admin uı.
+	 */
 	public AdminUI() {
 		
 		System.err.println("UI needs a system.");
 		System.exit(0);
 		
 	}
-	
-	
-	
-	
+
+
+	/**
+	 * Instantiates a new Admin uı.
+	 *
+	 * @param system the system
+	 */
 	public AdminUI( ShelterSystem system ) {
 		
 		this.system_ = system;
 		this.scan = new Scanner(System.in);
 		
 	}
-	
-	
-	
-	
+
+
+	/**
+	 * Run.
+	 */
 	public void run() {
 		mainMenu();
 	}
@@ -251,23 +265,19 @@ public class AdminUI {
 }
 
 
-
-
-
-
 /**
  * Console helpers for Admin UI.
- * @author Berk Pekgoz
  *
+ * @author Berk Pekgoz
  */
 class ConsoleHelpers{
-	
-	
+
+
 	/**
 	 * Gets Integer input with specified scanner
-	 * 
+	 *
 	 * @param scan Scanner
-	 * @return Integer
+	 * @return Integer ınteger ınput
 	 */
 	public static String getIntegerInput(Scanner scan) {
 		while (true)

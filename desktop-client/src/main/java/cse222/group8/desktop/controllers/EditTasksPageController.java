@@ -22,11 +22,26 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * The type Edit tasks page controller.
+ */
 public class EditTasksPageController implements PageWithTokenController {
+    /**
+     * The Add task button.
+     */
     public Button addTaskButton;
+    /**
+     * The Left menu.
+     */
     public VBox leftMenu;
+    /**
+     * The Daily tasks v box.
+     */
     public VBox dailyTasksVBox;
     private EditTasksPageModel model;
+    /**
+     * The Left menu controller.
+     */
     @FXML
     public LeftMenuPanelController leftMenuController;
 
@@ -74,6 +89,12 @@ public class EditTasksPageController implements PageWithTokenController {
         controller.setToken(model.getToken());
         stage.show();
     }
+
+    /**
+     * On add task button action.
+     *
+     * @param e the e
+     */
     public void onAddTaskButtonAction(Event e){
         TextInputDialog td = new TextInputDialog();
         td.setHeaderText(null);

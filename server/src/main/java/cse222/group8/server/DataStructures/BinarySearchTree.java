@@ -8,14 +8,14 @@ package cse222.group8.server.DataStructures;
 @SuppressWarnings("serial")
 public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> implements SearchTree<E> {
 	// Data Fields
-    /**
-     * Return value from the public add method.
-     */
-    protected boolean addReturn;
-    /**
-     * Return value from the public delete method
-     */
-    protected E deleteReturn;
+	/**
+	 * Return value from the public add method.
+	 */
+	protected boolean addReturn;
+	/**
+	 * Return value from the public delete method
+	 */
+	protected E deleteReturn;
 
 	/**Starter method find.
 	 * pre: The target object must implement the
@@ -169,6 +169,11 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
 		return true;
 	}
 
+	/**
+	 * Iterator ıterator.
+	 *
+	 * @return the ıterator
+	 */
 	public Iterator<E> iterator(){
 		return new Iterator<E>() {
 			ArrayList<E> nodesSorted;

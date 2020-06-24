@@ -7,16 +7,37 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
+/**
+ * The type Settings page controller.
+ */
 public class SettingsPageController implements PageWithTokenController {
+    /**
+     * The Change capacity button.
+     */
     public Button changeCapacityButton;
+    /**
+     * The Change password button.
+     */
     public Button changePasswordButton;
+    /**
+     * The Change shelter name button.
+     */
     public Button changeShelterNameButton;
+    /**
+     * The Left menu controller.
+     */
     @FXML
     public LeftMenuPanelController leftMenuController;
+    /**
+     * The Left menu.
+     */
     public VBox leftMenu;
 
     private SettingsPageModel model;
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
         model = new SettingsPageModel();

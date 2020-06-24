@@ -1,4 +1,4 @@
-package com.company;
+package cse222.group8.userapp;
 
 
 import com.google.gson.Gson;
@@ -9,11 +9,21 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 
+/**
+ * The type Request handler.
+ */
 public class RequestHandler {
 
     private static final HttpClient client = HttpClient.newHttpClient();
     private static final String baseUrl = "http://localhost:8080/";
 
+    /**
+     * Login string.
+     *
+     * @param user the user
+     * @return the string
+     * @throws ConnectionError the connection error
+     */
     public  String Login(User user) throws ConnectionError {
         Gson gson = new Gson();
 
@@ -45,6 +55,13 @@ public class RequestHandler {
 
     }
 
+    /**
+     * Register boolean.
+     *
+     * @param user the user
+     * @return the boolean
+     * @throws ConnectionError the connection error
+     */
     public Boolean Register(User user) throws ConnectionError {
         Gson gson = new Gson();
 
@@ -79,6 +96,13 @@ public class RequestHandler {
 
     }
 
+    /**
+     * Get all animals by filter string [ ].
+     *
+     * @param filter the filter
+     * @return the string [ ]
+     * @throws ConnectionError the connection error
+     */
     public String[] GetAllAnimalsByFilter(Filter filter) throws ConnectionError {
         URI uri = URI.create(baseUrl + "/animals/filter/get");
         HttpRequest request = HttpRequest.newBuilder()
@@ -105,6 +129,13 @@ public class RequestHandler {
         }
     }
 
+    /**
+     * Get favorite pets string [ ].
+     *
+     * @param user the user
+     * @return the string [ ]
+     * @throws ConnectionError the connection error
+     */
     public String[] GetFavoritePets(User user) throws ConnectionError {
         URI uri = URI.create(baseUrl + "/user/favoritePets");
         HttpRequest request = HttpRequest.newBuilder()
@@ -132,6 +163,14 @@ public class RequestHandler {
     }
 
 
+    /**
+     * Update user boolean.
+     *
+     * @param userToUpdate   the user to update
+     * @param updateUserWith the update user with
+     * @return the boolean
+     * @throws ConnectionError the connection error
+     */
     public Boolean updateUser(User userToUpdate, User updateUserWith) throws ConnectionError {
         URI uri = URI.create(baseUrl + "/user/account/update");
         HttpRequest request = HttpRequest.newBuilder()
@@ -160,6 +199,13 @@ public class RequestHandler {
         }
     }
 
+    /**
+     * Get all ownership string [ ].
+     *
+     * @param user the user
+     * @return the string [ ]
+     * @throws ConnectionError the connection error
+     */
     public String[] getAllOwnership(User user) throws ConnectionError {
         URI uri = URI.create(baseUrl + "/user/ownages/get");
         HttpRequest request = HttpRequest.newBuilder()
@@ -186,6 +232,13 @@ public class RequestHandler {
         }
     }
 
+    /**
+     * Get all ownership request list string [ ].
+     *
+     * @param user the user
+     * @return the string [ ]
+     * @throws ConnectionError the connection error
+     */
     public String[] getAllOwnershipRequestList(User user) throws ConnectionError {
         URI uri = URI.create(baseUrl + "/user/ownages/requests/get");
         HttpRequest request = HttpRequest.newBuilder()
@@ -212,6 +265,15 @@ public class RequestHandler {
         }
     }
 
+    /**
+     * Request ownership boolean.
+     *
+     * @param user      the user
+     * @param animal    the animal
+     * @param shelterId the shelter ıd
+     * @return the boolean
+     * @throws ConnectionError the connection error
+     */
     public Boolean requestOwnership(User user, Animal animal,String shelterId) throws ConnectionError {
         Gson gson = new Gson();
 

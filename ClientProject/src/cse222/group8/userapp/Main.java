@@ -1,8 +1,11 @@
-package com.company;
+package cse222.group8.userapp;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * The type Main.
+ */
 public class Main {
 
     private static void printInnerMenu(){
@@ -23,6 +26,11 @@ public class Main {
         System.out.println("8-) Quit");
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int menuType = 1;  //parent

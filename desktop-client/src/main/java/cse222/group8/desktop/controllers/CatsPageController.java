@@ -21,13 +21,28 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * The type Cats page controller.
+ */
 public class CatsPageController implements PageWithTokenController {
+    /**
+     * The Grid pane.
+     */
     public GridPane gridPane;
+    /**
+     * The Left menu.
+     */
     public VBox leftMenu;
     private CatsPageModel model;
+    /**
+     * The Left menu controller.
+     */
     @FXML
     public LeftMenuPanelController leftMenuController;
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
         model = new CatsPageModel();

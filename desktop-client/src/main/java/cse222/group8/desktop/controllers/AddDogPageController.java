@@ -27,22 +27,64 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * The type Add dog page controller.
+ */
 public class AddDogPageController implements PageWithTokenController {
+    /**
+     * The Name field.
+     */
     public TextField nameField;
+    /**
+     * The Gender combo.
+     */
     public ComboBox<Character> genderCombo;
+    /**
+     * The Age combo.
+     */
     public ComboBox<String> ageCombo;
+    /**
+     * The Neutered check.
+     */
     public CheckBox neuteredCheck;
+    /**
+     * The Vac ınfo field.
+     */
     public TextArea vacInfoField;
+    /**
+     * The Info field.
+     */
     public TextArea infoField;
+    /**
+     * The Species field.
+     */
     public TextField speciesField;
+    /**
+     * The Animal ımage view.
+     */
     public ImageView animalImageView;
+    /**
+     * The Add change ımage button.
+     */
     public Button addChangeImageButton;
+    /**
+     * The Update button.
+     */
     public Button updateButton;
+    /**
+     * The Left menu.
+     */
     public VBox leftMenu;
+    /**
+     * The Left menu controller.
+     */
     @FXML public LeftMenuPanelController leftMenuController;
 
     private AddDogPageModel model;
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
         model = new AddDogPageModel();
@@ -80,6 +122,11 @@ public class AddDogPageController implements PageWithTokenController {
         leftMenuController.setToken(token);
     }
 
+    /**
+     * Sets animal ıd.
+     *
+     * @param id the id
+     */
     public void setAnimalID(int id) {
         try {
             AnimalDataWithImage data = Client.getAnimal(model.getToken(),id);
@@ -98,6 +145,11 @@ public class AddDogPageController implements PageWithTokenController {
         }
     }
 
+    /**
+     * On add change ımage button.
+     *
+     * @param e the e
+     */
     public void onAddChangeImageButton(Event e){
         Node node=(Node) e.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
@@ -183,6 +235,12 @@ public class AddDogPageController implements PageWithTokenController {
         }
         return valid;
     }
+
+    /**
+     * On update button.
+     *
+     * @param e the e
+     */
     public void onUpdateButton(Event e){
         Node node=(Node) e.getSource();
         Stage stage=(Stage) node.getScene().getWindow();

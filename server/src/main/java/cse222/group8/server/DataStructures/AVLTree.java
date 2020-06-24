@@ -1,8 +1,11 @@
 package cse222.group8.server.DataStructures;
 
-/** Self-balancing binary search tree using the algorithm defined
- *  by Adelson-Velskii and Landis.
- *  @author Koffman and Wolfgang
+/**
+ * Self-balancing binary search tree using the algorithm defined
+ * by Adelson-Velskii and Landis.
+ *
+ * @param <E> the type parameter
+ * @author Koffman and Wolfgang
  */
 @SuppressWarnings("serial")
 public class AVLTree <E extends Comparable <E>> extends BinarySearchTreeWithRotate <E> {
@@ -20,23 +23,32 @@ public class AVLTree <E extends Comparable <E>> extends BinarySearchTreeWithRota
 	/** Class to represent an AVL Node. It extends the
 	BinaryTree.Node by adding the balance field. */
 	private static class AVLNode <E> extends Node <E> {
-		
-		/** Constant to indicate left-heavy */
+
+		/**
+		 * Constant to indicate left-heavy
+		 */
 		public static final int LEFT_HEAVY = -1;
-	
-		/** Constant to indicate balanced */
+
+		/**
+		 * Constant to indicate balanced
+		 */
 		public static final int BALANCED = 0;
-	
-		/** Constant to indicate right-heavy */
+
+		/**
+		 * Constant to indicate right-heavy
+		 */
 		public static final int RIGHT_HEAVY = 1;
 	
-		/** balance is right subtree height – left subtree height */
+		/** balance is right subtree height ï¿½ left subtree height */
 		private int balance;
 	
 	
 		// Methods
-		/** Construct a node with the given item as the data field.
-	    	@param item The data field
+
+		/**
+		 * Construct a node with the given item as the data field.
+		 *
+		 * @param item The data field
 		 */
 		public AVLNode(E item) {
 			super(item);

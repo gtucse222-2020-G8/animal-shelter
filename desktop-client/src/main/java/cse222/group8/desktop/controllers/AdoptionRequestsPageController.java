@@ -26,12 +26,31 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.Optional;
 
+/**
+ * The type Adoption requests page controller.
+ */
 public class AdoptionRequestsPageController implements PageWithTokenController {
+    /**
+     * The Adoption requests list v box.
+     */
     public VBox adoptionRequestsListVBox;
+    /**
+     * The Left menu.
+     */
     public VBox leftMenu;
+    /**
+     * The Model.
+     */
     AdoptionRequestsPageModel model;
+    /**
+     * The Left menu controller.
+     */
     @FXML
     public LeftMenuPanelController leftMenuController;
+
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
         model = new AdoptionRequestsPageModel();

@@ -5,10 +5,9 @@ import java.util.*;
 /**
  * A ListGraph is an extension of the AbstractGraph abstract class that uses an
  * array of lists to represent the edges.
- * 
+ *
  * @author Koffman and Wolfgang
  */
-
 public class ListGraph extends AbstractGraph {
 
 	// Data Field
@@ -19,7 +18,7 @@ public class ListGraph extends AbstractGraph {
 
 	/**
 	 * Construct a graph with the specified number of vertices and directionality.
-	 * 
+	 *
 	 * @param numV     The number of vertices
 	 * @param directed The directionality flag
 	 */

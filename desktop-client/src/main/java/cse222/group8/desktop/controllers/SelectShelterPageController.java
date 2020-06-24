@@ -20,14 +20,32 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The type Select shelter page controller.
+ */
 public class SelectShelterPageController {
+    /**
+     * The City select combo.
+     */
     public ComboBox<String> citySelectCombo;
+    /**
+     * The Town select combo.
+     */
     public ComboBox<String> townSelectCombo;
+    /**
+     * The Shelter name field.
+     */
     public TextField shelterNameField;
+    /**
+     * The Submit button.
+     */
     public Button submitButton;
 
     private SelectShelterPageModel model;
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
         this.model = new SelectShelterPageModel();
@@ -62,6 +80,12 @@ public class SelectShelterPageController {
             submitButton.setDisable(newValue.length() < 5);
         });
     }
+
+    /**
+     * On submit button action.
+     *
+     * @param e the e
+     */
     public void onSubmitButtonAction(Event e){
         Node node=(Node) e.getSource();
         Stage stage=(Stage) node.getScene().getWindow();

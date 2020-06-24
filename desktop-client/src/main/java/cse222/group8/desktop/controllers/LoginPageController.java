@@ -18,24 +18,59 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The type Login page controller.
+ */
 public class LoginPageController{
+    /**
+     * The Login shelter name.
+     */
     public Text loginShelterName;
+    /**
+     * The Password field.
+     */
     public PasswordField passwordField;
+    /**
+     * The Login button.
+     */
     public Button loginButton;
+    /**
+     * The Cancel button.
+     */
     public Button cancelButton;
 
     private LoginPageModel model;
 
+    /**
+     * Set login shelter name.
+     *
+     * @param shelterName the shelter name
+     */
     public void setLoginShelterName(String shelterName){
         loginShelterName.setText(shelterName);
     }
+
+    /**
+     * Set city.
+     *
+     * @param city the city
+     */
     public void setCity(String city){
         model.setCity(city);
     }
+
+    /**
+     * Set town.
+     *
+     * @param town the town
+     */
     public void setTown(String town){
         model.setTown(town);
     }
 
+    /**
+     * Initialize.
+     */
     @FXML public void initialize(){
         model = new LoginPageModel();
         passwordField.textProperty().addListener((observableValue, s, t1) -> {
@@ -49,6 +84,11 @@ public class LoginPageController{
         });
     }
 
+    /**
+     * On login button action.
+     *
+     * @param e the e
+     */
     public void onLoginButtonAction(Event e){
         String shelterName = loginShelterName.getText();
         String password = model.getPassword();
@@ -90,6 +130,11 @@ public class LoginPageController{
         }
     }
 
+    /**
+     * On cancel button action.
+     *
+     * @param e the e
+     */
     public void onCancelButtonAction(Event e){
         Node node=(Node) e.getSource();
         Stage stage=(Stage) node.getScene().getWindow();

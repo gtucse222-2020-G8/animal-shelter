@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Implementation of a Skip-List data structure
  *
- *@param <E> The type of data stored. Must be a Comparable
+ * @param <E> The type of data stored. Must be a Comparable
  */
 public class SkipList<E extends Comparable<E>> {
     /**
@@ -40,6 +40,9 @@ public class SkipList<E extends Comparable<E>> {
 
     //Constructor
 
+    /**
+     * Instantiates a new Skip list.
+     */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public SkipList(){
         size = 0;
@@ -69,9 +72,9 @@ public class SkipList<E extends Comparable<E>> {
 
     /**
      * Find an object in the skip-list
+     *
      * @param target The item being sought
-     * @return A reference to the object in the skip-list that matches
-     * 		   the target. If not found, null is returned
+     * @return A reference to the object in the skip-list that matches 		   the target. If not found, null is returned
      */
     public E find(E target){
         SLNode<E>[] pred = search(target);
@@ -85,6 +88,7 @@ public class SkipList<E extends Comparable<E>> {
 
     /**
      * Inserts the given item
+     *
      * @param item The item to add
      * @return true as the item is added
      */
@@ -108,6 +112,7 @@ public class SkipList<E extends Comparable<E>> {
 
     /**
      * Removes an instance of the given item
+     *
      * @param item The item to remove
      * @return true if the item is removed, false if the item is not in the list
      */
@@ -176,12 +181,19 @@ public class SkipList<E extends Comparable<E>> {
      * @param <E> The type of data stored. Must be a Comparable
      */
     static class SLNode<E>{
+        /**
+         * The Links.
+         */
         SLNode<E>[] links;
+        /**
+         * The Data.
+         */
         E data;
 
         /**
          * Create a node of level m
-         * @param m The level of the node
+         *
+         * @param m    The level of the node
          * @param data The data to be stored
          */
         @SuppressWarnings("unchecked")

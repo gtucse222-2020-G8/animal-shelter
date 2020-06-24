@@ -21,13 +21,31 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * The type Dogs page controller.
+ */
 public class DogsPageController implements PageWithTokenController {
+    /**
+     * The Left menu.
+     */
     public VBox leftMenu;
+    /**
+     * The Grid pane.
+     */
     public GridPane gridPane;
+    /**
+     * The Model.
+     */
     DogsPageModel model;
+    /**
+     * The Left menu controller.
+     */
     @FXML
     public LeftMenuPanelController leftMenuController;
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
         model = new DogsPageModel();

@@ -14,19 +14,55 @@ import javafx.scene.text.Text;
 
 import java.util.LinkedList;
 
+/**
+ * The type Home page controller.
+ */
 public class HomePageController implements PageWithTokenController {
+    /**
+     * The Adoption requests circle.
+     */
     public Circle adoptionRequestsCircle;
+    /**
+     * The Adoption requests text.
+     */
     public Text adoptionRequestsText;
+    /**
+     * The Cats circle.
+     */
     public Circle catsCircle;
+    /**
+     * The Cats text.
+     */
     public Text catsText;
+    /**
+     * The Dogs circle.
+     */
     public Circle dogsCircle;
+    /**
+     * The Dogs text.
+     */
     public Text dogsText;
+    /**
+     * The Left menu.
+     */
     public VBox leftMenu;
+    /**
+     * The Daily task v box.
+     */
     public VBox dailyTaskVBox;
+    /**
+     * The Model.
+     */
     HomePageModel model;
 
+    /**
+     * The Left menu controller.
+     */
     @FXML public LeftMenuPanelController leftMenuController;
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
         model = new HomePageModel();

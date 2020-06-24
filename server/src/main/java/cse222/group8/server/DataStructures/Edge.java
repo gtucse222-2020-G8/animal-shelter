@@ -2,10 +2,9 @@ package cse222.group8.server.DataStructures;
 
 /**
  * An Edge is a link between two vertices.
- * 
+ *
  * @author Koffman and Wolfgang
  */
-
 public class Edge {
 
 	/** Source vertex */
@@ -19,7 +18,7 @@ public class Edge {
 
 	/**
 	 * Constructs an Edge from source to destination. Sets the weight to 1.0
-	 * 
+	 *
 	 * @param source Source vertex
 	 * @param dest   Destination vertex
 	 */
@@ -31,7 +30,7 @@ public class Edge {
 
 	/**
 	 * Constructs an Edge from source to destination. Sets the weight to w
-	 * 
+	 *
 	 * @param source Source vertex
 	 * @param dest   Destination vertex
 	 * @param w      Weight
@@ -44,7 +43,7 @@ public class Edge {
 
 	/**
 	 * Get source
-	 * 
+	 *
 	 * @return Value of source
 	 */
 	public int getSource() {
@@ -53,7 +52,7 @@ public class Edge {
 
 	/**
 	 * Get Destination
-	 * 
+	 *
 	 * @return Value of dest
 	 */
 	public int getDest() {
@@ -62,7 +61,7 @@ public class Edge {
 
 	/**
 	 * Get weight
-	 * 
+	 *
 	 * @return Value of weight
 	 */
 	public double getWeight() {

@@ -18,8 +18,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The type Waiting registeration page controller.
+ */
 public class WaitingRegisterationPageController {
+    /**
+     * The Refresh button.
+     */
     public Button refreshButton;
+    /**
+     * The Cancel button.
+     */
     public Button cancelButton;
 
     private WaitingRegisterationPageModel model;
@@ -29,6 +38,14 @@ public class WaitingRegisterationPageController {
         model = new WaitingRegisterationPageModel();
     }
 
+    /**
+     * Set fields.
+     *
+     * @param token       the token
+     * @param city        the city
+     * @param town        the town
+     * @param shelterName the shelter name
+     */
     public void setFields(Token token, String city, String town, String shelterName){
         model.setCity(city);
         model.setShelterName(shelterName);

@@ -7,6 +7,9 @@ import cse222.group8.desktop.client.models.Token;
 
 import java.util.Scanner;
 
+/**
+ * The type Console uı.
+ */
 public class ConsoleUI {
     private Scanner scanner;
     private Token token;
@@ -47,7 +50,8 @@ public class ConsoleUI {
         System.out.println("9: Logout");
         System.out.println("10: Quit");
     }
-    public int getMenuChoice(){
+
+    private int getMenuChoice(){
         int choice = -1;
         while(choice<0||choice>10){
             printMainMenu();
@@ -85,7 +89,8 @@ public class ConsoleUI {
     private void logout(){
 
     }
-    public void menu(){
+
+    private void menu(){
         switch (getMenuChoice()){
             case 0:
                 getAdoptionRequests();
@@ -119,7 +124,10 @@ public class ConsoleUI {
         }
     }
 
-    public void run() {
+    /**
+     * Run.
+     */
+    public void run() throws ConnectionError {
         login();
         menu();
     }

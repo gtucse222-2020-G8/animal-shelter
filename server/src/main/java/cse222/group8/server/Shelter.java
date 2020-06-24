@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+/**
+ * The type Shelter.
+ */
 public class Shelter implements Comparable<Shelter> {
 
     private String name;
@@ -29,7 +32,10 @@ public class Shelter implements Comparable<Shelter> {
     private int dogSize;
     private boolean registered;
 
-	
+
+    /**
+     * Instantiates a new Shelter.
+     */
     public Shelter(){
     	this.catCapacity = 10;
     	this.dogCapacity = 10;
@@ -44,6 +50,19 @@ public class Shelter implements Comparable<Shelter> {
 
     }
 
+    /**
+     * Instantiates a new Shelter.
+     *
+     * @param name        the name
+     * @param city        the city
+     * @param town        the town
+     * @param catCapacity the cat capacity
+     * @param dogCapacity the dog capacity
+     * @param address     the address
+     * @param phoneNumber the phone number
+     * @param password    the password
+     * @param system      the system
+     */
     public Shelter(String name, City city, Town town, int catCapacity, int dogCapacity, String address, String phoneNumber, String password, ShelterSystem system){
         this.name = name;
         this.city = city;
@@ -64,6 +83,11 @@ public class Shelter implements Comparable<Shelter> {
         registered = false;
     }
 
+    /**
+     * Approve adoption request.
+     *
+     * @param requestID the request ıd
+     */
     public void approveAdoptionRequest(int requestID) {
 
         if(requestID>=0 && requestID<getAdoptionRequests().size()) {
@@ -82,14 +106,28 @@ public class Shelter implements Comparable<Shelter> {
         }
     }
 
+    /**
+     * Register.
+     */
     public void register(){
         registered = true;
     }
 
+    /**
+     * Is registered boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRegistered(){
         return registered;
     }
 
+    /**
+     * Add cat boolean.
+     *
+     * @param cat the cat
+     * @return the boolean
+     */
     public boolean addCat(Animal cat){
        if(catSize < catCapacity) {
     	   cats.add(cat);
@@ -99,6 +137,12 @@ public class Shelter implements Comparable<Shelter> {
        return false;
     }
 
+    /**
+     * Add dog boolean.
+     *
+     * @param dog the dog
+     * @return the boolean
+     */
     public boolean addDog(Animal dog){
        if(dogSize < dogCapacity) {
             dogs.add(dog);
@@ -107,23 +151,49 @@ public class Shelter implements Comparable<Shelter> {
         }
         return false;
     }
-	
+
+    /**
+     * Gets cat size.
+     *
+     * @return the cat size
+     */
     public int getCatSize() {
     	return catSize;
     }
-   
+
+    /**
+     * Gets dog size.
+     *
+     * @return the dog size
+     */
     public int getDogSize() {
     	return dogSize;
     }
-    
+
+    /**
+     * Sets dog size.
+     *
+     * @param size the size
+     */
     public void setDogSize(int size) {
     	dogSize = size;
     }
-    
+
+    /**
+     * Sets cat size.
+     *
+     * @param size the size
+     */
     public void setCatSize(int size) {
     	catSize = size;
     }
-	
+
+    /**
+     * Remove cat boolean.
+     *
+     * @param cat the cat
+     * @return the boolean
+     */
     public boolean removeCat(Animal cat) {
     	Animal animal = cats.find(cat);
     	
@@ -134,7 +204,13 @@ public class Shelter implements Comparable<Shelter> {
     	}
     	return false;
     }
-    
+
+    /**
+     * Remove dog boolean.
+     *
+     * @param dog the dog
+     * @return the boolean
+     */
     public boolean removeDog(Animal dog) {
     	Animal animal = dogs.find(dog);
     	
@@ -145,13 +221,26 @@ public class Shelter implements Comparable<Shelter> {
     	}
     	return false;
     }
-	
+
+    /**
+     * Make cap change request capacity change request.
+     *
+     * @param catCap the cat cap
+     * @param dogCap the dog cap
+     * @return the capacity change request
+     */
     public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
         CapacityChangeRequest newChangeRequest = new CapacityChangeRequest(city.getName(),town.getName(),this,dogCap,catCap);
         shelterSystem.addCapChangeRequest(newChangeRequest);
     	return newChangeRequest;
     }
 
+    /**
+     * Add diseased animal.
+     *
+     * @param animalId the animal ıd
+     * @param diseased the diseased
+     */
     public void addDiseasedAnimal(int animalId, int diseased) {
     	Animal dog = getDog(animalId);
     	if(dog != null) {
@@ -166,22 +255,44 @@ public class Shelter implements Comparable<Shelter> {
     		}
     	}
     }
-    
+
+    /**
+     * Add task.
+     *
+     * @param task the task
+     */
     public void addTask(Task task) {
         if(!(getTasks().contains(task)))
             tasks.add(task);
     }
 
+    /**
+     * Get dog animal.
+     *
+     * @param animalId the animal ıd
+     * @return the animal
+     */
     public Animal getDog(int animalId){
     	Animal animal = dogs.find(new Animal(animalId));
     	return animal;
     }
-    
+
+    /**
+     * Get cat animal.
+     *
+     * @param animalId the animal ıd
+     * @return the animal
+     */
     public Animal getCat(int animalId){
     	Animal animal = cats.find(new Animal(animalId));
     	return animal;
     }
 
+    /**
+     * Gets total animal.
+     *
+     * @return the total animal
+     */
     public int getTotalAnimal() {
          return getDogSize() + getCatSize();
     }
@@ -190,90 +301,195 @@ public class Shelter implements Comparable<Shelter> {
     public int compareTo(Shelter o) {
     	return name.compareTo(o.name);
     }
-    
 
+
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets addresss.
+     *
+     * @return the addresss
+     */
     public String getAddresss() {
         return address;
     }
 
+    /**
+     * Sets addresss.
+     *
+     * @param address the address
+     */
     public void setAddresss(String address) {
         this.address = address;
     }
 
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Gets adopteds.
+     *
+     * @return the adopteds
+     */
     public SkipList<Animal> getAdopteds() {
         return adopteds;
     }
 
+    /**
+     * Gets adoption requests.
+     *
+     * @return the adoption requests
+     */
     public List<AdoptionRequest> getAdoptionRequests() {
         return adoptionRequests;
     }
 
 
+    /**
+     * Gets tasks.
+     *
+     * @return the tasks
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
-	public String getPhoneNumber() {
+    /**
+     * Gets phone number.
+     *
+     * @return the phone number
+     */
+    public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+    /**
+     * Sets phone number.
+     *
+     * @param phoneNumber the phone number
+     */
+    public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getAddress() {
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
+    public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
+    public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public int getCatCapacity() {
+    /**
+     * Gets cat capacity.
+     *
+     * @return the cat capacity
+     */
+    public int getCatCapacity() {
 		return catCapacity;
 	}
 
-	public void setCatCapacity(int catCapacity) {
+    /**
+     * Sets cat capacity.
+     *
+     * @param catCapacity the cat capacity
+     */
+    public void setCatCapacity(int catCapacity) {
 		this.catCapacity = catCapacity;
 	}
 
-	public int getDogCapacity() {
+    /**
+     * Gets dog capacity.
+     *
+     * @return the dog capacity
+     */
+    public int getDogCapacity() {
 		return dogCapacity;
 	}
 
-	public void setDogCapacity(int dogCapacity) {
+    /**
+     * Sets dog capacity.
+     *
+     * @param dogCapacity the dog capacity
+     */
+    public void setDogCapacity(int dogCapacity) {
 		this.dogCapacity = dogCapacity;
 	}
 
-	public BinarySearchTree<Animal> getDogs() {
+    /**
+     * Gets dogs.
+     *
+     * @return the dogs
+     */
+    public BinarySearchTree<Animal> getDogs() {
 		return dogs;
 	}
 
-	public BinarySearchTree<Animal> getCats() {
+    /**
+     * Gets cats.
+     *
+     * @return the cats
+     */
+    public BinarySearchTree<Animal> getCats() {
 		return cats;
 	}
 
-	public PriorityQueue<Disease> getDiseasedAnimals() {
+    /**
+     * Gets diseased animals.
+     *
+     * @return the diseased animals
+     */
+    public PriorityQueue<Disease> getDiseasedAnimals() {
 		return diseasedAnimals;
 	}
 
-	public void setDiseasedAnimals(PriorityQueue<Disease> diseasedAnimals) {
+    /**
+     * Sets diseased animals.
+     *
+     * @param diseasedAnimals the diseased animals
+     */
+    public void setDiseasedAnimals(PriorityQueue<Disease> diseasedAnimals) {
 		this.diseasedAnimals = diseasedAnimals;
 	}
 }

@@ -14,18 +14,41 @@ import io.javalin.plugin.json.JavalinJackson;
 
 import java.util.*;
 
+/**
+ * The type Javalin server.
+ */
 public class JavalinServer implements Runnable {
 
     private Javalin app;
     private ShelterSystem system;
+    /**
+     * The Jwt algorithm.
+     */
     Algorithm jwtAlgorithm;
+    /**
+     * The Verifier.
+     */
     JWTVerifier verifier;
 
+    /**
+     * Instantiates a new Javalin server.
+     *
+     * @param system the system
+     */
     public JavalinServer(ShelterSystem system){
         this.system = system;
         jwtAlgorithm = Algorithm.HMAC256("adgsdgdfsgasdgas");
         verifier = JWT.require(jwtAlgorithm).build();
     }
+
+    /**
+     * Create shelter token string.
+     *
+     * @param cityName    the city name
+     * @param townName    the town name
+     * @param shelterName the shelter name
+     * @return the string
+     */
     public String createShelterToken(String cityName, String townName, String shelterName) {
         return JWT.create().withClaim("City", cityName)
                            .withClaim("Town", townName)
@@ -33,6 +56,13 @@ public class JavalinServer implements Runnable {
                            .withClaim("IsShelter", true)
                   .sign(jwtAlgorithm);
     }
+
+    /**
+     * Create user token string.
+     *
+     * @param username the username
+     * @return the string
+     */
     public String createUserToken(String username) {
         return JWT.create().withClaim("Username", username)
                 .withClaim("IsShelter", false)
@@ -61,6 +91,9 @@ public class JavalinServer implements Runnable {
         return system.getCity(cityName).getTown(townName).getShelter(shelterName);
     }
 
+    /**
+     * Init routes.
+     */
     public void initRoutes(){
         app.get("/cities",this::getCities);
         app.get("/cities/towns",this::getTowns);
@@ -804,6 +837,12 @@ public class JavalinServer implements Runnable {
             ctx.json("Authorization header not found");
         }
     }
+
+    /**
+     * Get most diseased animal.
+     *
+     * @param ctx the ctx
+     */
     public void getMostDiseasedAnimal(Context ctx){
         if(hasJwt(ctx)){
             DecodedJWT jwt = verifyBearer(ctx.header("Authorization"));
@@ -830,6 +869,12 @@ public class JavalinServer implements Runnable {
         }
 
     }
+
+    /**
+     * Add diseased animal.
+     *
+     * @param ctx the ctx
+     */
     public void addDiseasedAnimal(Context ctx){
         if(hasJwt(ctx)){
             DecodedJWT jwt = verifyBearer(ctx.header("Authorization"));
@@ -860,6 +905,12 @@ public class JavalinServer implements Runnable {
             ctx.json("Authorization header not found");
         }
     }
+
+    /**
+     * Delete most diseased animal from queue.
+     *
+     * @param ctx the ctx
+     */
     public void deleteMostDiseasedAnimalFromQueue(Context ctx){
         if(hasJwt(ctx)){
             DecodedJWT jwt = verifyBearer(ctx.header("Authorization"));
@@ -885,10 +936,22 @@ public class JavalinServer implements Runnable {
             ctx.json("Authorization header not found");
         }
     }
+
+    /**
+     * Is city exists.
+     *
+     * @param ctx the ctx
+     */
     public void isCityExists(Context ctx)){
         ctx.status(200);
         ctx.json(system.getCity(ctx.headers("City"))!=null);
     }
+
+    /**
+     * Is town exists.
+     *
+     * @param ctx the ctx
+     */
     public void isTownExists(Context ctx)){
         try {
             ctx.status(200);
@@ -898,6 +961,12 @@ public class JavalinServer implements Runnable {
             ctx.json(false);
         }
     }
+
+    /**
+     * Is shelter exists.
+     *
+     * @param ctx the ctx
+     */
     public void isShelterExists(Context ctx)){
         try {
             ctx.status(200);
@@ -910,6 +979,11 @@ public class JavalinServer implements Runnable {
 
     // User routes
 
+    /**
+     * User login.
+     *
+     * @param ctx the ctx
+     */
     public void userLogin(Context ctx){
         ObjectMapper mapper = JavalinJackson.getObjectMapper();
         HashMap<String, String> data;
@@ -928,6 +1002,12 @@ public class JavalinServer implements Runnable {
             return;
         }
     }    //HashMap<String,String> UserName Password
+
+    /**
+     * User register.
+     *
+     * @param ctx the ctx
+     */
     public void userRegister(Context ctx){
         ObjectMapper mapper = JavalinJackson.getObjectMapper();
         HashMap<String, String> data;
@@ -957,6 +1037,12 @@ public class JavalinServer implements Runnable {
             return;
         }
     } //HashMap<String,String> UserName Password Email Name City Town
+
+    /**
+     * Gets filtered animals.
+     *
+     * @param ctx the ctx
+     */
     public void getFilteredAnimals(Context ctx){
         try {
             String cityName = ctx.header("City");
@@ -977,6 +1063,12 @@ public class JavalinServer implements Runnable {
             ctx.status(432);
         }
     } //Header City Town
+
+    /**
+     * Gets favorite animals.
+     *
+     * @param ctx the ctx
+     */
     public void getFavoriteAnimals(Context ctx){
         try {
             String username = ctx.header("Username");
@@ -995,6 +1087,12 @@ public class JavalinServer implements Runnable {
             ctx.status(432);
         }
     } //Header Username Mail
+
+    /**
+     * Update user.
+     *
+     * @param ctx the ctx
+     */
     public void updateUser(Context ctx){
         try {
             String username = ctx.header("Username");
@@ -1008,6 +1106,12 @@ public class JavalinServer implements Runnable {
             ctx.status(432);
         }
     } //Header Username Mail NewUsername NewMail NewPassword
+
+    /**
+     * Gets all ownership requests.
+     *
+     * @param ctx the ctx
+     */
     public void getAllOwnershipRequests(Context ctx){
         try {
             String username = ctx.header("Username");
@@ -1024,6 +1128,12 @@ public class JavalinServer implements Runnable {
             ctx.status(432);
         }
     } //Header Username Mail
+
+    /**
+     * New ownership request.
+     *
+     * @param ctx the ctx
+     */
     public void newOwnershipRequest(Context ctx){
         ObjectMapper mapper = JavalinJackson.getObjectMapper();
         HashMap<String, String> data;

@@ -17,15 +17,42 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * The type Left menu panel controller.
+ */
 public class LeftMenuPanelController implements PageWithTokenController {
 
+    /**
+     * The Menu v box.
+     */
     public VBox menuVBox;
+    /**
+     * The Menu home button.
+     */
     public Button menuHomeButton;
+    /**
+     * The Menu animals button.
+     */
     public Button menuAnimalsButton;
+    /**
+     * The Menu cat button.
+     */
     public Button menuCatButton;
+    /**
+     * The Menu dog button.
+     */
     public Button menuDogButton;
+    /**
+     * The Menu edit tasks button.
+     */
     public Button menuEditTasksButton;
+    /**
+     * The Menu adoption requests button.
+     */
     public Button menuAdoptionRequestsButton;
+    /**
+     * The Menu settings button.
+     */
     public Button menuSettingsButton;
 
     private LeftMenuPanelModel model;
@@ -48,6 +75,9 @@ public class LeftMenuPanelController implements PageWithTokenController {
     private final String focusedBackgroundStyle = "-fx-background-color: #FFE32D; -fx-border-color: #CF9B01; -fx-border-width: 1; -fx-border-style: hidden hidden solid hidden;";
     private final String unfocusedBackgroundStyle = "-fx-background-color: #FFCB31; -fx-border-color: #CF9B01; -fx-border-width: 1; -fx-border-style: hidden hidden solid hidden;";
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
         model = new LeftMenuPanelModel();
@@ -59,6 +89,11 @@ public class LeftMenuPanelController implements PageWithTokenController {
         model.setToken(token);
     }
 
+    /**
+     * Change focus.
+     *
+     * @param i the
+     */
     public void changeFocus(int i){
         if(getButtonByIndex(focused)!=null && getButtonByIndex(i)!=null){
             Objects.requireNonNull(getButtonByIndex(focused)).setStyle(unfocusedBackgroundStyle);
@@ -88,24 +123,66 @@ public class LeftMenuPanelController implements PageWithTokenController {
         controller.setToken(model.getToken());
         stage.show();
     }
+
+    /**
+     * On menu home button action.
+     *
+     * @param e the e
+     */
     public void onMenuHomeButtonAction(Event e){
         commonButtonAction(e,"./views/HomePage.fxml");
     }
+
+    /**
+     * On menu animals button action.
+     *
+     * @param e the e
+     */
     public void onMenuAnimalsButtonAction(Event e){
         commonButtonAction(e,"./views/AnimalsPage.fxml");
     }
+
+    /**
+     * On menu cat button action.
+     *
+     * @param e the e
+     */
     public void onMenuCatButtonAction(Event e){
         commonButtonAction(e,"./views/CatsPage.fxml");
     }
+
+    /**
+     * On menu dog button action.
+     *
+     * @param e the e
+     */
     public void onMenuDogButtonAction(Event e){
         commonButtonAction(e,"./views/DogsPage.fxml");
     }
+
+    /**
+     * On menu edit tasks button action.
+     *
+     * @param e the e
+     */
     public void onMenuEditTasksButtonAction(Event e){
         commonButtonAction(e,"./views/EditTasksPage.fxml");
     }
+
+    /**
+     * On menu adoption requests button action.
+     *
+     * @param e the e
+     */
     public void onMenuAdoptionRequestsButtonAction(Event e){
         commonButtonAction(e,"./views/AdoptionRequestsPage.fxml");
     }
+
+    /**
+     * On menu settings button action.
+     *
+     * @param e the e
+     */
     public void onMenuSettingsButtonAction(Event e){
         commonButtonAction(e,"./views/SettingsPage.fxml");
     }

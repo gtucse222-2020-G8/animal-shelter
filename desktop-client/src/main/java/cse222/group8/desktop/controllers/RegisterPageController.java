@@ -24,14 +24,41 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The type Register page controller.
+ */
 public class RegisterPageController {
+    /**
+     * The Register shelter name.
+     */
     public Text registerShelterName;
+    /**
+     * The Submit button.
+     */
     public Button submitButton;
+    /**
+     * The Cancel button.
+     */
     public Button cancelButton;
+    /**
+     * The Cat capacity field.
+     */
     public TextField catCapacityField;
+    /**
+     * The Dog capacity field.
+     */
     public TextField dogCapacityField;
+    /**
+     * The Password field.
+     */
     public PasswordField passwordField;
+    /**
+     * The Phone number field.
+     */
     public TextField phoneNumberField;
+    /**
+     * The Address field.
+     */
     public TextArea addressField;
     private RegisterPageModel model;
     @FXML
@@ -59,6 +86,14 @@ public class RegisterPageController {
         phoneNumberField.textProperty().addListener((observableValue, s, t1) -> model.setPhoneNumber(t1));
         addressField.textProperty().addListener((observableValue, s, t1) -> model.setAddress(t1));
     }
+
+    /**
+     * Set fields.
+     *
+     * @param shelterName the shelter name
+     * @param city        the city
+     * @param town        the town
+     */
     public void setFields(String shelterName, String city, String town){
         registerShelterName.setText(shelterName);
         model.setCity(city);
@@ -103,6 +138,12 @@ public class RegisterPageController {
         }
         return valid;
     }
+
+    /**
+     * On submit button action.
+     *
+     * @param e the e
+     */
     public void onSubmitButtonAction(Event e){
         Node node=(Node) e.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
@@ -136,6 +177,12 @@ public class RegisterPageController {
             }
         }
     }
+
+    /**
+     * On cancel button action.
+     *
+     * @param e the e
+     */
     public void onCancelButtonAction(Event e){
         Node node=(Node) e.getSource();
         Stage stage=(Stage) node.getScene().getWindow();

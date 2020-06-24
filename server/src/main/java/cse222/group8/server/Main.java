@@ -7,10 +7,17 @@ import java.util.TreeMap;
 import cse222.group8.server.DataStructures.*;
 
 
+/**
+ * The type Main.
+ */
 public class Main {
-	
-	
-	
+
+
+	/**
+	 * The entry point of application.
+	 *
+	 * @param args the input arguments
+	 */
 	public static void main(String[] args) {
 		
 		
@@ -65,8 +72,13 @@ public class Main {
 		
 		
 	}
-	
-	
+
+
+	/**
+	 * Read city ınfo.
+	 *
+	 * @param system the system
+	 */
 	protected static void readCityInfo(ShelterSystem system) {
 		
 		BinarySearchTree<City> cities 	= system.getCitiesBST();
