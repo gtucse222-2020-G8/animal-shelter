@@ -564,4 +564,52 @@ public class Client {
             throw new ConnectionError();
         }
     }
+    public static AnimalData getMostDiseasedAnimal(Token token) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"shelters/animals/diseased");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .setHeader("Content-Type", "application/json")
+                .setHeader("Authorization", "Bearer "+token.accessToken)
+                .uri(uri)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+                Gson gson = new Gson();
+                return gson.fromJson(jsonBody, AnimalData.class);
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
+    public static void addDiseasedAnimal(Token token, int animalId, int diseaseLevel) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"shelters/animals/diseased");
+        Gson gson = new Gson();
+        String body = gson.toJson("");
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(body))
+                .setHeader("Content-Type", "application/json")
+                .setHeader("Authorization", "Bearer "+token.accessToken)
+                .uri(uri)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
 }
