@@ -170,8 +170,7 @@ public class Shelter implements Comparable<Shelter> {
     
     @Override
     public int compareTo(Shelter o) {
-    	//TODO
-        return -1;
+    	return name.compareTo(o.name);
     }
     
 
