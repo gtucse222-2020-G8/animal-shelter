@@ -21,7 +21,7 @@ public class Shelter implements Comparable<Shelter> {
     private int dogCapacity;
     private AVLTree<Animal> dogs;
     private AVLTree<Animal> cats;
-    private List<Animal> adopteds;
+    private SkipList<Animal> adopteds;
     private List<AdoptionRequest> adoptionRequests;
     private List<Task> tasks;
     private PriorityQueue<Disease> diseasedAnimals;
@@ -37,7 +37,7 @@ public class Shelter implements Comparable<Shelter> {
     	this.dogSize = 0;
     	cats = new AVLTree<Animal>();
         dogs = new AVLTree<Animal>();
-        adopteds = new LinkedList<Animal>();
+        adopteds = new SkipList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
         registered = false;
@@ -58,10 +58,28 @@ public class Shelter implements Comparable<Shelter> {
         shelterSystem = system;
         cats = new AVLTree<Animal>();
         dogs = new AVLTree<Animal>();
-        adopteds = new LinkedList<Animal>();
+        adopteds = new SkipList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
         registered = false;
+    }
+
+    public void approveAdoptionRequest(int requestID) {
+
+        if(requestID>=0 && requestID<getAdoptionRequests().size()) {
+
+            Animal reqAnimal = getAdoptionRequests().get(requestID).getRequestedAnimal(); // requested animal
+            getAdoptionRequests().remove(requestID); //remove element at requestID index
+            reqAnimal.setAdopted(true); // animal is adopted now
+            getAdopteds().add(reqAnimal); // add this animal in adopteds list
+
+            //Remove that animal from animal list
+            if(reqAnimal.getId()%2 == 1)
+                getCats().remove(reqAnimal);
+
+            if(reqAnimal.getId()%2 == 0)
+                getDogs().remove(reqAnimal);
+        }
     }
 
     public void register(){
@@ -198,10 +216,9 @@ public class Shelter implements Comparable<Shelter> {
         this.password = password;
     }
 
-    public List<Animal> getAdopteds() {
+    public SkipList<Animal> getAdopteds() {
         return adopteds;
     }
-
 
     public List<AdoptionRequest> getAdoptionRequests() {
         return adoptionRequests;

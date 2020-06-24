@@ -100,7 +100,7 @@ public class Animal implements Comparable<Animal> {
 		if(isAdopted()) {
 
 		Animal animal = new Animal(this.id);
-		//setAdopteds(id);
+		setAdopted(true);
 
 		if(this.id%2 == 1) {
 			getShelter().removeCat(animal);
