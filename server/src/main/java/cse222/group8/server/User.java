@@ -51,8 +51,7 @@ public class User implements Comparable<User> {
     
     @Override
     public int compareTo(User o) {
-    	// with username
-        return 0;
+    	  return username.compareTo(o.username);
     }
 
     public String getName() {

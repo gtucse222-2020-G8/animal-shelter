@@ -169,5 +169,47 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
 		return true;
 	}
 
+	public Iterator<E> iterator(){
+		return new Iterator<E>() {
+			ArrayList<E> nodesSorted;
+			int index;
+
+			{
+			    // Array containing all the nodes in the sorted order
+			    this.nodesSorted = new ArrayList<E>();
+
+			    // Pointer to the next smallest element in the BST
+			    this.index = -1;
+
+			    // Call to flatten the input binary search tree
+			    this._inorder(root);
+			}
+
+			private void _inorder(Node<E> root) {
+
+			    if (root == null) {
+				return;
+			    }
+
+			    this._inorder(root.left);
+			    this.nodesSorted.add(root.data);
+			    this._inorder(root.right);
+			}
+
+			/**
+			 * @return the next smallest number
+			 */
+			public E next() {
+			    return this.nodesSorted.get(++this.index);
+			}
+
+			/**
+			 * @return whether we have a next smallest number
+			 */
+			public boolean hasNext() {
+			    return this.index + 1 < this.nodesSorted.size();
+			}
+		};
+	}
 
 }

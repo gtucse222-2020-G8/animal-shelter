@@ -97,7 +97,18 @@ public class Animal implements Comparable<Animal> {
 	}
 
 	public void updateRequests() {
-		// Date check!
+		if(isAdopted()) {
+
+		Animal animal = new Animal(this.id);
+		//setAdopteds(id);
+
+		if(this.id%2 == 1) {
+			getShelter().removeCat(animal);
+		}
+		else{
+			getShelter().removeDog(animal);
+		}
+		}
 	}
 
 	public City getCity() {
