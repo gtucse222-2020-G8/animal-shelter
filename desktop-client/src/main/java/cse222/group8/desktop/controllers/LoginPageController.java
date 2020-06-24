@@ -57,8 +57,8 @@ public class LoginPageController{
         try{
             Token token;
             token = Client.login(model.getCity(),model.getTown(),shelterName,password);
-            int res = Client.getShelterStatus(model.getCity(),model.getTown(),loginShelterName.getText());
-            if(res==1){
+            boolean res = Client.getShelterStatus(model.getCity(),model.getTown(),loginShelterName.getText());
+            if(res){
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/HomePage.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);

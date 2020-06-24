@@ -55,8 +55,8 @@ public class WaitingRegisterationPageController {
         Node node=(Node) e.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
         try{
-            int res = Client.getShelterStatus(model.getCity(),model.getTown(),model.getShelterName());
-            if(res==1){
+            boolean res = Client.getShelterStatus(model.getCity(),model.getTown(),model.getShelterName());
+            if(res){
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/HomePage.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);

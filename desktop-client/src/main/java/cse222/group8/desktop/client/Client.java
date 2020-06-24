@@ -135,7 +135,7 @@ public class Client {
             throw new ConnectionError();
         }
     }
-    public static int getShelterStatus(String city, String town, String shelterName) throws ConnectionError{
+    public static boolean getShelterStatus(String city, String town, String shelterName) throws ConnectionError{
         URI uri = URI.create(baseUrl+"shelters/registeration");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -150,7 +150,7 @@ public class Client {
             if (response.statusCode()==200){
                 String jsonBody = response.body();
                 Gson gson = new Gson();
-                return gson.fromJson(jsonBody, int.class);
+                return gson.fromJson(jsonBody, boolean.class);
             }
             else {
                 System.out.println(response.statusCode());

@@ -6,14 +6,14 @@ public class AnimalData {
     public String breed;
     public String kind;
     public char gender;
-    public String age;
+    public int age;
     public String vaccination;
     public boolean neutered;
     public String info;
     public boolean adoptRequested;
     public String date;
 
-    public AnimalData(int id, String name, String breed, String kind, char gender, String age, String vaccination, boolean neutered, String info, boolean adoptRequested){
+    public AnimalData(int id, String name, String breed, String kind, char gender, int age, String vaccination, boolean neutered, String info, boolean adoptRequested){
         this.id = id;
         this.name = name;
         this.breed = breed;

@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.Queue;
 
 public class Animal implements Comparable<Animal> {
-
+	private static int catCount = 0;
+	private static int dogCount = 0;
 	private int id;
 	private String name;
 	private String kind;
@@ -30,8 +31,29 @@ public class Animal implements Comparable<Animal> {
 		this.id = id;
 	}
 
-	public Animal(int id, String name, String kind, int age) {
-		this.id = id;
+	public Animal(String name, String kind, int age, boolean isCat) {
+		if(isCat) {
+			this.id = 2 * catCount + 1;
+			++catCount;
+		}
+		else {
+			this.id = 2 * dogCount;
+			++dogCount;
+		}
+		this.name = name;
+		this.kind = kind;
+		this.age = age;
+		this.diseased = 0;
+	}
+	public Animal(String name, String kind, int age, boolean isCat, boolean increase) {
+		if(isCat) {
+			this.id = 2 * catCount + 1;
+			if (increase) ++catCount;
+		}
+		else {
+			this.id = 2 * dogCount;
+			if (increase) ++dogCount;
+		}
 		this.name = name;
 		this.kind = kind;
 		this.age = age;

@@ -26,6 +26,7 @@ public class Shelter implements Comparable<Shelter> {
     private PriorityQueue<Disease> diseasedAnimals;
     private int catSize;
     private int dogSize;
+    private boolean registered;
 
 	
     public Shelter(){
@@ -38,22 +39,35 @@ public class Shelter implements Comparable<Shelter> {
         adopteds = new LinkedList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
+        registered = false;
     }
 
-    public Shelter(String name, City city, Town town, ShelterSystem system){
+    public Shelter(String name, City city, Town town, int catCapacity, int dogCapacity, String address, String phoneNumber, String password, ShelterSystem system){
         this.name = name;
         this.city = city;
         this.town = town;
-	this.catSize = 0;
+	    this.catSize = 0;
         this.dogSize = 0;
-        this.catCapacity = 10;
-        this.dogCapacity = 10;
+        this.catCapacity = catCapacity;
+        this.dogCapacity = dogCapacity;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
         shelterSystem = system;
         cats = new AVLTree<Animal>();
         dogs = new AVLTree<Animal>();
         adopteds = new LinkedList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
+        registered = false;
+    }
+
+    public void register(){
+        registered = true;
+    }
+
+    public boolean isRegistered(){
+        return registered;
     }
 
     public boolean addCat(Animal cat){

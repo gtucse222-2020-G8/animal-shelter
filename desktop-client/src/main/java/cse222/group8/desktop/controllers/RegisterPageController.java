@@ -109,8 +109,8 @@ public class RegisterPageController {
         if(checkFields()){
             try {
                 Token token = Client.createShelter(model.getCity(), model.getTown(), registerShelterName.getText(), model.getPhoneNumber(), model.getPassword(), model.getCatCapacity(), model.getDogCapacity(), model.getAddress());
-                int res = Client.getShelterStatus(model.getCity(),model.getTown(),registerShelterName.getText());
-                if(res==1){
+                boolean res = Client.getShelterStatus(model.getCity(),model.getTown(),registerShelterName.getText());
+                if(res){
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/HomePage.fxml"));
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
