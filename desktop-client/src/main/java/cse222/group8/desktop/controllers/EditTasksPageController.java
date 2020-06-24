@@ -6,6 +6,7 @@ import cse222.group8.desktop.client.models.AnimalDataWithImage;
 import cse222.group8.desktop.client.models.TaskData;
 import cse222.group8.desktop.client.models.Token;
 import cse222.group8.desktop.models.EditTasksPageModel;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -73,6 +74,9 @@ public class EditTasksPageController implements PageWithTokenController {
     }
     private void reload(Event e){
         Node node=(Node) e.getSource();
+        reload(node);
+    }
+    private void reload(Node node){
         Stage stage=(Stage) node.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./views/EditTasksPage.fxml"));
         Parent root = null;
@@ -136,8 +140,13 @@ public class EditTasksPageController implements PageWithTokenController {
         taskCheck.selectedProperty().setValue(data.status);
         taskCheck.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
             try {
-                Client.updateTask(model.getToken(),data);
                 data.status = t1;
+                Client.updateTask(model.getToken(),data);
+                try {
+                    BooleanProperty property = (BooleanProperty) observableValue;
+                    CheckBox checkBox = (CheckBox) property.getBean();
+                    reload(checkBox);
+                }catch (Exception ignore){}
             } catch (ConnectionError connectionError) {
                 Alert alert = new Alert(Alert.AlertType.ERROR,"Connection Error", ButtonType.OK);
                 alert.showAndWait();
@@ -156,8 +165,8 @@ public class EditTasksPageController implements PageWithTokenController {
             td.getEditor().setText(data.text);
             td.showAndWait();
             try {
-                Client.updateTask(model.getToken(),data);
                 data.text = td.getEditor().getText();
+                Client.updateTask(model.getToken(),data);
                 taskText.setText(data.text);
             } catch (ConnectionError connectionError) {
                 Alert alert = new Alert(Alert.AlertType.ERROR,"Connection Error", ButtonType.OK);

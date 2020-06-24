@@ -18,6 +18,9 @@ public class LoginShelterData extends ShelterAddressData{
      * @param shelterName the shelter name
      * @param password    the password
      */
+    public LoginShelterData(){
+        super();
+    }
     public LoginShelterData(String city, String town, String shelterName, String password) {
         super(city, town, shelterName);
         this.password = password;

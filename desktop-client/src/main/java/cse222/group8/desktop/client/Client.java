@@ -4,7 +4,6 @@ import cse222.group8.desktop.client.models.*;
 
 import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -121,7 +120,7 @@ public class Client {
      * @throws ConnectionError the connection error
      */
     public static boolean townExists(String city, String town) throws ConnectionError {
-        URI uri = URI.create(baseUrl+"cities//towns/check");
+        URI uri = URI.create(baseUrl+"cities/towns/check");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(uri)
@@ -370,7 +369,7 @@ public class Client {
      * @return the animal
      * @throws ConnectionError the connection error
      */
-    public static AnimalDataWithImage getAnimal(Token token, int animalId) throws ConnectionError {
+    public static AnimalDataWithImage getAnimal(Token token, int animalId) throws ConnectionError, NotFound {
         URI uri = URI.create(baseUrl+"shelters/animals");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -385,6 +384,9 @@ public class Client {
                 String jsonBody = response.body();
                 Gson gson = new Gson();
                 return gson.fromJson(jsonBody, AnimalDataWithImage.class);
+            }
+            else if (response.statusCode()==404){
+                throw new NotFound();
             }
             else {
                 System.out.println(response.statusCode());
@@ -693,7 +695,7 @@ public class Client {
      * @param adoptionRequestId the adoption request ıd
      * @throws ConnectionError the connection error
      */
-    public static void approveAdoption(Token token, int adoptionRequestId) throws ConnectionError {
+    public static void approveAdoption(Token token, int adoptionRequestId) throws ConnectionError, NotFound {
         URI uri = URI.create(baseUrl+"shelters/adoption-requests/approve");
         Gson gson = new Gson();
         String body = gson.toJson(adoptionRequestId);
@@ -707,6 +709,9 @@ public class Client {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode()==200){
                 String jsonBody = response.body();
+            }
+            else if (response.statusCode()==404){
+                throw new NotFound();
             }
             else {
                 System.out.println(response.statusCode());
@@ -885,7 +890,7 @@ public class Client {
      * @return the most diseased animal
      * @throws ConnectionError the connection error
      */
-    public static AnimalData getMostDiseasedAnimal(Token token) throws ConnectionError {
+    public static AnimalData getMostDiseasedAnimal(Token token) throws ConnectionError, NotFound {
         URI uri = URI.create(baseUrl+"shelters/animals/diseased");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -899,6 +904,9 @@ public class Client {
                 String jsonBody = response.body();
                 Gson gson = new Gson();
                 return gson.fromJson(jsonBody, AnimalData.class);
+            }
+            else if(response.statusCode()==404){
+                throw new NotFound();
             }
             else {
                 System.out.println(response.statusCode());
@@ -946,7 +954,6 @@ public class Client {
      * Cure diseased animal.
      *
      * @param token        the token
-     * @param animalId     the animal ıd
      * @throws ConnectionError the connection error
      */
     public static void cureDiseasedAnimal(Token token) throws ConnectionError {

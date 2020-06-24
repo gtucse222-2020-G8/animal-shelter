@@ -1,5 +1,7 @@
 package cse222.group8.server.clientModels;
 
+import cse222.group8.server.Shelter;
+
 /**
  * The type Shelter address data.
  */
@@ -17,6 +19,7 @@ public class ShelterAddressData {
      */
     public String shelterName;
 
+    public ShelterAddressData(){}
     /**
      * Instantiates a new Shelter address data.
      *

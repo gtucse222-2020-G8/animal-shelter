@@ -3,6 +3,9 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import cse222.group8.server.DataStructures.*;
 
@@ -20,12 +23,66 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		ShelterSystem system = new ShelterSystem();
+
 		readCityInfo(system);
 		insertTownsTests(system);
-		System.out.println("Hello word");
 		printCitiesInfo(system);
-//		JavalinServer javalinServer = new JavalinServer(system);
-//		javalinServer.run();
+
+		BinarySearchTree<City> cities 	= system.getCitiesBST();
+		City istanbul = cities.find(new City("Istanbul", 34, system));
+		Town kagithane = istanbul.getTown("Kagithane");
+
+		Shelter dogaevi = new Shelter("dogaevi", istanbul, kagithane, 23, 11, "Sultan selim mah. No 3", "+902122222415", "stockpass", system);
+		kagithane.getShelters().add(dogaevi);
+		dogaevi.register();
+		dogaevi.addCat(new Animal("korpe","tekir",3,true,dogaevi));
+		dogaevi.addCat(new Animal("sari","sarman",6,true,dogaevi));
+		dogaevi.addDog(new Animal("pasa","kangal",12,false,dogaevi));
+		User user = new User();
+		user.setUsername("ismltpn");
+		user.setName("ismail tapan");
+		user.createARequest(dogaevi.getCat(1));
+
+		ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+		executor.scheduleAtFixedRate(new DailyExecutions(system),0,1, TimeUnit.DAYS);
+		JavalinServer javalinServer = new JavalinServer(system);
+		Thread javalinThread = new Thread(javalinServer);
+		javalinThread.start();
+		AdminUI ui = new AdminUI(system);
+		ui.run();
+		javalinThread.stop();
+	}
+
+	private static void testAddAnimal(){
+		ShelterSystem system = new ShelterSystem();
+		City istanbul = new City("Istanbul", 34, system);
+		Town pendik = new Town("Pendik", istanbul, system);
+		Shelter myShelter = new Shelter("Pendik Barinagi",istanbul,pendik,10,10,"yeni mah","3759630","123456",system);
+
+		myShelter.addCat(new Animal("Tyson","Scottishfold",2,true,myShelter));
+		myShelter.addCat(new Animal("Mahmut","Tekir",4,true,myShelter));
+		myShelter.addCat(new Animal("Mia","Ankara",12,true,myShelter));
+		myShelter.addCat(new Animal("Yumi","Van",1,true,myShelter));
+		Animal animal=new Animal("Leia","Corgi",2,false,myShelter);
+		myShelter.addDog(animal);
+		myShelter.addDog(new Animal("Baron","Rottweiler",8,false,myShelter));
+
+		for(Animal cat: myShelter.getCats()){
+			System.out.println(cat.getName());
+		}
+		System.out.println("-----");
+		for(Animal dog: myShelter.getDogs()){
+			System.out.println(dog.getName());
+		}
+		System.out.println("-----");
+		for(Animal dog: myShelter.getDogs()){
+			if(dog.getName().equals("Leia")) {
+				dog.updateAnimal(new Animal("Pamuk", "abc", 13, false,myShelter));
+			}
+		}
+		for(Animal dog: myShelter.getDogs()){
+			System.out.println(dog.getName());
+		}
 	}
 	
 	private static void testAdminUI() {
@@ -80,9 +137,8 @@ public class Main {
 	}
 
 	protected static void insertTownsTests(ShelterSystem system){
-		BinarySearchTree<City> cities 	= system.getCitiesBST();
 
-		File file = new File("C:\\Users\\seyma\\Desktop\\Veri Proje\\Files\\Towns.txt");
+		File file = new File("src/main/Constants/Towns.txt");
 
 		try {
 
@@ -91,7 +147,11 @@ public class Main {
 			while( sc.hasNextLine() ) {
 
 				String str = sc.nextLine();
-				String[] townsInfo = str.split("-");
+				String[] townsInfo = str.split(" ");
+				if(townsInfo.length < 2){
+					System.out.println("The file of towns missing info!");
+					break;
+				}
  				String id = townsInfo[1];
 				City city = system.getCity(Integer.parseInt(id));
 
@@ -123,9 +183,9 @@ public class Main {
 		TreeMap<Integer, City> cityIds	= system.getCityIdsMap();
 		ListGraph borderCities 			= system.getBorderCities();
 		
-		
-		File file = new File("C:\\Users\\seyma\\Desktop\\Veri Proje\\Files\\Cities.txt");
-		
+
+		File file = new File("src/main/Constants/Cities.txt");
+
 		try {
 			
 			Scanner sc = new Scanner(file);
@@ -147,7 +207,6 @@ public class Main {
 					
 					Edge edge = new Edge(cityID, Integer.parseInt(keys[i]));
 					borderCities.insert(edge);
-								
 				}
 						
 				

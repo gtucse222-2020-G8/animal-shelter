@@ -497,7 +497,9 @@ public class ShelterSystem {
     	shelter.getDiseasedAnimals().poll();
     }
     
-    
+    public BinarySearchTree<User> getUsers(){
+    	return users;
+	}
     
     
     /**

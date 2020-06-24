@@ -47,7 +47,7 @@ public class Animal implements Comparable<Animal> {
 	 * @param age   the age
 	 * @param isCat the is cat
 	 */
-	public Animal(String name, String kind, int age, boolean isCat) {
+	public Animal(String name, String kind, int age, boolean isCat, Shelter shelter) {
 		if(isCat) {
 			this.id = 2 * catCount + 1;
 			++catCount;
@@ -60,6 +60,7 @@ public class Animal implements Comparable<Animal> {
 		this.kind = kind;
 		this.age = age;
 		this.diseased = 0;
+		this.shelter = shelter;
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class Animal implements Comparable<Animal> {
 	 * @param isCat    the is cat
 	 * @param increase the increase
 	 */
-	public Animal(String name, String kind, int age, boolean isCat, boolean increase) {
+	public Animal(String name, String kind, int age, boolean isCat, boolean increase, Shelter shelter) {
 		if(isCat) {
 			this.id = 2 * catCount + 1;
 			if (increase) ++catCount;
@@ -84,6 +85,7 @@ public class Animal implements Comparable<Animal> {
 		this.kind = kind;
 		this.age = age;
 		this.diseased = 0;
+		this.shelter = shelter;
 	}
 
 	/**
@@ -134,8 +136,7 @@ public class Animal implements Comparable<Animal> {
 	 * @return the adoption request
 	 */
 	public AdoptionRequest makeARequest(User requester) {
-		adoptionRequest = new AdoptionRequest(null, requester, this);
-		adoptionRequest.setRequestDate(new Date());
+		adoptionRequest = new AdoptionRequest( requester, this);
 		return adoptionRequest;
 	}
 

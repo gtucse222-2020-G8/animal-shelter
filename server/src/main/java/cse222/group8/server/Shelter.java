@@ -82,13 +82,12 @@ public class Shelter implements Comparable<Shelter> {
         tasks = new LinkedList<Task>();
         registered = false;
     }
-
     /**
      * Approve adoption request.
      *
      * @param requestID the request ıd
      */
-    public void approveAdoptionRequest(int requestID) {
+    public boolean approveAdoptionRequest(int requestID) {
 
         if(requestID>=0 && requestID<getAdoptionRequests().size()) {
 
@@ -103,7 +102,9 @@ public class Shelter implements Comparable<Shelter> {
 
             if(reqAnimal.getId()%2 == 0)
                 getDogs().remove(reqAnimal);
+            return true;
         }
+        return false;
     }
 
     /**

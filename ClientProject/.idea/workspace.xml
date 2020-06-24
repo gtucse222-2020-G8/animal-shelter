@@ -20,25 +20,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b24d25d5-042d-44f5-9191-5797f0657209" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/client/NotFound.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ClientProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cse222/group8/userapp/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cse222/group8/userapp/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/Antalya.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Antalya.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/Balıkesir.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Balıkesir.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/Bursa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Bursa.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/Istanbul.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Istanbul.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/Kocaeli.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Kocaeli.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/Konya.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Konya.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/Ordu.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Ordu.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/Sivas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Sivas.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Files/ankara.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/ankara.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DataStructures/AVLTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DataStructures/AVLTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DataStructures/BinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DataStructures/BinaryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Antalya.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Balıkesir.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Bursa.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Cities.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Istanbul.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Kocaeli.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Konya.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Ordu.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Sivas.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Towns.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/ankara.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/cats.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/dogKinds.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/isim_listesi.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/ConsoleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/ConsoleUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/AddCatPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/AddCatPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/AddDogPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/AddDogPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/AdoptionRequestsPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/AdoptionRequestsPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/CatsPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/CatsPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/DogsPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/DogsPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/EditTasksPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../desktop-client/src/main/java/cse222/group8/desktop/controllers/EditTasksPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DailyExecutions.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DailyExecutions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/JavalinServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/JavalinServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Shelter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Shelter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/ShelterSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/ShelterSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Town.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Town.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/clientModels/LoginShelterData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/clientModels/LoginShelterData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/clientModels/ShelterAddressData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/clientModels/ShelterAddressData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

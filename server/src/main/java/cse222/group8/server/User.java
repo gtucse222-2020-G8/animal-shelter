@@ -1,6 +1,7 @@
 package cse222.group8.server;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -22,7 +23,8 @@ public class User implements Comparable<User> {
      * Instantiates a new User.
      */
     public User() {
-
+        requests = new LinkedList<AdoptionRequest>();
+        favorites = new LinkedList<Animal>();
     }
 
     /**
@@ -42,6 +44,8 @@ public class User implements Comparable<User> {
     	this.city = city;
     	this.town = town;
     	this.signUpDate = signUpDate;
+        requests = new LinkedList<AdoptionRequest>();
+        favorites = new LinkedList<Animal>();
     }
 
     /**
@@ -51,6 +55,8 @@ public class User implements Comparable<User> {
      */
     protected User(String userName) {
     	this.username = userName;
+        requests = new LinkedList<AdoptionRequest>();
+        favorites = new LinkedList<Animal>();
     }
 
 
@@ -64,10 +70,10 @@ public class User implements Comparable<User> {
     	
     	AdoptionRequest request = new AdoptionRequest(this,animal);
     	if(!requests.contains(request)) {    		
-		animal.getShelter().getAdoptionRequests().add(request);
-		animal.setAdopted(true);
-		requests.add(request);
-		return true;
+            animal.getShelter().getAdoptionRequests().add(request);
+            animal.setAdopted(true);
+            requests.add(request);
+            return true;
     	}
     	else {
     		return false;
