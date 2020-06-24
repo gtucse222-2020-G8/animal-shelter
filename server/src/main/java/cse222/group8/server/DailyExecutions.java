@@ -1,5 +1,7 @@
 package cse222.group8.server;
 
+import java.util.Date;
+
 /**
  * The type Daily executions.
  */
@@ -23,9 +25,14 @@ public class DailyExecutions implements Runnable {
 	 * Reset daily tasks.
 	 */
 	public void resetDailyTasks() {
-		int shelterSize = system.getCitiesBST().getData().getTowns().getData().getShelters().size();
-		for(int i=0; i< shelterSize; ++i) {
-			//system.getCitiesBST().getData().getTowns().getData().getShelters().get(i).getTasks().
+		for(City city : system.getCitiesBST()){
+			for(Town town : city.getTowns()){
+				for(Shelter shelter : town.getShelters()){
+					for(Task task : shelter.getTasks()){
+						task.setStatus(false);
+					}
+				}
+			}
 		}
 	}
 
@@ -33,11 +40,18 @@ public class DailyExecutions implements Runnable {
 	 * Drop expired adoption requests.
 	 */
 	public void dropExpiredAdoptionRequests() {
-		
+		for(User user : system.getUsers()){
+			for(AdoptionRequest request : user.getRequests()){
+				if(request.getExpirationDate().compareTo(new Date())<0){
+					system.removeAdoptionRequest(request);
+				}
+			}
+		}
 	}
 
 	@Override
 	public void run() {
-
+		resetDailyTasks();
+		dropExpiredAdoptionRequests();
 	}
 }

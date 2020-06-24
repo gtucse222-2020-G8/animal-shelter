@@ -18,17 +18,16 @@ import java.util.*;
  * The type Javalin server.
  */
 public class JavalinServer implements Runnable {
-
     private Javalin app;
     private ShelterSystem system;
     /**
      * The Jwt algorithm.
      */
-    Algorithm jwtAlgorithm;
+    private Algorithm jwtAlgorithm;
     /**
      * The Verifier.
      */
-    JWTVerifier verifier;
+    private JWTVerifier verifier;
 
     /**
      * Instantiates a new Javalin server.
@@ -75,9 +74,7 @@ public class JavalinServer implements Runnable {
         return false;
     }
     private DecodedJWT verifyBearer(String str){
-        System.out.println("##"+str);
         String token = str.substring(str.indexOf("rer ")+4);
-        System.out.println("##"+token);
         try {
             DecodedJWT jwt = verifier.verify(token);
             return jwt;
@@ -142,10 +139,17 @@ public class JavalinServer implements Runnable {
 
     @Override
 	public void run() {
-        app = Javalin.create(javalinConfig -> javalinConfig.defaultContentType = "application/json");
+        app = Javalin.create(javalinConfig -> {
+            javalinConfig.defaultContentType = "application/json";
+            javalinConfig.log
+        });
         initRoutes();
         app.start(8080);
 	}
+
+	public void stop() {
+        app.stop();
+    }
 
 	private void getCities(Context ctx){
         BinarySearchTree<City> cities = system.getCitiesBST();
@@ -325,7 +329,7 @@ public class JavalinServer implements Runnable {
                         else{
                             animal = shelter.getDog(data.id);
                         }
-                        animal.updateAnimal(new Animal(data.name,data.kind,data.age,isCat));
+                        animal.updateAnimal(new Animal(data.name,data.kind,data.age,isCat,shelter));
                         animal.setInfo(data.info);
                         animal.setGender(data.gender);
                         animal.setVaccination(data.vaccination);
@@ -467,7 +471,7 @@ public class JavalinServer implements Runnable {
                     AnimalDataWithImage data;
                     try {
                         data = mapper.readValue(ctx.body(), AnimalDataWithImage.class);
-                        Animal cat = new Animal(data.name, data.kind, data.age, true);
+                        Animal cat = new Animal(data.name, data.kind, data.age, true,shelter);
                         cat.setInfo(data.info);
                         cat.setGender(data.gender);
                         cat.setVaccination(data.vaccination);
@@ -503,7 +507,7 @@ public class JavalinServer implements Runnable {
                     AnimalDataWithImage data;
                     try {
                         data = mapper.readValue(ctx.body(), AnimalDataWithImage.class);
-                        Animal dog = new Animal(data.name, data.kind, data.age, false);
+                        Animal dog = new Animal(data.name, data.kind, data.age, false,shelter);
                         dog.setInfo(data.info);
                         dog.setGender(data.gender);
                         dog.setVaccination(data.vaccination);

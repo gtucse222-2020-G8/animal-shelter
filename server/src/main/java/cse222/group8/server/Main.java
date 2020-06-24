@@ -3,6 +3,9 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import cse222.group8.server.DataStructures.*;
 
@@ -29,9 +32,9 @@ public class Main {
 		Shelter dogaevi = new Shelter("dogaevi", istanbul, kagithane, 23, 11, "Sultan selim mah. No 3", "+902122222415", "stockpass", system);
 		kagithane.getShelters().add(dogaevi);
 		dogaevi.register();
-		dogaevi.addCat(new Animal("korpe","tekir",3,true));
-		dogaevi.addCat(new Animal("sari","sarman",6,true));
-		dogaevi.addDog(new Animal("pasa","kangal",12,false));
+		dogaevi.addCat(new Animal("korpe","tekir",3,true,dogaevi));
+		dogaevi.addCat(new Animal("sari","sarman",6,true,dogaevi));
+		dogaevi.addDog(new Animal("pasa","kangal",12,false,dogaevi));
 		User user = new User();
 		user.setUsername("ismltpn");
 		user.setName("ismail tapan");
@@ -44,8 +47,14 @@ public class Main {
 		system.getCitiesBST().add(istanbul);
 		system.getCitiesBST().add(izmir);
 		system.getCitiesBST().add(sivas);
+		ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+		executor.scheduleAtFixedRate(new DailyExecutions(system),0,1, TimeUnit.DAYS);
 		JavalinServer javalinServer = new JavalinServer(system);
-		javalinServer.run();
+		Thread javalinThread = new Thread(javalinServer);
+		javalinThread.start();
+		AdminUI ui = new AdminUI(system);
+		ui.run();
+		javalinThread.stop();
 	}
 	
 	private static void testAdminUI() {

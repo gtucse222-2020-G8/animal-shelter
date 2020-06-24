@@ -55,6 +55,8 @@ public class User implements Comparable<User> {
      */
     protected User(String userName) {
     	this.username = userName;
+        requests = new LinkedList<AdoptionRequest>();
+        favorites = new LinkedList<Animal>();
     }
 
 
