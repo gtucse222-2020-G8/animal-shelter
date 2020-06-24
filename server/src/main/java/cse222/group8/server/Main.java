@@ -21,7 +21,8 @@ public class Main {
 		
 		// TEST
 		ShelterSystem system = new ShelterSystem();
-		Shelter shelter = new Shelter("Test1", null, null, system);
+		Shelter shelter = new Shelter("Test1", null, null, 10, 10,
+									 "","","pass1",system);
 		system.addCapChangeRequest(new CapacityChangeRequest("Ist", "Krtl", shelter, 120,130));
 		system.addNewShleterRequest(new ShelterRequest("Ist", "Krtl2", shelter));
 		system.addRemoveShelterRequest(new ShelterRequest("Ist3", "Krtl3", shelter));

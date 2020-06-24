@@ -134,11 +134,14 @@ public class Shelter implements Comparable<Shelter> {
 
     public void addDiseasedAnimal(int animalId, int diseased) {
     	Animal dog = getDog(animalId);
-    	if(dog != null)
-    		diseasedAnimals.add(new Disease(dog, diseased));
+    	if(dog != null) {
+            dog.setDiseased(diseased);
+            diseasedAnimals.add(new Disease(dog, diseased));
+        }
     	else {
     		Animal cat = getCat(animalId);
     		if(cat != null) {
+                cat.setDiseased(diseased);
     			diseasedAnimals.add(new Disease(cat, diseased));
     		}
     	}

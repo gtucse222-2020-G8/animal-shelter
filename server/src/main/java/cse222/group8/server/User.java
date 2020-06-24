@@ -6,7 +6,6 @@ import java.util.List;
 public class User implements Comparable<User> {
 
     private String name;
-    private String surname;
     private String username;
     private String password;
     private String email;
@@ -18,7 +17,7 @@ public class User implements Comparable<User> {
     
     
     protected User(String userName) {
-    	
+    	this.username = userName;
     }
     
     
@@ -32,7 +31,6 @@ public class User implements Comparable<User> {
 
     public boolean updateUser(User user) {
         this.setName(user.name);
-        this.setSurname(user.surname);
         this.setUsername(user.username);
         this.setPassword(user.password);
         this.setEmail(user.email);
@@ -61,14 +59,6 @@ public class User implements Comparable<User> {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getUsername() {
