@@ -2,6 +2,7 @@ package cse222.group8.server;
 
 import cse222.group8.server.DataStructures.AVLTree;
 import cse222.group8.server.DataStructures.BinarySearchTree;
+import cse222.group8.server.DataStructures.SkipList;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class Shelter implements Comparable<Shelter> {
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
         registered = false;
+
     }
 
     public Shelter(String name, City city, Town town, int catCapacity, int dogCapacity, String address, String phoneNumber, String password, ShelterSystem system){

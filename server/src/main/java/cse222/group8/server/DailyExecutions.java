@@ -5,11 +5,14 @@ public class DailyExecutions {
 	ShelterSystem system;
 	
 	public DailyExecutions(ShelterSystem system) {
-		// TODO Auto-generated constructor stub
+		this.system = system;
 	}
 	
 	public void resetDailyTasks() {
-		// TODO reset daily tasks
+		int shelterSize = system.getCitiesBST().getData().getTowns().getData().getShelters().size();
+		for(int i=0; i< shelterSize; ++i) {
+			//system.getCitiesBST().getData().getTowns().getData().getShelters().get(i).getTasks().
+		}
 	}
 	
 	public void dropExpiredAdoptionRequests() {

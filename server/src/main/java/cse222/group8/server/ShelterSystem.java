@@ -103,7 +103,7 @@ public class ShelterSystem {
 	 * @param request
 	 * @return True if succeed
 	 */
-	public boolean addNewShleterRequest( ShelterRequest request ) {
+	public boolean addNewShelterRequest( ShelterRequest request ) {
     	
     	return newShelterRequests.add(request);
     	
