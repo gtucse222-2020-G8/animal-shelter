@@ -18,6 +18,16 @@ public class User implements Comparable<User> {
     public User() {
 
     }
+
+    public User(String name, String username, String password, City city, Town town, Date signUpDate) {
+    	this.name = name;
+    	this.username = username;
+    	this.password = password;
+    	this.city = city;
+    	this.town = town;
+    	this.signUpDate = signUpDate;
+    }
+	
     protected User(String userName) {
     	this.username = userName;
     }
