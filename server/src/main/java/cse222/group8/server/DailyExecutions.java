@@ -1,6 +1,6 @@
 package cse222.group8.server;
 
-public class DailyExecutions {
+public class DailyExecutions implements Runnable {
 	
 	ShelterSystem system;
 	
@@ -19,4 +19,8 @@ public class DailyExecutions {
 		
 	}
 
+	@Override
+	public void run() {
+		
+	}
 }
