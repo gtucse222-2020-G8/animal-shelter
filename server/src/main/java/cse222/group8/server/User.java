@@ -33,12 +33,20 @@ public class User implements Comparable<User> {
     }
     
     
-    // public constr needed
+  
     
     public boolean createARequest(Animal animal) {
-    	//TODO
-    	// calls animals method
-    	return false;
+    	
+    	AdoptionRequest request = new AdoptionRequest(this,animal);
+    	if(!requests.contains(request)) {    		
+		animal.getShelter().getAdoptionRequests().add(request);
+		animal.setAdopted(true);
+		requests.add(request);
+		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
 
     public boolean updateUser(User user) {
