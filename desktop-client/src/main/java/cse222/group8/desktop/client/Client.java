@@ -38,6 +38,30 @@ public class Client {
             throw new ConnectionError();
         }
     }
+    public static boolean cityExists(String city) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"cities/check");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(uri)
+                .setHeader("Content-Type", "application/json")
+                .setHeader("City", city)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+                Gson gson = new Gson();
+                return gson.fromJson(jsonBody,boolean.class);
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
     public static String[] getTowns(String city) throws ConnectionError {
         URI uri = URI.create(baseUrl+"cities/towns");
         HttpRequest request = HttpRequest.newBuilder()
@@ -52,6 +76,31 @@ public class Client {
                 String jsonBody = response.body();
                 Gson gson = new Gson();
                 return gson.fromJson(jsonBody,String[].class);
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
+    public static boolean townExists(String city, String town) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"cities//towns/check");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(uri)
+                .setHeader("Content-Type", "application/json")
+                .setHeader("City", city)
+                .setHeader("Town",town)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+                Gson gson = new Gson();
+                return gson.fromJson(jsonBody,boolean.class);
             }
             else {
                 System.out.println(response.statusCode());
@@ -77,6 +126,32 @@ public class Client {
                 String jsonBody = response.body();
                 Gson gson = new Gson();
                 return gson.fromJson(jsonBody,String[].class);
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
+    public static boolean shelterExists(String city, String town, String shelter) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"cities/towns/shelters/check");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(uri)
+                .setHeader("Content-Type", "application/json")
+                .setHeader("City", city)
+                .setHeader("Town",town)
+                .setHeader("Shelter", shelter)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+                Gson gson = new Gson();
+                return gson.fromJson(jsonBody,boolean.class);
             }
             else {
                 System.out.println(response.statusCode());

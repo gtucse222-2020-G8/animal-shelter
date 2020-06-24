@@ -21,6 +21,6 @@ public class DailyExecutions implements Runnable {
 
 	@Override
 	public void run() {
-		
+
 	}
 }

@@ -12,10 +12,7 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.plugin.json.JavalinJackson;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class JavalinServer implements Runnable {
 
@@ -57,6 +54,12 @@ public class JavalinServer implements Runnable {
             return null;
         }
     }
+    private Shelter getShelterFromJWT(DecodedJWT jwt){
+        String cityName = jwt.getClaim("City").asString();
+        String townName = jwt.getClaim("Town").asString();
+        String shelterName = jwt.getClaim("Shelter").asString();
+        return system.getCity(cityName).getTown(townName).getShelter(shelterName);
+    }
 
     public void initRoutes(){
         app.get("/cities",this::getCities);
@@ -86,6 +89,9 @@ public class JavalinServer implements Runnable {
         app.get("/shelters/animals/diseased",this::getMostDiseasedAnimal);
         app.post("/shelters/animals/diseased",this::addDiseasedAnimal);
         app.post("/shelters/animals/diseased/pop",this::deleteMostDiseasedAnimalFromQueue);
+        app.get("/cities/check",this::isCityExists);
+        app.get("/cities/towns/check",this::isTownExists);
+        app.get("/cities/towns/shelters/check",this::isShelterExists);
         // user routes
         app.post("/user/login",this::userLogin);    //HashMap<String,String> UserName Password
         app.post("/user/register",this::userRegister); //HashMap<String,String> UserName Password Email Name City Town
@@ -104,7 +110,15 @@ public class JavalinServer implements Runnable {
 	}
 
 	private void getCities(Context ctx){
-        //TODO
+        Collection<City> cities = system.getAllCities();
+        String[] cityNames = new String[cities.size()];
+        int i = 0;
+        for(City city : cities){
+            cityNames[i] = city.getName();
+            ++i;
+        }
+        ctx.status(200);
+        ctx.json(cityNames);
     }
 
     private void getTowns(Context ctx){
@@ -115,13 +129,7 @@ public class JavalinServer implements Runnable {
         for(Town town : towns){
             townNames.add(town.getName());
         }
-        ctx.json((Town[])townNames.toArray());
-    }
-    private Shelter getShelterFromJWT(DecodedJWT jwt){
-        String cityName = jwt.getClaim("City").asString();
-        String townName = jwt.getClaim("Town").asString();
-        String shelterName = jwt.getClaim("Shelter").asString();
-        return system.getCity(cityName).getTown(townName).getShelter(shelterName);
+        ctx.json((String[])townNames.toArray());
     }
     private void getShelters(Context ctx){
         String cityName = ctx.header("City");
@@ -877,154 +885,176 @@ public class JavalinServer implements Runnable {
             ctx.json("Authorization header not found");
         }
     }
+    public void isCityExists(Context ctx)){
+        ctx.status(200);
+        ctx.json(system.getCity(ctx.headers("City"))!=null);
+    }
+    public void isTownExists(Context ctx)){
+        try {
+            ctx.status(200);
+            ctx.json(system.getCity(ctx.headers("City")).getTown(ctx.headers("Town"))!=null);
+        }catch (Exception ignore){
+            ctx.status(200);
+            ctx.json(false);
+        }
+    }
+    public void isShelterExists(Context ctx)){
+        try {
+            ctx.status(200);
+            ctx.json(system.getCity(ctx.headers("City")).getTown(ctx.headers("Town")).getShelter(ctx.headers("Shelter"))!=null);
+        }catch (Exception ignore){
+            ctx.status(200);
+            ctx.json(false);
+        }
+    }
 
     // User routes
 
-        public void userLogin(Context ctx){
-            ObjectMapper mapper = JavalinJackson.getObjectMapper();
-            HashMap<String, String> data;
-            try {
-                data = mapper.readValue(ctx.body(), HashMap.class);
-                String username = data.get("UserName");
+    public void userLogin(Context ctx){
+        ObjectMapper mapper = JavalinJackson.getObjectMapper();
+        HashMap<String, String> data;
+        try {
+            data = mapper.readValue(ctx.body(), HashMap.class);
+            String username = data.get("UserName");
+            String password = data.get("Password");
+            if(system.getUser(username).getPassword()==password){
+                ctx.status(200);
+                ctx.json(createUserToken(username));
+            }else{
+                ctx.status(403);
+            }
+        } catch (Exception e) {
+            ctx.status(432);
+            return;
+        }
+    }    //HashMap<String,String> UserName Password
+    public void userRegister(Context ctx){
+        ObjectMapper mapper = JavalinJackson.getObjectMapper();
+        HashMap<String, String> data;
+        try {
+            data = mapper.readValue(ctx.body(), HashMap.class);
+            String username = data.get("UserName");
+            if(system.getUser(username)==null){
                 String password = data.get("Password");
-                if(system.getUser(username).getPassword()==password){
-                    ctx.status(200);
-                    ctx.json(createUserToken(username));
-                }else{
-                    ctx.status(403);
-                }
-            } catch (Exception e) {
-                ctx.status(432);
-                return;
-            }
-        }    //HashMap<String,String> UserName Password
-        public void userRegister(Context ctx){
-            ObjectMapper mapper = JavalinJackson.getObjectMapper();
-            HashMap<String, String> data;
-            try {
-                data = mapper.readValue(ctx.body(), HashMap.class);
-                String username = data.get("UserName");
-                if(system.getUser(username)==null){
-                    String password = data.get("Password");
-                    String email = data.get("Email");
-                    String name = data.get("Name");
-                    String city = data.get("City");
-                    String town = data.get("Town");
-                    User user = new User();
-                    user.setCity(system.getCity(city));
-                    user.setTown(system.getCity(city).getTown(town));
-                    user.setName(name);
-                    user.setUsername(username);
-                    user.setEmail(email);
-                    user.setPassword(password);
-                    ctx.status(200);
-                    ctx.json(createUserToken(username));
-                }else{
-                    ctx.status(304);
-                }
-            } catch (Exception e) {
-                ctx.status(432);
-                return;
-            }
-        } //HashMap<String,String> UserName Password Email Name City Town
-        public void getFilteredAnimals(Context ctx){
-            try {
-                String cityName = ctx.header("City");
-                String townName = ctx.header("Town");
-                Town town = system.getCity(cityName).getTown(townName);
-                List<AnimalData> data = new LinkedList<AnimalData>();
-                for(Shelter shelter : town.getShelters()){
-                    for(Animal animal : shelter.getCats()){
-                        data.add(new AnimalData(animal.getId(),animal.getName(),"cat",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
-                    }
-                    for(Animal animal : shelter.getDogs()){
-                        data.add(new AnimalData(animal.getId(),animal.getName(),"dog",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
-                    }
-                }
+                String email = data.get("Email");
+                String name = data.get("Name");
+                String city = data.get("City");
+                String town = data.get("Town");
+                User user = new User();
+                user.setCity(system.getCity(city));
+                user.setTown(system.getCity(city).getTown(town));
+                user.setName(name);
+                user.setUsername(username);
+                user.setEmail(email);
+                user.setPassword(password);
                 ctx.status(200);
-                ctx.json((AnimalData[])data.toArray());
-            }catch (Exception ignore){
-                ctx.status(432);
+                ctx.json(createUserToken(username));
+            }else{
+                ctx.status(304);
             }
-        } //Header City Town
-        public void getFavoriteAnimals(Context ctx){
-            try {
-                String username = ctx.header("Username");
-                String email = ctx.header("Mail");
-                List<AnimalData> data = new LinkedList<AnimalData>();
-                for(Animal animal : system.getUser(username).getFavorites()){
-                    String species = "Dog";
-                    if(animal.getId()%2==1){
-                        species = "Cat";
-                    }
-                    data.add(new AnimalData(animal.getId(),animal.getName(),species,animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
+        } catch (Exception e) {
+            ctx.status(432);
+            return;
+        }
+    } //HashMap<String,String> UserName Password Email Name City Town
+    public void getFilteredAnimals(Context ctx){
+        try {
+            String cityName = ctx.header("City");
+            String townName = ctx.header("Town");
+            Town town = system.getCity(cityName).getTown(townName);
+            List<AnimalData> data = new LinkedList<AnimalData>();
+            for(Shelter shelter : town.getShelters()){
+                for(Animal animal : shelter.getCats()){
+                    data.add(new AnimalData(animal.getId(),animal.getName(),"cat",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
                 }
-                ctx.status(200);
-                ctx.json((AnimalData[])data.toArray());
-            }catch (Exception ignore){
-                ctx.status(432);
-            }
-        } //Header Username Mail
-        public void updateUser(Context ctx){
-            try {
-                String username = ctx.header("Username");
-                String email = ctx.header("Mail");
-                String newUsername = ctx.header("NewUsername");
-                String newPassword = ctx.header("NewPassword");
-                system.getUser(username).setPassword(newPassword);
-                system.getUser(username).setUsername(newUsername);
-                ctx.status(200);
-            }catch (Exception ignore){
-                ctx.status(432);
-            }
-        } //Header Username Mail NewUsername NewMail NewPassword
-        public void getAllOwnershipRequests(Context ctx){
-            try {
-                String username = ctx.header("Username");
-                String email = ctx.header("Mail");
-                List<String> data = new LinkedList<String>();
-                for(AdoptionRequest request : system.getUser(username).getRequests()){
-                    data.add(request.getRequestedAnimal().getCity().getName() + " " +
-                            request.getRequestedAnimal().getTown().getName() + " Animal ID: "+
-                            request.getRequestedAnimal().getId()+" Expires at: " + request.getExpirationDate().toString());
+                for(Animal animal : shelter.getDogs()){
+                    data.add(new AnimalData(animal.getId(),animal.getName(),"dog",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
                 }
-                ctx.status(200);
-                ctx.json((String[])data.toArray());
-            }catch (Exception ignore){
-                ctx.status(432);
             }
-        } //Header Username Mail
-        public void newOwnershipRequest(Context ctx){
-            ObjectMapper mapper = JavalinJackson.getObjectMapper();
-            HashMap<String, String> data;
-            try {
-                data = mapper.readValue(ctx.body(), HashMap.class);
-                String username = data.get("UserName");
-                String password = data.get("Password");
-                if(system.getUser(username)!=null && system.getUser(username).getPassword()==password){
-                    String email = data.get("Email");
-                    String name = data.get("Name");
-                    String city = data.get("City");
-                    String town = data.get("Town");
-                    String shelter = data.get("Shelter");
-                    int id = Integer.parseInt(data.get("AnimalId"));
-                    Animal animal;
-                    if(id%2==1){
-                        animal = system.getCity(city).getTown(town).getShelter(shelter).getCat(id);
-                    }
-                    else{
-                        animal = system.getCity(city).getTown(town).getShelter(shelter).getDog(id);
-                    }
-                    animal.makeARequest(system.getUser(username));
-                    ctx.status(200);
-                    ctx.json(createUserToken(username));
-                }else{
-                    ctx.status(304);
+            ctx.status(200);
+            ctx.json((AnimalData[])data.toArray());
+        }catch (Exception ignore){
+            ctx.status(432);
+        }
+    } //Header City Town
+    public void getFavoriteAnimals(Context ctx){
+        try {
+            String username = ctx.header("Username");
+            String email = ctx.header("Mail");
+            List<AnimalData> data = new LinkedList<AnimalData>();
+            for(Animal animal : system.getUser(username).getFavorites()){
+                String species = "Dog";
+                if(animal.getId()%2==1){
+                    species = "Cat";
                 }
-            } catch (Exception e) {
-                ctx.status(432);
-                return;
+                data.add(new AnimalData(animal.getId(),animal.getName(),species,animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
             }
-        } //HashMap<String,String> UserName Password Email City Town Shelter AnimalId
+            ctx.status(200);
+            ctx.json((AnimalData[])data.toArray());
+        }catch (Exception ignore){
+            ctx.status(432);
+        }
+    } //Header Username Mail
+    public void updateUser(Context ctx){
+        try {
+            String username = ctx.header("Username");
+            String email = ctx.header("Mail");
+            String newUsername = ctx.header("NewUsername");
+            String newPassword = ctx.header("NewPassword");
+            system.getUser(username).setPassword(newPassword);
+            system.getUser(username).setUsername(newUsername);
+            ctx.status(200);
+        }catch (Exception ignore){
+            ctx.status(432);
+        }
+    } //Header Username Mail NewUsername NewMail NewPassword
+    public void getAllOwnershipRequests(Context ctx){
+        try {
+            String username = ctx.header("Username");
+            String email = ctx.header("Mail");
+            List<String> data = new LinkedList<String>();
+            for(AdoptionRequest request : system.getUser(username).getRequests()){
+                data.add(request.getRequestedAnimal().getCity().getName() + " " +
+                        request.getRequestedAnimal().getTown().getName() + " Animal ID: "+
+                        request.getRequestedAnimal().getId()+" Expires at: " + request.getExpirationDate().toString());
+            }
+            ctx.status(200);
+            ctx.json((String[])data.toArray());
+        }catch (Exception ignore){
+            ctx.status(432);
+        }
+    } //Header Username Mail
+    public void newOwnershipRequest(Context ctx){
+        ObjectMapper mapper = JavalinJackson.getObjectMapper();
+        HashMap<String, String> data;
+        try {
+            data = mapper.readValue(ctx.body(), HashMap.class);
+            String username = data.get("UserName");
+            String password = data.get("Password");
+            if(system.getUser(username)!=null && system.getUser(username).getPassword()==password){
+                String email = data.get("Email");
+                String name = data.get("Name");
+                String city = data.get("City");
+                String town = data.get("Town");
+                String shelter = data.get("Shelter");
+                int id = Integer.parseInt(data.get("AnimalId"));
+                Animal animal;
+                if(id%2==1){
+                    animal = system.getCity(city).getTown(town).getShelter(shelter).getCat(id);
+                }
+                else{
+                    animal = system.getCity(city).getTown(town).getShelter(shelter).getDog(id);
+                }
+                animal.makeARequest(system.getUser(username));
+                ctx.status(200);
+                ctx.json(createUserToken(username));
+            }else{
+                ctx.status(304);
+            }
+        } catch (Exception e) {
+            ctx.status(432);
+            return;
+        }
+    } //HashMap<String,String> UserName Password Email City Town Shelter AnimalId
 
 }
