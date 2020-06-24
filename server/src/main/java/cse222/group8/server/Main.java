@@ -56,6 +56,38 @@ public class Main {
 		ui.run();
 		javalinThread.stop();
 	}
+
+	private static void testAddAnimal(){
+		ShelterSystem system = new ShelterSystem();
+		City istanbul = new City("Istanbul", 34, system);
+		Town pendik = new Town("Pendik", istanbul, system);
+		Shelter myShelter = new Shelter("Pendik Barinagi",istanbul,pendik,10,10,"yeni mah","3759630","123456",system);
+
+		myShelter.addCat(new Animal("Tyson","Scottishfold",2,true,myShelter));
+		myShelter.addCat(new Animal("Mahmut","Tekir",4,true,myShelter));
+		myShelter.addCat(new Animal("Mia","Ankara",12,true,myShelter));
+		myShelter.addCat(new Animal("Yumi","Van",1,true,myShelter));
+		Animal animal=new Animal("Leia","Corgi",2,false,myShelter);
+		myShelter.addDog(animal);
+		myShelter.addDog(new Animal("Baron","Rottweiler",8,false,myShelter));
+
+		for(Animal cat: myShelter.getCats()){
+			System.out.println(cat.getName());
+		}
+		System.out.println("-----");
+		for(Animal dog: myShelter.getDogs()){
+			System.out.println(dog.getName());
+		}
+		System.out.println("-----");
+		for(Animal dog: myShelter.getDogs()){
+			if(dog.getName().equals("Leia")) {
+				dog.updateAnimal(new Animal("Pamuk", "abc", 13, false,myShelter));
+			}
+		}
+		for(Animal dog: myShelter.getDogs()){
+			System.out.println(dog.getName());
+		}
+	}
 	
 	private static void testAdminUI() {
 		
