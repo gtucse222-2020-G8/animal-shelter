@@ -12,6 +12,7 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.plugin.json.JavalinJackson;
 
+import java.util.Map;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -87,12 +88,11 @@ public class JavalinServer implements Runnable {
         app.post("/shelters/animals/diseased/pop",this::deleteMostDiseasedAnimalFromQueue);
         // user routes
         app.post("/user/login",this::userLogin);    //HashMap<String,String> UserName Password
-        app.post("/user/register",this::userRegister); //HashMap<String,String> UserName Password Email PhoneNumber Name City Town
+        app.post("/user/register",this::userRegister); //HashMap<String,String> UserName Password Email Name City Town
         app.get("/animals/filter/get",this::getFilteredAnimals); //Header City Town
-        app.get("/user/favoritePets",this::getFavoriteAnimals); //Header Username Mail PhoneNumber
-        app.get("/user/account/update",this::updateUser); //Header Username Mail PhoneNumber NewUsername NewMail NewPhoneNumber NewPassword
-        app.get("/user/ownages/get",this::getAllOwnership); //Header Username Mail PhoneNumber
-        app.get("/user/ownages/requests/get",this::getAllOwnershipRequests); //Header Username Mail PhoneNumber
+        app.get("/user/favoritePets",this::getFavoriteAnimals); //Header Username Mail
+        app.get("/user/account/update",this::updateUser); //Header Username Mail NewUsername NewMail NewPassword
+        app.get("/user/ownages/requests/get",this::getAllOwnershipRequests); //Header Username Mail
         app.post("/user/ownages/requests/add",this::newOwnershipRequest); //HashMap<String,String> UserName Password Email City Town Shelter AnimalId
     }
 
@@ -171,7 +171,7 @@ public class JavalinServer implements Runnable {
             data = mapper.readValue(ctx.body(), RegisterShelterData.class);
             City city = system.getCity(data.city);
             Town town = city.getTown(data.town);
-            system.addNewShleterRequest(new ShelterRequest(data.city,data.town,new Shelter(data.shelterName,data.city,data.town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password,system)));
+            system.addNewShelterRequest(new ShelterRequest(data.city,data.town,new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password,system)));
         } catch (Exception e) {
             ctx.status(432);
             return;
@@ -343,7 +343,7 @@ public class JavalinServer implements Runnable {
                     BinarySearchTree<Animal> cats = shelter.getCats();
                     List<AnimalDataWithImage> data = new LinkedList<AnimalDataWithImage>();
                     for(Animal cat: cats){
-                        data.add(new AnimalDataWithImage(cat.getId(),cat.getName(),"cat",cat.getKind(),cat.getGender(),cat.getAge(),cat.getVaccination(),cat.isNeutered(),cat.getInfo(),cat.getAdoptionRequest()!=null,cat.getImageString()))
+                        data.add(new AnimalDataWithImage(cat.getId(),cat.getName(),"cat",cat.getKind(),cat.getGender(),cat.getAge(),cat.getVaccination(),cat.isNeutered(),cat.getInfo(),cat.getAdoptionRequest()!=null,cat.getImageString()));
                     }
                     ctx.status(200);
                     ctx.json((AnimalDataWithImage[])data.toArray());
@@ -372,7 +372,7 @@ public class JavalinServer implements Runnable {
                     BinarySearchTree<Animal> dogs = shelter.getDogs();
                     List<AnimalDataWithImage> data = new LinkedList<AnimalDataWithImage>();
                     for(Animal dog: dogs){
-                        data.add(new AnimalDataWithImage(dog.getId(),dog.getName(),"dog",dog.getKind(),dog.getGender(),dog.getAge(),dog.getVaccination(),dog.isNeutered(),dog.getInfo(),dog.getAdoptionRequest()!=null,dog.getImageString()))
+                        data.add(new AnimalDataWithImage(dog.getId(),dog.getName(),"dog",dog.getKind(),dog.getGender(),dog.getAge(),dog.getVaccination(),dog.isNeutered(),dog.getInfo(),dog.getAdoptionRequest()!=null,dog.getImageString()));
                     }
                     ctx.status(200);
                     ctx.json((AnimalDataWithImage[])data.toArray());
@@ -503,7 +503,13 @@ public class JavalinServer implements Runnable {
                     int data;
                     try {
                         data = mapper.readValue(ctx.body(), int.class);
-                        shelter.makeCapChangeRequest(data);
+                        String animalType = ctx.header("AnimalType");
+                        if(animalType == "Cat"){
+                            shelter.makeCapChangeRequest(data,shelter.getDogCapacity());
+                        }
+                        else if(animalType == "Dog"){
+                            shelter.makeCapChangeRequest(shelter.getCatCapacity(),data);
+                        }
                     }catch (Exception ignore){
                         ctx.status(432);
                     }
@@ -821,10 +827,14 @@ public class JavalinServer implements Runnable {
             if(jwt!=null){
                 if(jwt.getClaim("IsShelter").asBoolean()) {
                     Shelter shelter = getShelterFromJWT(jwt);
-                    int animalId = ctx.header("AnimalId");
-                    int diseaseLevel = ctx.header("DiseaseLevel");
-                    shelter.addDiseasedAnimal(animalId,diseaseLevel);
-                    ctx.status(200);
+                    try {
+                        int animalId = Integer.parseInt(ctx.header("AnimalId"));
+                        int diseaseLevel = Integer.parseInt(ctx.header("DiseaseLevel"));
+                        shelter.addDiseasedAnimal(animalId, diseaseLevel);
+                        ctx.status(200);
+                    }catch (NumberFormatException ignore){
+                        ctx.status(432);
+                    }
                 }
                 else{
                     ctx.status(403);
@@ -873,7 +883,7 @@ public class JavalinServer implements Runnable {
             ObjectMapper mapper = JavalinJackson.getObjectMapper();
             HashMap<String, String> data;
             try {
-                data = mapper.readValue(ctx.body(), Map.class);
+                data = mapper.readValue(ctx.body(), HashMap.class);
                 String username = data.get("UserName");
                 String password = data.get("Password");
                 if(system.getUser(username).getPassword()==password){
@@ -891,7 +901,7 @@ public class JavalinServer implements Runnable {
             ObjectMapper mapper = JavalinJackson.getObjectMapper();
             HashMap<String, String> data;
             try {
-                data = mapper.readValue(ctx.body(), Map.class);
+                data = mapper.readValue(ctx.body(), HashMap.class);
                 String username = data.get("UserName");
                 if(system.getUser(username)==null){
                     String password = data.get("Password");
@@ -924,10 +934,10 @@ public class JavalinServer implements Runnable {
                 List<AnimalData> data = new LinkedList<AnimalData>();
                 for(Shelter shelter : town.getShelters()){
                     for(Animal animal : shelter.getCats()){
-                        data.add(new AnimalData(animal.getId(),animal.getName(),"cat",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null)))
+                        data.add(new AnimalData(animal.getId(),animal.getName(),"cat",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
                     }
                     for(Animal animal : shelter.getDogs()){
-                        data.add(new AnimalData(animal.getId(),animal.getName(),"dog",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null)))
+                        data.add(new AnimalData(animal.getId(),animal.getName(),"dog",animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
                     }
                 }
                 ctx.status(200);
@@ -946,7 +956,7 @@ public class JavalinServer implements Runnable {
                     if(animal.getId()%2==1){
                         species = "Cat";
                     }
-                    data.add(new AnimalData(animal.getId(),animal.getName(),species,animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null)));
+                    data.add(new AnimalData(animal.getId(),animal.getName(),species,animal.getKind(),animal.getGender(),animal.getAge(),animal.getVaccination(),animal.isNeutered(),animal.getInfo(),animal.getAdoptionRequest()!=null));
                 }
                 ctx.status(200);
                 ctx.json((AnimalData[])data.toArray());
@@ -987,7 +997,7 @@ public class JavalinServer implements Runnable {
             ObjectMapper mapper = JavalinJackson.getObjectMapper();
             HashMap<String, String> data;
             try {
-                data = mapper.readValue(ctx.body(), Map.class);
+                data = mapper.readValue(ctx.body(), HashMap.class);
                 String username = data.get("UserName");
                 String password = data.get("Password");
                 if(system.getUser(username)!=null && system.getUser(username).getPassword()==password){

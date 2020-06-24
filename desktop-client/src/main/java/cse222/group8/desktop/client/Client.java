@@ -346,13 +346,14 @@ public class Client {
             throw new ConnectionError();
         }
     }
-    public static void updateCapacity(Token token, int capacity) throws ConnectionError {
+    public static void updateCapacity(Token token, int capacity, String animalType) throws ConnectionError {
         URI uri = URI.create(baseUrl+"shelters/update/capacity");
         Gson gson = new Gson();
         String body = gson.toJson(capacity);
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
+                .setHeader("AnimalType", animalType)
                 .setHeader("Authorization", "Bearer "+token.accessToken)
                 .uri(uri)
                 .build();

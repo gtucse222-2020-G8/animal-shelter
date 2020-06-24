@@ -15,7 +15,9 @@ public class User implements Comparable<User> {
     private List<Animal> favorites;
     private Date signUpDate;
     
-    
+    public User() {
+
+    }
     protected User(String userName) {
     	this.username = userName;
     }
