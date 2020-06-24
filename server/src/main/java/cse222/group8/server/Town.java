@@ -68,4 +68,13 @@ public class Town implements Comparable<Town> {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Town{" +
+                "name='" + name + '\'' +
+                ", city=" + city.getName() +
+                ", shelters=" + shelters +
+                '}';
+    }
 }

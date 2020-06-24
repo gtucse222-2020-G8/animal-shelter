@@ -1,19 +1,19 @@
-Akkus
-Altinordu
-Aybasti
-Camas
-Catalpinar
-Caybasi
-Fatsa
-Golkoy
-Gulyali
-Gurgentepe
-Ikizce
-Kabaduz
-Kabatas
-Korgan
-Kumru
-Mesudiye
-Persembe
-Ulubey
-Unye
+Akkus 52
+Altinordu 52
+Aybasti 52
+Camas 52
+Catalpinar 52
+Caybasi 52
+Fatsa 52
+Golkoy 52
+Gulyali 52
+Gurgentepe 52
+Ikizce 52
+Kabaduz 52
+Kabatas 52
+Korgan 52
+Kumru 52
+Mesudiye 52
+Persembe 52
+Ulubey 52
+Unye 52

@@ -20,27 +20,12 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		ShelterSystem system = new ShelterSystem();
-		City istanbul = new City("istanbul",34,system);
-		City izmir = new City("izmir",35,system);
-		City sivas = new City("sivas",58,system);
-		Town kagithane = new Town("kagithane",istanbul,system);
-		Town uskudar = new Town("uskudar",istanbul,system);
-		Town kadikoy = new Town("kadikoy",istanbul,system);
-		Shelter dogaevi = new Shelter("dogaevi", istanbul, kagithane, 23, 11, "Sultan selim mah. No 3", "+902122222415", "stockpass", system);
-		kagithane.getShelters().add(dogaevi);
-		dogaevi.addCat(new Animal("korpe","tekir",3,true));
-		dogaevi.addCat(new Animal("sari","sarman",6,true));
-		dogaevi.addDog(new Animal("pasa","kangal",12,false));
-		istanbul.getTowns().add(kagithane);
-		istanbul.getTowns().add(uskudar);
-		istanbul.getTowns().add(kadikoy);
-		izmir.getTowns().add(new Town("bornova",izmir,system));
-		sivas.getTowns().add(new Town("zara",sivas,system));
-		system.getCitiesBST().add(istanbul);
-		system.getCitiesBST().add(izmir);
-		system.getCitiesBST().add(sivas);
-		JavalinServer javalinServer = new JavalinServer(system);
-		javalinServer.run();
+		readCityInfo(system);
+		insertTownsTests(system);
+		System.out.println("Hello word");
+		printCitiesInfo(system);
+//		JavalinServer javalinServer = new JavalinServer(system);
+//		javalinServer.run();
 	}
 	
 	private static void testAdminUI() {
@@ -56,8 +41,8 @@ public class Main {
 		ui.run();
 		
 	}
-	
-	
+
+
 	private static void testCities() {
 		
 		//its a dummy system for test	
@@ -87,9 +72,43 @@ public class Main {
 			System.out.println(cityIds.get(id).getName());
 			
 		}
-		
-		
-		
+	}
+
+	protected static void printCitiesInfo(ShelterSystem system){
+		BinarySearchTree<City> cities 	= system.getCitiesBST();
+		System.out.println(cities.toString());
+	}
+
+	protected static void insertTownsTests(ShelterSystem system){
+		BinarySearchTree<City> cities 	= system.getCitiesBST();
+
+		File file = new File("C:\\Users\\seyma\\Desktop\\Veri Proje\\Files\\Towns.txt");
+
+		try {
+
+			Scanner sc = new Scanner(file);
+
+			while( sc.hasNextLine() ) {
+
+				String str = sc.nextLine();
+				String[] townsInfo = str.split("-");
+ 				String id = townsInfo[1];
+				City city = system.getCity(Integer.parseInt(id));
+
+				city.towns.add(new Town(townsInfo[0], city, system));
+
+			}
+
+			sc.close();
+
+		}
+		catch ( Exception e ) {
+			System.out.println(e.getMessage());
+			System.err.println("Something went wrong while reading towns from file");
+			System.exit(0);
+
+		}
+
 	}
 
 
@@ -105,7 +124,7 @@ public class Main {
 		ListGraph borderCities 			= system.getBorderCities();
 		
 		
-		File file = new File("Cities.txt");
+		File file = new File("C:\\Users\\seyma\\Desktop\\Veri Proje\\Files\\Cities.txt");
 		
 		try {
 			

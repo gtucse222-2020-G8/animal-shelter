@@ -54,15 +54,7 @@ public class AVLTree <E extends Comparable <E>> extends BinarySearchTreeWithRota
 			super(item);
 			balance = BALANCED;
 		}
-	
-		/** Return a string representation of this object.
-		    The balance value is appended to the contents.
-		    @return String representation of this object
-		 */
-		public String toString() {
-			return balance + ": " + super.toString();
-		    }
-		}
+	}
 	
 		/** add starter method.
 			pre: the item to insert implements the Comparable interface.

@@ -1,12 +1,12 @@
-Basiskele
-Cayirova
-Darica
-Derince
-Dilovasi
-Gebze
-Izmit
-Korfez
-Golcuk
-Kandira
-Karamursel
-Kartepe
+Basiskele 41
+Cayirova 41
+Darica 41
+Derince 41
+Dilovasi 41
+Gebze 41
+Izmit 41
+Korfez 41
+Golcuk 41
+Kandira 41
+Karamursel 41
+Kartepe 41

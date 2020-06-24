@@ -137,6 +137,19 @@ public class Shelter implements Comparable<Shelter> {
        return false;
     }
 
+    @Override
+    public String toString() {
+        return "Shelter{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", city=" + city +
+                ", town=" + town +
+                ", catSize=" + catSize +
+                ", dogSize=" + dogSize +
+                '}';
+    }
+
     /**
      * Add dog boolean.
      *

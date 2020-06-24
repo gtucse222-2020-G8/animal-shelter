@@ -72,7 +72,11 @@ public class City implements Comparable<City>{
 
     @Override
     public int compareTo(City o) {
-        return name.compareTo(o.getName());
+        if(cityId == o.cityId )
+            return 0;
+        else if(cityId > o.cityId) return 1;
+        else
+            return -1;
     }
 
     /**
@@ -82,5 +86,14 @@ public class City implements Comparable<City>{
      */
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "cityId=" + cityId +
+                ", name='" + name + '\'' +
+                ", towns=" + towns +
+                '}';
     }
 }

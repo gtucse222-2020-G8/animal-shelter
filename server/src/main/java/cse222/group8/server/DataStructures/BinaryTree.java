@@ -151,22 +151,17 @@ public class BinaryTree<E> implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		preOrderTraverse(root, 1, sb);
+		preOrderTraverse(root, sb);
 		return sb.toString();
 	}
 
 
-	private void preOrderTraverse(Node<E> node,int depth,StringBuilder sb){
-		for (int i = 1; i < depth; i++) {
-			sb.append("  ");
-		}
-		if (node == null) {
-			sb.append("null\n");
-		} else {
+	private void preOrderTraverse(Node<E> node,StringBuilder sb){
+		if (node != null) {
 			sb.append(node.toString());
 			sb.append("\n");
-			preOrderTraverse(node.left, depth + 1, sb);
-			preOrderTraverse(node.right, depth + 1, sb);
+			preOrderTraverse(node.left, sb);
+			preOrderTraverse(node.right, sb);
 		}
 	}
 

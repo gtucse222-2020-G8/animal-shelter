@@ -20,11 +20,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b24d25d5-042d-44f5-9191-5797f0657209" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ClientProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cse222/group8/userapp/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cse222/group8/userapp/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Antalya.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Antalya.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Balıkesir.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Balıkesir.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Bursa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Bursa.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Istanbul.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Istanbul.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Kocaeli.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Kocaeli.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Konya.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Konya.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Ordu.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Ordu.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/Sivas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/Sivas.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Files/ankara.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Files/ankara.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/City.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DataStructures/AVLTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DataStructures/AVLTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DataStructures/BinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/DataStructures/BinaryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Shelter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Shelter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/ShelterSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/ShelterSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Town.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/cse222/group8/server/Town.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,24 +70,41 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../server" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/gson-2.6.2.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cse222.group8.userapp.Main" />
       <module name="ClientProject" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cse222.group8.userapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="cse222.group8.userapp" />
+      <module name="ClientProject" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (1)" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -100,43 +131,54 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593019652511">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.834@0.0.1536.834" timestamp="1593019652511" />
     <state x="580" y="92" key="#com.intellij.ide.util.MemberChooser" timestamp="1592986759596">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="580" y="92" key="#com.intellij.ide.util.MemberChooser/1920.0.1549.831/0.0.1549.831@0.0.1549.831" timestamp="1592986759596" />
-    <state x="489" y="149" key="FileChooserDialogImpl" timestamp="1593011133758">
-      <screen x="0" y="0" width="1366" height="738" />
+    <state x="550" y="168" key="FileChooserDialogImpl" timestamp="1593019586805">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="489" y="149" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1593011133758" />
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1592947223796" />
+    <state x="550" y="168" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1593019586805" />
     <state x="554" y="168" key="FileChooserDialogImpl/1920.0.1549.831/0.0.1549.831@0.0.1549.831" timestamp="1592982482419" />
-    <state width="1493" height="162" key="GridCell.Tab.0.bottom" timestamp="1592952343040">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="153" key="GridCell.Tab.0.bottom" timestamp="1593026638054">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="162" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1592952343040" />
-    <state width="1493" height="162" key="GridCell.Tab.0.center" timestamp="1592952343039">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="153" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1593026638054" />
+    <state width="1493" height="153" key="GridCell.Tab.0.center" timestamp="1593026638054">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="162" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1592952343039" />
-    <state width="1493" height="162" key="GridCell.Tab.0.left" timestamp="1592952343039">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="153" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1593026638054" />
+    <state width="1493" height="153" key="GridCell.Tab.0.left" timestamp="1593026638054">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="162" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1592952343039" />
-    <state width="1493" height="162" key="GridCell.Tab.0.right" timestamp="1592952343039">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="153" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1593026638054" />
+    <state width="1493" height="153" key="GridCell.Tab.0.right" timestamp="1593026638054">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="162" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1592952343039" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1592947225203">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="153" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1593026638054" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1593019592533">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1592947225203" />
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1593019592533" />
   </component>
 </project>

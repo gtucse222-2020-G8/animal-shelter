@@ -277,7 +277,10 @@ public class ShelterSystem {
     	
     }
     
-    
+
+    public City getCity(int cityId){
+		return cities.find(new City("",cityId,this));
+	}
     
     
     
