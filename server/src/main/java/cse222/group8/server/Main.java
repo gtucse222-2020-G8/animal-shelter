@@ -17,6 +17,19 @@ public class Main {
 		
 	}
 	
+	private static void testAdminUI() {
+		
+		// TEST
+		ShelterSystem system = new ShelterSystem();
+		Shelter shelter = new Shelter("Test1", null, null, system);
+		system.addCapChangeRequest(new CapacityChangeRequest("Ist", "Krtl", shelter, 120,130));
+		system.addNewShleterRequest(new ShelterRequest("Ist", "Krtl2", shelter));
+		system.addRemoveShelterRequest(new ShelterRequest("Ist3", "Krtl3", shelter));
+		AdminUI ui = new AdminUI(system);
+		ui.run();
+		
+	}
+	
 	
 	private static void testCities() {
 		
