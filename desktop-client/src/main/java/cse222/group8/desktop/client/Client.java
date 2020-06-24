@@ -942,4 +942,35 @@ public class Client {
             throw new ConnectionError();
         }
     }
+    /**
+     * Cure diseased animal.
+     *
+     * @param token        the token
+     * @param animalId     the animal ıd
+     * @throws ConnectionError the connection error
+     */
+    public static void cureDiseasedAnimal(Token token) throws ConnectionError {
+        URI uri = URI.create(baseUrl+"shelters/animals/diseased/pop");
+        Gson gson = new Gson();
+        String body = gson.toJson("");
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(body))
+                .setHeader("Content-Type", "application/json")
+                .setHeader("Authorization", "Bearer "+token.accessToken)
+                .uri(uri)
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode()==200){
+                String jsonBody = response.body();
+            }
+            else {
+                System.out.println(response.statusCode());
+                System.out.println(response.body());
+                throw new ConnectionError();
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new ConnectionError();
+        }
+    }
 }

@@ -15,7 +15,7 @@ public class AddCatPageModel extends PageWithTokenModel{
     private String kind;
     private String image;
     private String name;
-    private String age;
+    private int age;
     private String vaccination;
     private String info;
     private boolean neutered;
@@ -101,7 +101,7 @@ public class AddCatPageModel extends PageWithTokenModel{
      *
      * @return the age
      */
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -110,7 +110,7 @@ public class AddCatPageModel extends PageWithTokenModel{
      *
      * @param age the age
      */
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

@@ -42,7 +42,7 @@ public class AddCatPageController implements PageWithTokenController {
     /**
      * The Age combo.
      */
-    public ComboBox<String> ageCombo;
+    public ComboBox<Integer> ageCombo;
     /**
      * The Neutered check.
      */
@@ -94,11 +94,19 @@ public class AddCatPageController implements PageWithTokenController {
         genders.add('m');
         genders.add('f');
         genderCombo.setItems(FXCollections.observableArrayList(genders));
-        List<String> ages = new ArrayList<>(4);
-        ages.add("<1");
-        ages.add("1-3");
-        ages.add("3-5");
-        ages.add("+5");
+        List<Integer> ages = new ArrayList<Integer>(12);
+        ages.add(1);
+        ages.add(2);
+        ages.add(3);
+        ages.add(4);
+        ages.add(5);
+        ages.add(6);
+        ages.add(7);
+        ages.add(8);
+        ages.add(9);
+        ages.add(10);
+        ages.add(15);
+        ages.add(20);
         ageCombo.setItems(FXCollections.observableArrayList(ages));
         genderCombo.valueProperty().addListener((observableValue, character, t1) -> {
             model.setGender(t1);
@@ -207,7 +215,7 @@ public class AddCatPageController implements PageWithTokenController {
         else{
             nameField.setStyle("-fx-background-color: #FFFFFF;");
         }
-        if(model.getAge()==null){
+        if(model.getAge()==0){
             ageCombo.setStyle("-fx-background-color: #FF4444;");
             valid = false;
         }

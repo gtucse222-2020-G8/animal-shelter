@@ -942,9 +942,9 @@ public class JavalinServer implements Runnable {
      *
      * @param ctx the ctx
      */
-    public void isCityExists(Context ctx)){
+    public void isCityExists(Context ctx){
         ctx.status(200);
-        ctx.json(system.getCity(ctx.headers("City"))!=null);
+        ctx.json(system.getCity(ctx.header("City"))!=null);
     }
 
     /**
@@ -952,10 +952,10 @@ public class JavalinServer implements Runnable {
      *
      * @param ctx the ctx
      */
-    public void isTownExists(Context ctx)){
+    public void isTownExists(Context ctx){
         try {
             ctx.status(200);
-            ctx.json(system.getCity(ctx.headers("City")).getTown(ctx.headers("Town"))!=null);
+            ctx.json(system.getCity(ctx.header("City")).getTown(ctx.header("Town"))!=null);
         }catch (Exception ignore){
             ctx.status(200);
             ctx.json(false);
@@ -967,10 +967,10 @@ public class JavalinServer implements Runnable {
      *
      * @param ctx the ctx
      */
-    public void isShelterExists(Context ctx)){
+    public void isShelterExists(Context ctx){
         try {
             ctx.status(200);
-            ctx.json(system.getCity(ctx.headers("City")).getTown(ctx.headers("Town")).getShelter(ctx.headers("Shelter"))!=null);
+            ctx.json(system.getCity(ctx.header("City")).getTown(ctx.header("Town")).getShelter(ctx.header("Shelter"))!=null);
         }catch (Exception ignore){
             ctx.status(200);
             ctx.json(false);

@@ -19,9 +19,28 @@ public class Main {
 	 * @param args the input arguments
 	 */
 	public static void main(String[] args) {
-		
-		
-		
+		ShelterSystem system = new ShelterSystem();
+		City istanbul = new City("istanbul",34,system);
+		City izmir = new City("izmir",35,system);
+		City sivas = new City("sivas",58,system);
+		Town kagithane = new Town("kagithane",istanbul,system);
+		Town uskudar = new Town("uskudar",istanbul,system);
+		Town kadikoy = new Town("kadikoy",istanbul,system);
+		Shelter dogaevi = new Shelter("dogaevi", istanbul, kagithane, 23, 11, "Sultan selim mah. No 3", "+902122222415", "stockpass", system);
+		kagithane.getShelters().add(dogaevi);
+		dogaevi.addCat(new Animal("korpe","tekir",3,true));
+		dogaevi.addCat(new Animal("sari","sarman",6,true));
+		dogaevi.addDog(new Animal("pasa","kangal",12,false));
+		istanbul.getTowns().add(kagithane);
+		istanbul.getTowns().add(uskudar);
+		istanbul.getTowns().add(kadikoy);
+		izmir.getTowns().add(new Town("bornova",izmir,system));
+		sivas.getTowns().add(new Town("zara",sivas,system));
+		system.getCitiesBST().add(istanbul);
+		system.getCitiesBST().add(izmir);
+		system.getCitiesBST().add(sivas);
+		JavalinServer javalinServer = new JavalinServer(system);
+		javalinServer.run();
 	}
 	
 	private static void testAdminUI() {

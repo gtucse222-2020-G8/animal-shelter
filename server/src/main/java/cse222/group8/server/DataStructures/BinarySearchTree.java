@@ -1,12 +1,15 @@
 package cse222.group8.server.DataStructures;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * The type Binary search tree.
  *
  * @param <E> the type parameter
  */
 @SuppressWarnings("serial")
-public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> implements SearchTree<E> {
+public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> implements SearchTree<E>, Iterable<E> {
 	// Data Fields
 	/**
 	 * Return value from the public add method.

@@ -1,6 +1,9 @@
 package cse222.group8.server;
 
 
+import cse222.group8.server.DataStructures.SkipList;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +28,7 @@ public class Town implements Comparable<Town> {
         this.name = name;
         this.city = city;
         this.shelterSystem = shelterSystem;
+        shelters = new ArrayList<Shelter>();
     }
 
     /**

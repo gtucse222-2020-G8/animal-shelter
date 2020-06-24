@@ -113,7 +113,7 @@ public class CatsPageController implements PageWithTokenController {
         Text breed = (Text) children.get(1);
         breed.setText(data.name);
         Text age = (Text) children.get(2);
-        age.setText(data.age);
+        age.setText(String.valueOf(data.age));
         Text date = (Text) children.get(3);
         date.setText(data.date);
         return node;

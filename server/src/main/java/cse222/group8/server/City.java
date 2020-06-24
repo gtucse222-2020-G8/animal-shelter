@@ -27,6 +27,7 @@ public class City implements Comparable<City>{
         this.name = cityName;
         this.cityId = cityId;
         shelterSystem = system;
+        towns = new BinarySearchTree<Town>();
     }
 
     /**
