@@ -1,14 +1,13 @@
 package com.company;
 
-import java.io.File;
+
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
-
-import com.google.gson.Gson;
 
 public class RequestHandler {
 
@@ -53,7 +52,8 @@ public class RequestHandler {
             put("UserName", user.getUserName());
             put ("Password", user.getPassword());
             put("Email", user.getEmail());
-            put("PhoneNumber", user.getPhoneNumber());
+            put("City",user.getCity());
+            put("Town",user.getTown());
         }};
 
         var requestBody = gson.toJson(values);
@@ -113,7 +113,6 @@ public class RequestHandler {
                 .setHeader("Content-Type", "application/json")
                 .setHeader("Username", user.getUserName())
                 .setHeader("Mail", user.getEmail())
-                .setHeader("PhoneNumber", user.getPhoneNumber())
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -140,11 +139,10 @@ public class RequestHandler {
                 .uri(uri)
                 .setHeader("Content-Type", "application/json")
                 .setHeader("Username", userToUpdate.getUserName())
+                .setHeader("Name", userToUpdate.getName())
                 .setHeader("Mail", userToUpdate.getEmail())
-                .setHeader("PhoneNumber", userToUpdate.getPhoneNumber())
                 .setHeader("NewUsername", updateUserWith.getUserName())
                 .setHeader("NewMail", updateUserWith.getEmail())
-                .setHeader("NewPhoneNumber", updateUserWith.getPhoneNumber())
                 .setHeader("NewPassword", updateUserWith.getPassword())
                 .build();
         try {
@@ -170,7 +168,6 @@ public class RequestHandler {
                 .setHeader("Content-Type", "application/json")
                 .setHeader("Username", user.getUserName())
                 .setHeader("Mail", user.getEmail())
-                .setHeader("PhoneNumber", user.getPhoneNumber())
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -197,7 +194,6 @@ public class RequestHandler {
                 .setHeader("Content-Type", "application/json")
                 .setHeader("Username", user.getUserName())
                 .setHeader("Mail", user.getEmail())
-                .setHeader("PhoneNumber", user.getPhoneNumber())
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -216,14 +212,16 @@ public class RequestHandler {
         }
     }
 
-    public Boolean requestOwnership(User user, Animal animal) throws ConnectionError {
+    public Boolean requestOwnership(User user, Animal animal,String shelterId) throws ConnectionError {
         Gson gson = new Gson();
 
         var values = new HashMap<String, String>() {{
             put("UserName", user.getUserName());
+            put("Name", user.getName());
             put ("Password", user.getPassword());
             put("Email", user.getEmail());
             put("AnimalId", animal.getId());
+            put("ShelterID", shelterId);
         }};
 
         var requestBody = gson.toJson(values);
@@ -247,6 +245,4 @@ public class RequestHandler {
             throw new ConnectionError();
         }
     }
-
-
 }

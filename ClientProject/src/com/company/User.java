@@ -4,14 +4,42 @@ public class User {
 
     private String userName;
     private String password;
-    private String phoneNumber;
     private String email;
+    private String name;
+    private String city;
+    private String town;
 
-    public User(String userName, String password, String phoneNumber, String email){
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User(String userName,String password, String name, String email, String city, String town){
         this.userName = userName;
+        this.name=name;
         this.password = password;
-        this.phoneNumber = phoneNumber;
         this.email = email;
+        this.city=city;
+        this.town=town;
     }
 
     public void setEmail(String email) {
@@ -26,20 +54,12 @@ public class User {
         this.userName = userName;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public String getPassword() {
         return password;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
     public String getUserName() {

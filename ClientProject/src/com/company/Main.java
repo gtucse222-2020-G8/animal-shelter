@@ -56,7 +56,7 @@ public class Main {
                 String userName = scanner.next();
                 System.out.print("Enter password: ");
                 String password = scanner.next();
-                currentUser = new User(userName, password, "", "");
+                currentUser = new User(userName, password,"", "","","");
                 try {
                      String token = requestHandler.Login(currentUser);
                      if(token.isEmpty()) System.out.println("Invalid account parameters");
@@ -67,14 +67,18 @@ public class Main {
             else if(menuType == 1 && choice == 2){
                 System.out.print("Enter username: ");
                 String userName = scanner.next();
+                System.out.print("Enter name: ");
+                String name = scanner.next();
                 System.out.print("Enter password: ");
                 String password = scanner.next();
                 System.out.print("Enter mail address: ");
                 String mail = scanner.next();
-                System.out.print("Enter phone number: ");
-                String phoneNumber = scanner.next();
+                System.out.print("Enter city: ");
+                String city = scanner.next();
+                System.out.print("Enter town: ");
+                String town = scanner.next();
 
-                User user = new User(userName, password, phoneNumber, mail);
+                User user = new User(userName, password,name,mail,city,town);
                 try {
                     Boolean response = requestHandler.Register(user);
                     if(response) System.out.println("Server return with an error! Try again later");
@@ -113,7 +117,8 @@ public class Main {
                     String animalId = scanner.next();
                     Animal animal = new Animal();
                     animal.setId(animalId);
-                    Boolean response = requestHandler.requestOwnership(currentUser, animal);
+                    String id=animalId;
+                    Boolean response = requestHandler.requestOwnership(currentUser, animal,id);
                     if(response) System.out.println("Server return with an error! Try again later");
                     else{
                         System.out.println("Request created successfully");
@@ -127,13 +132,17 @@ public class Main {
 
                     System.out.print("Enter new username: ");
                     String userName = scanner.next();
+                    System.out.print("Enter new name: ");
+                    String name = scanner.next();
                     System.out.print("Enter new password: ");
                     String password = scanner.next();
                     System.out.print("Enter new mail address: ");
                     String mail = scanner.next();
-                    System.out.print("Enter new phone number: ");
-                    String phoneNumber = scanner.next();
-                    User updatedUser = new User(userName, password, phoneNumber, mail);
+                    System.out.print("Enter city: ");
+                    String city = scanner.next();
+                    System.out.print("Enter town: ");
+                    String town = scanner.next();
+                    User updatedUser = new User(userName, password,name,mail,city,town);
                     Boolean response = requestHandler.updateUser(currentUser, updatedUser);
                     if(response) System.out.println("Server return with an error! Try again later");
                     else{
