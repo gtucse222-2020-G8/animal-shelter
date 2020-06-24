@@ -88,7 +88,7 @@ public class SkipList<E extends Comparable<E>> {
      * @param item The item to add
      * @return true as the item is added
      */
-    boolean add(E item){
+    public boolean add(E item){
         size++;
         SLNode<E>[] pred = search(item);
         if(size > maxCap){
