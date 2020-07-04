@@ -4,6 +4,7 @@ import cse222.group8.server.DataStructures.AVLTree;
 import cse222.group8.server.DataStructures.BinarySearchTree;
 import cse222.group8.server.DataStructures.SkipList;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -46,7 +47,7 @@ public class Shelter implements Comparable<Shelter> {
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
         registered = false;
-
+        diseasedAnimals = new PriorityQueue<Disease>((o1, o2) -> Integer.compare(o2.getPriority(),o1.getPriority()));
     }
 
     /**
@@ -78,6 +79,7 @@ public class Shelter implements Comparable<Shelter> {
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
         registered = false;
+        diseasedAnimals = new PriorityQueue<Disease>((o1, o2) -> Integer.compare(o2.getPriority(),o1.getPriority()));
     }
     /**
      * Approve adoption request.
@@ -87,7 +89,8 @@ public class Shelter implements Comparable<Shelter> {
     public boolean approveAdoptionRequest(int requestID) {
 
         if(requestID>=0 && requestID<getAdoptionRequests().size()) {
-
+            AdoptionRequest request = getAdoptionRequests().get(requestID);
+            request.getRequester().getRequests().remove(request);
             Animal reqAnimal = getAdoptionRequests().get(requestID).getRequestedAnimal(); // requested animal
             getAdoptionRequests().remove(requestID); //remove element at requestID index
             reqAnimal.setAdopted(true); // animal is adopted now
