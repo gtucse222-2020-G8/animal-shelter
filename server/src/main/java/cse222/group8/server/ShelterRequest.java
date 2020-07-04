@@ -4,10 +4,9 @@ package cse222.group8.server;
  * The type Shelter request.
  */
 public class ShelterRequest {
-    /**
-     * The City.
-     */
-    String city;
+
+
+    City city;
     /**
      * The Town.
      */
@@ -24,10 +23,11 @@ public class ShelterRequest {
      * @param town    the town
      * @param shelter the shelter
      */
-    public ShelterRequest(String city, String town, Shelter shelter) {
+    public ShelterRequest(City city, String town, Shelter shelter) {
         this.city = city;
         this.town = town;
         this.shelter = shelter;
     }
+
     
 }
