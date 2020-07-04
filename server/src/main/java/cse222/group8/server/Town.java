@@ -123,7 +123,6 @@ public class Town implements Comparable<Town> {
         return "Town{" +
                 "name='" + name + '\'' +
                 ", city=" + city.getName() +
-                ", shelters=" + shelters +
                 '}';
     }
 }

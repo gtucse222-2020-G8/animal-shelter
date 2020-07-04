@@ -102,12 +102,12 @@ public class City implements Comparable<City>{
         return name;
     }
 
-//    @Override
-//    public String toString() {
-//        return "City{" +
-//                "cityId=" + cityId +
-//                ", name='" + name + '\'' +
-//                ", towns=" + towns +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "City{" +
+                "cityId=" + cityId +
+                ", name='" + name + '\'' +
+                ", towns=" + towns +
+                '}';
+    }
 }

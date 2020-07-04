@@ -39,7 +39,7 @@ public class MergeSort<E> {
         int rightIndex = midIndex+1;
 
         while(leftIndex<=midIndex && rightIndex<=endIndex){
-            if(((String)inputArray.get(leftIndex)).compareTo((String)inputArray.get(rightIndex))<=-1){
+            if(inputArray.get(leftIndex).toString().compareTo(inputArray.get(rightIndex).toString()) <= -1 ){
                 mergedSortedArray.add(inputArray.get(leftIndex));
                 leftIndex++;
             }else{

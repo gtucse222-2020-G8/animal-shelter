@@ -45,11 +45,11 @@ public class Main {
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 		executor.scheduleAtFixedRate(new DailyExecutions(system),0,1, TimeUnit.DAYS);
 		JavalinServer javalinServer = new JavalinServer(system);
-//		Thread javalinThread = new Thread(javalinServer);
-//		javalinThread.start();
-//		AdminUI ui = new AdminUI(system);
-//		ui.run();
-//		javalinThread.stop();
+		Thread javalinThread = new Thread(javalinServer);
+		javalinThread.start();
+		AdminUI ui = new AdminUI(system);
+		ui.run();
+		javalinThread.stop();
 	}
 
 	private static void testAddAnimal(){
@@ -186,24 +186,22 @@ public class Main {
 
 	protected static void shelterTests(ShelterSystem system){
 		File file = new File("src/main/Constants/Shelters.txt");
-
+		Random randNum = new Random();
 		try {
 
 			Scanner sc = new Scanner(file);
 
 			while(sc.hasNextLine()){
 				String str = sc.nextLine();
-				int citySize, randNum;
+				int citySize;
 				Town town;
 
 				Shelter shelter = getShelterFromStrByPrefix(system, str, ",");
-				City city = new City(shelter.getCity().getName(), shelter.getCity().getCityId());
 				citySize = shelter.getCity().towns.size();
-				city.towns = shelter.getCity().towns;
-				randNum = new Random().nextInt(citySize);
-				town = shelter.getCity().getTownByNumber(randNum);
+				int num = randNum.nextInt(citySize);
+				town = shelter.getCity().getTownByNumber(num);
 
-				ShelterRequest shelterRequest = new ShelterRequest(city, town.getName(), shelter);
+				ShelterRequest shelterRequest = new ShelterRequest(shelter.getCity(), town.getName(), shelter);
 				system.addShelter(shelterRequest);
 			}
 
