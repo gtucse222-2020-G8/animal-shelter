@@ -1,12 +1,14 @@
 package cse222.group8.server;
+import cse222.group8.server.DataStructures.BinarySearchTree;
+import cse222.group8.server.DataStructures.Edge;
+import cse222.group8.server.DataStructures.ListGraph;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import cse222.group8.server.DataStructures.*;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 
 /**
@@ -24,34 +26,68 @@ public class Main {
 		ShelterSystem system = new ShelterSystem();
 
 		readCityInfo(system);
-		printCitiesInfo(system);
+		//printCitiesInfo(system);
+		systemTest();
 		insertTownsTests(system);
+		//shelterTests(system);
 
-		shelterTests(system);
 
-		BinarySearchTree<City> cities 	= system.getCitiesBST();
-		City istanbul = cities.find(new City("Istanbul", 34));
-		Town kagithane = istanbul.getTown("Kagithane");
-		Shelter dogaevi = kagithane.addShelter("dogaevi",23,11,"Sultan selim mah. No 3","+902122222415","stockpass");
-		dogaevi.register();
-		dogaevi.addCat(new Animal("korpe","tekir",3,true,dogaevi));
-		dogaevi.addCat(new Animal("sari","sarman",6,true,dogaevi));
-		dogaevi.addDog(new Animal("pasa","kangal",12,false,dogaevi));
-		User user = new User();
-		user.setUsername("ismltpn");
-		user.setName("ismail tapan");
-		user.createARequest(dogaevi.getCat(1));
-
-		ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
-		executor.scheduleAtFixedRate(new DailyExecutions(system),0,1, TimeUnit.DAYS);
-		JavalinServer javalinServer = new JavalinServer(system);
-		Thread javalinThread = new Thread(javalinServer);
-		javalinThread.start();
-		AdminUI ui = new AdminUI(system);
-		ui.run();
-		javalinThread.stop();
+//		BinarySearchTree<City> cities 	= system.getCitiesBST();
+//		City istanbul = cities.find(new City("Istanbul", 34));
+//		Town kagithane = istanbul.getTown("Kagithane");
+//		Shelter dogaevi = kagithane.addShelter("dogaevi",23,11,"Sultan selim mah. No 3","+902122222415","stockpass");
+//		dogaevi.register();
+//		dogaevi.addCat(new Animal("korpe","tekir",3,true,dogaevi));
+//		dogaevi.addCat(new Animal("sari","sarman",6,true,dogaevi));
+//		dogaevi.addDog(new Animal("pasa","kangal",12,false,dogaevi));
+//		User user = new User();
+//		user.setUsername("ismltpn");
+//		user.setName("ismail tapan");
+//		user.createARequest(dogaevi.getCat(1));
+//
+//		ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+//		executor.scheduleAtFixedRate(new DailyExecutions(system),0,1, TimeUnit.DAYS);
+//		JavalinServer javalinServer = new JavalinServer(system);
+//		Thread javalinThread = new Thread(javalinServer);
+//		javalinThread.start();
+//		AdminUI ui = new AdminUI(system);
+//		ui.run();
+//		javalinThread.stop();
 	}
 
+	public static void systemTest(){
+		ShelterSystem system = new ShelterSystem();
+
+		readCityInfo(system);
+		insertTownsTests(system);
+		BinarySearchTree<City> cities 	= system.getCitiesBST();
+		//System.out.println(system.getAllCities().toString());
+		City istanbul = cities.find(new City("Istanbul", 34));
+		Town tuzla = istanbul.getTown("Tuzla");
+		Shelter shelter=new Shelter("shelter1", istanbul, tuzla, 10, 5, "tuzla yayla", "0234", "password");
+		ShelterRequest shelterRequest=new ShelterRequest(istanbul,"Tuzla",shelter);
+
+		system.addNewShelterRequest(shelterRequest);
+		system.addShelter(shelterRequest);
+
+		System.out.println(tuzla.getShelters().toString());
+
+		CapacityChangeRequest capReq=new CapacityChangeRequest("istanbul","Tuzla",shelter,12,12);
+		System.out.println("Dog capacity before request : "+shelter.getDogCapacity()+"\n"+"Cat capacity before request : "+shelter.getCatCapacity());
+		system.addCapChangeRequest(capReq);
+		system.changeShelterCap(capReq);
+		System.out.println("Dog capacity after request : "+shelter.getDogCapacity()+"\n"+"Cat capacity after request : "+shelter.getCatCapacity());
+		System.out.println(system.getCitiesBST().find(istanbul).getTown("Tuzla").getShelters());
+		Shelter shelter2=new Shelter("shelter2", istanbul, tuzla, 12, 12, "tuzla yayla", "0234", "password");
+		ShelterRequest shelterRequest2=new ShelterRequest(istanbul,"Tuzla",shelter2);
+		system.addRemoveShelterRequest(shelterRequest2);
+		system.removeShelter(shelterRequest2);
+
+		System.out.println(system.getCitiesBST().find(istanbul).getTown("Tuzla").getShelter("shelter2"));
+
+
+
+	}
 	private static ShelterSystem createSystem(){
 		ShelterSystem system = new ShelterSystem();
 		readCityInfo(system);

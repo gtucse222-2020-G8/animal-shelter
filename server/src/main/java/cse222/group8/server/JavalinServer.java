@@ -232,7 +232,7 @@ public class JavalinServer implements Runnable {
 
             Town town = city.getTown(data.town);
             ShelterRequest shelterRequest = new ShelterRequest(city, data.town,
-                    new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password,system));
+                    new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password));
             system.addNewShelterRequest(shelterRequest);
 
             ctx.status(200);
