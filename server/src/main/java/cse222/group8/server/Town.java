@@ -1,6 +1,7 @@
 package cse222.group8.server;
 
 
+import cse222.group8.server.DataStructures.MergeSort;
 import cse222.group8.server.DataStructures.SkipList;
 
 import java.util.ArrayList;
@@ -14,7 +15,8 @@ public class Town implements Comparable<Town> {
 
     private String name;
     private City city;
-    private List<Shelter> shelters;
+
+    private ArrayList<Shelter> shelters;
 
     /**
      * Instantiates a new Town.
@@ -35,12 +37,62 @@ public class Town implements Comparable<Town> {
      * @return the shelter
      */
     public Shelter getShelter(String name){
-        for(int i=0; i<getShelters().size(); ++i) {
-            if (getShelters().get(i).getName().equals(name) )
-                return getShelters().get(i);
+        boolean found = false;
+        int current_index = shelters.size() / 2;
+        int gap = current_index;
+        while(!found){
+            int cmp = shelters.get(current_index).getName().compareTo(name);
+            if(cmp < 0){
+                gap /= 2;
+                current_index = current_index-gap;
+            }
+            else if(cmp > 0){
+                gap /= 2;
+                current_index = current_index+gap;
+            }
+            else{
+                return shelters.get(current_index);
+            }
+            if(gap == 0){
+                found = true;
+            }
         }
-
         return null;
+    }
+
+    /**
+     * Adds new shelter.
+     *
+     * @param name the name
+     * @param catCapacity the cat capacity
+     * @param dogCapacity the dog capacity
+     * @param address the address
+     * @param phoneNumber the phone number
+     * @param password the password
+     * @return the shelter
+     */
+    public Shelter addShelter(String name, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
+        for(Shelter shelter: shelters){
+            if(shelter.getName().equals(name)){
+                return null;
+            }
+        }
+        Shelter shelter = new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password);
+        shelters.add(shelter);
+        MergeSort<Shelter> sorter = new MergeSort<Shelter>(shelters);
+        sorter.sortGivenArray();
+        this.shelters = sorter.getSortedArray();
+        return shelter;
+    }
+
+    /**
+     * Adds new shelter.
+     *
+     * @param shelter the shelter that will be added
+     * @return the shelter
+     */
+    public Shelter addShelter(Shelter shelter){
+        return addShelter(shelter.getName(),shelter.getCatCapacity(),shelter.getDogCapacity(),shelter.getAddress(),shelter.getPhoneNumber(),shelter.getPassword());
     }
 
     /**

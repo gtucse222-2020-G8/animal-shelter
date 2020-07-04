@@ -32,9 +32,7 @@ public class Main {
 		BinarySearchTree<City> cities 	= system.getCitiesBST();
 		City istanbul = cities.find(new City("Istanbul", 34));
 		Town kagithane = istanbul.getTown("Kagithane");
-
-		Shelter dogaevi = new Shelter("dogaevi", istanbul, kagithane, 23, 11, "Sultan selim mah. No 3", "+902122222415", "stockpass", system);
-		kagithane.getShelters().add(dogaevi);
+		Shelter dogaevi = kagithane.addShelter("dogaevi",23,11,"Sultan selim mah. No 3","+902122222415","stockpass");
 		dogaevi.register();
 		dogaevi.addCat(new Animal("korpe","tekir",3,true,dogaevi));
 		dogaevi.addCat(new Animal("sari","sarman",6,true,dogaevi));
@@ -58,7 +56,8 @@ public class Main {
 		ShelterSystem system = new ShelterSystem();
 		City istanbul = new City("Istanbul", 34);
 		Town pendik = new Town("Pendik", istanbul);
-		Shelter myShelter = new Shelter("Pendik Barinagi",istanbul,pendik,10,10,"yeni mah","3759630","123456",system);
+
+		Shelter myShelter = new Shelter("Pendik Barinagi",istanbul,pendik,10,10,"yeni mah","3759630","123456");
 
 		myShelter.addCat(new Animal("Tyson","Scottishfold",2,true,myShelter));
 		myShelter.addCat(new Animal("Mahmut","Tekir",4,true,myShelter));
@@ -91,7 +90,7 @@ public class Main {
 		// TEST
 		ShelterSystem system = new ShelterSystem();
 		Shelter shelter = new Shelter("Test1", null, null, 10, 10,
-									 "","","pass1",system);
+									 "","","pass1");
 		system.addCapChangeRequest(new CapacityChangeRequest("Ist", "Krtl", shelter, 120,130));
 		system.addNewShelterRequest(new ShelterRequest(new City("Ist", 34), "Krtl2", shelter));
 		system.addRemoveShelterRequest(new ShelterRequest(new City("Ist3", 34), "Krtl3", shelter));

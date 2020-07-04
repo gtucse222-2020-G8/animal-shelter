@@ -60,9 +60,8 @@ public class Shelter implements Comparable<Shelter> {
      * @param address     the address
      * @param phoneNumber the phone number
      * @param password    the password
-     * @param system      the system
      */
-    public Shelter(String name, City city, Town town, int catCapacity, int dogCapacity, String address, String phoneNumber, String password, ShelterSystem system){
+    public Shelter(String name, City city, Town town, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
         this.name = name;
         this.city = city;
         this.town = town;

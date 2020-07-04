@@ -196,8 +196,7 @@ public class ShelterSystem {
     	if(town == null) {
     		return false;
     	}
-    	
-    	return town.getShelters().add(requestedShelter.shelter);
+    	return town.addShelter(requestedShelter.shelter)!=null;
     }
     
     
