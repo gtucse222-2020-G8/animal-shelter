@@ -35,12 +35,31 @@ public class Town implements Comparable<Town> {
      * @return the shelter
      */
     public Shelter getShelter(String name){
-        for(int i=0; i<getShelters().size(); ++i) {
-            if (getShelters().get(i).getName().equals(name) )
-                return getShelters().get(i);
+        boolean found = false;
+        int current_index = shelters.size() / 2;
+        int gap = current_index;
+        while(!found){
+            int cmp = shelters.get(current_index).getName().compareTo(name);
+            if(cmp < 0){
+                gap /= 2;
+                current_index = current_index-gap;
+            }
+            else if(cmp > 0){
+                gap /= 2;
+                current_index = current_index+gap;
+            }
+            else{
+                return shelters.get(current_index);
+            }
+            if(gap == 0){
+                found = true;
+            }
         }
-
         return null;
+    }
+
+    public void addShelter(String name, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
+        shelters.add(new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password));
     }
 
     /**
