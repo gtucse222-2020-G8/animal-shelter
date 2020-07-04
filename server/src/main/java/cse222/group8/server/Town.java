@@ -1,6 +1,7 @@
 package cse222.group8.server;
 
 
+import cse222.group8.server.DataStructures.MergeSort;
 import cse222.group8.server.DataStructures.SkipList;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Town implements Comparable<Town> {
 
     private String name;
     private City city;
-    private List<Shelter> shelters;
+    private ArrayList<Shelter> shelters;
 
     /**
      * Instantiates a new Town.
@@ -60,6 +61,9 @@ public class Town implements Comparable<Town> {
 
     public void addShelter(String name, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
         shelters.add(new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password));
+        MergeSort<Shelter> sorter = new MergeSort<Shelter>(shelters);
+        sorter.sortGivenArray();
+        this.shelters = sorter.getSortedArray();
     }
 
     /**
