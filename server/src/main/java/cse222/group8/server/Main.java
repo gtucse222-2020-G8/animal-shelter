@@ -52,6 +52,54 @@ public class Main {
 		javalinThread.stop();
 	}
 
+	private static ShelterSystem createSystem(){
+		ShelterSystem system = new ShelterSystem();
+		readCityInfo(system);
+		insertTownsTests(system);
+		shelterTests(system);
+		Random random = new Random();
+		for(City city : system.getCitiesBST()){
+			for(Town town : city.getTowns()){
+				for(Shelter shelter : town.getShelters()){
+					for(int i = 0; i<5; ++i){
+						shelter.addDog(new Animal("dog"+i,getRandomDogKind(random),random.nextInt(15),false,shelter));
+						shelter.addCat(new Animal("cat"+i,getRandomCatKind(random),random.nextInt(15),true,shelter));
+					}
+				}
+			}
+		}
+		return system;
+	}
+
+	private static String getRandomDogKind(Random random){
+		File file = new File("src/main/Constants/dogKinds.txt");
+		try {
+			Scanner sc = new Scanner(file);
+			int destLine = random.nextInt(500);
+			for(int i = 0; i < destLine; ++i, sc.nextLine());
+			String kind = sc.nextLine();
+			sc.close();
+			return kind;
+		}
+		catch ( Exception e ) {
+			return "DogKind_"+random.nextInt(50);
+		}
+	}
+	private static String getRandomCatKind(Random random){
+		File file = new File("src/main/Constants/cats.txt");
+		try {
+			Scanner sc = new Scanner(file);
+			int destLine = random.nextInt(50);
+			for(int i = 0; i < destLine; ++i, sc.nextLine());
+			String kind = sc.nextLine();
+			sc.close();
+			return kind;
+		}
+		catch ( Exception e ) {
+			return "CatKind_"+random.nextInt(50);
+		}
+	}
+
 	private static void testAddAnimal(){
 		ShelterSystem system = new ShelterSystem();
 		City istanbul = new City("Istanbul", 34);
