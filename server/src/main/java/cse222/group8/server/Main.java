@@ -1,8 +1,7 @@
 package cse222.group8.server;
 import java.io.File;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.io.IOException;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -25,11 +24,13 @@ public class Main {
 		ShelterSystem system = new ShelterSystem();
 
 		readCityInfo(system);
-		insertTownsTests(system);
 		printCitiesInfo(system);
+		insertTownsTests(system);
+
+		shelterTests(system);
 
 		BinarySearchTree<City> cities 	= system.getCitiesBST();
-		City istanbul = cities.find(new City("Istanbul", 34, system));
+		City istanbul = cities.find(new City("Istanbul", 34));
 		Town kagithane = istanbul.getTown("Kagithane");
 
 		Shelter dogaevi = new Shelter("dogaevi", istanbul, kagithane, 23, 11, "Sultan selim mah. No 3", "+902122222415", "stockpass", system);
@@ -46,17 +47,17 @@ public class Main {
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 		executor.scheduleAtFixedRate(new DailyExecutions(system),0,1, TimeUnit.DAYS);
 		JavalinServer javalinServer = new JavalinServer(system);
-		Thread javalinThread = new Thread(javalinServer);
-		javalinThread.start();
-		AdminUI ui = new AdminUI(system);
-		ui.run();
-		javalinThread.stop();
+//		Thread javalinThread = new Thread(javalinServer);
+//		javalinThread.start();
+//		AdminUI ui = new AdminUI(system);
+//		ui.run();
+//		javalinThread.stop();
 	}
 
 	private static void testAddAnimal(){
 		ShelterSystem system = new ShelterSystem();
-		City istanbul = new City("Istanbul", 34, system);
-		Town pendik = new Town("Pendik", istanbul, system);
+		City istanbul = new City("Istanbul", 34);
+		Town pendik = new Town("Pendik", istanbul);
 		Shelter myShelter = new Shelter("Pendik Barinagi",istanbul,pendik,10,10,"yeni mah","3759630","123456",system);
 
 		myShelter.addCat(new Animal("Tyson","Scottishfold",2,true,myShelter));
@@ -92,8 +93,8 @@ public class Main {
 		Shelter shelter = new Shelter("Test1", null, null, 10, 10,
 									 "","","pass1",system);
 		system.addCapChangeRequest(new CapacityChangeRequest("Ist", "Krtl", shelter, 120,130));
-		system.addNewShelterRequest(new ShelterRequest("Ist", "Krtl2", shelter));
-		system.addRemoveShelterRequest(new ShelterRequest("Ist3", "Krtl3", shelter));
+		system.addNewShelterRequest(new ShelterRequest(new City("Ist", 34), "Krtl2", shelter));
+		system.addRemoveShelterRequest(new ShelterRequest(new City("Ist3", 34), "Krtl3", shelter));
 		AdminUI ui = new AdminUI(system);
 		ui.run();
 		
@@ -113,7 +114,7 @@ public class Main {
 		readCityInfo(system);
 		
 		
-		City city = cities.find(new City("Mersin", 0,null));
+		City city = cities.find(new City("Mersin", 0));
 		System.out.println(city.getCityId());
 		
 		System.out.println(cityIds.get(city.getCityId()).getName());
@@ -155,7 +156,7 @@ public class Main {
  				String id = townsInfo[1];
 				City city = system.getCity(Integer.parseInt(id));
 
-				city.towns.add(new Town(townsInfo[0], city, system));
+				city.towns.add(new Town(townsInfo[0], city));
 
 			}
 
@@ -172,6 +173,56 @@ public class Main {
 	}
 
 
+	private static Shelter getShelterFromStrByPrefix(ShelterSystem system, String input, String prefix){
+		if(input.isEmpty() || input.isBlank()) return null;
+		String[] lineStr = input.split(prefix);
+		Shelter shelter = new Shelter();
+		String test = lineStr[0].trim();
+		shelter.setCity(system.getCity(Integer.parseInt(test)));
+		shelter.setName(lineStr[1].trim());
+		shelter.setAddress(lineStr[2].trim());
+		shelter.setPhoneNumber(lineStr[3].trim());
+		return shelter;
+	}
+
+	protected static void shelterTests(ShelterSystem system){
+		File file = new File("src/main/Constants/Shelters.txt");
+
+		try {
+
+			Scanner sc = new Scanner(file);
+
+			while(sc.hasNextLine()){
+				String str = sc.nextLine();
+				int citySize, randNum;
+				Town town;
+
+				Shelter shelter = getShelterFromStrByPrefix(system, str, ",");
+				City city = new City(shelter.getCity().getName(), shelter.getCity().getCityId());
+				citySize = shelter.getCity().towns.size();
+				city.towns = shelter.getCity().towns;
+				randNum = new Random().nextInt(citySize);
+				town = shelter.getCity().getTownByNumber(randNum);
+
+				ShelterRequest shelterRequest = new ShelterRequest(city, town.getName(), shelter);
+				system.addShelter(shelterRequest);
+			}
+
+			sc.close();
+		}
+		catch ( IOException e ) {
+			System.out.println(e.getMessage());
+			System.err.println("Error occurred while opening or reading given file!");
+			System.exit(0);
+		}
+		catch (NullPointerException e ) {
+			System.out.println(e.getMessage());
+			System.err.println("Error occurred while getting town from City");
+			System.exit(0);
+		}
+	}
+
+
 	/**
 	 * Read city ınfo.
 	 *
@@ -182,7 +233,6 @@ public class Main {
 		BinarySearchTree<City> cities 	= system.getCitiesBST();
 		TreeMap<Integer, City> cityIds	= system.getCityIdsMap();
 		ListGraph borderCities 			= system.getBorderCities();
-		
 
 		File file = new File("src/main/Constants/Cities.txt");
 
@@ -196,30 +246,24 @@ public class Main {
 				String[] keys = str.split(" ");
 				
 				int cityID = Integer.parseInt(keys[0]);
-				City city = new City( keys[1], cityID, system );
-				
-				
+				City city = new City( keys[1], cityID );
+
 				cities.add(city);
-				
 				cityIds.put(cityID, city);
-				
+
 				for(int i=2; i < keys.length; i++ ) {
 					
 					Edge edge = new Edge(cityID, Integer.parseInt(keys[i]));
 					borderCities.insert(edge);
 				}
-						
-				
 			}
 			
 			sc.close();
-				
 		}
 		catch ( Exception e ) {
 			System.out.println(e.getMessage());
 			System.err.println("Something went wrong while reading cities from file");
 			System.exit(0);
-			
 		}
 		
 		

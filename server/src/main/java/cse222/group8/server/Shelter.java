@@ -19,7 +19,6 @@ public class Shelter implements Comparable<Shelter> {
     private String password;
     private City city;
     private Town town;
-    private ShelterSystem shelterSystem;
     private int catCapacity;
     private int dogCapacity;
     private AVLTree<Animal> dogs;
@@ -74,7 +73,6 @@ public class Shelter implements Comparable<Shelter> {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        shelterSystem = system;
         cats = new AVLTree<Animal>();
         dogs = new AVLTree<Animal>();
         adopteds = new SkipList<Animal>();
@@ -236,6 +234,14 @@ public class Shelter implements Comparable<Shelter> {
     	return false;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     /**
      * Make cap change request capacity change request.
      *
@@ -243,7 +249,7 @@ public class Shelter implements Comparable<Shelter> {
      * @param dogCap the dog cap
      * @return the capacity change request
      */
-    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
+    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap, ShelterSystem shelterSystem) {
         CapacityChangeRequest newChangeRequest = new CapacityChangeRequest(city.getName(),town.getName(),this,dogCap,catCap);
         shelterSystem.addCapChangeRequest(newChangeRequest);
     	return newChangeRequest;

@@ -14,7 +14,6 @@ public class Town implements Comparable<Town> {
 
     private String name;
     private City city;
-    private ShelterSystem shelterSystem;
     private List<Shelter> shelters;
 
     /**
@@ -22,12 +21,10 @@ public class Town implements Comparable<Town> {
      *
      * @param name          the name
      * @param city          the city
-     * @param shelterSystem the shelter system
      */
-    public Town(String name, City city, ShelterSystem shelterSystem) {
+    public Town(String name, City city) {
         this.name = name;
         this.city = city;
-        this.shelterSystem = shelterSystem;
         shelters = new ArrayList<Shelter>();
     }
 
