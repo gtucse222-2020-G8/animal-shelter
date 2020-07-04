@@ -226,9 +226,15 @@ public class JavalinServer implements Runnable {
         RegisterShelterData data;
         try {
             data = mapper.readValue(ctx.body(), RegisterShelterData.class);
+
             City city = system.getCity(data.city);
+            City city2 = system.getCity(data.city);
+
             Town town = city.getTown(data.town);
-            system.addNewShelterRequest(new ShelterRequest(data.city,data.town,new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password,system)));
+            ShelterRequest shelterRequest = new ShelterRequest(city, data.town,
+                    new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password,system));
+            system.addNewShelterRequest(shelterRequest);
+
             ctx.status(200);
         } catch (Exception e) {
             ctx.status(432);
@@ -576,10 +582,10 @@ public class JavalinServer implements Runnable {
                         data = mapper.readValue(ctx.body(), int.class);
                         String animalType = ctx.header("AnimalType");
                         if(animalType == "Cat"){
-                            shelter.makeCapChangeRequest(data,shelter.getDogCapacity());
+                            shelter.makeCapChangeRequest(data,shelter.getDogCapacity(), system);
                         }
                         else if(animalType == "Dog"){
-                            shelter.makeCapChangeRequest(shelter.getCatCapacity(),data);
+                            shelter.makeCapChangeRequest(shelter.getCatCapacity(),data, system);
                         }
                         ctx.status(200);
                     }catch (Exception ignore){
