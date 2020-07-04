@@ -59,11 +59,13 @@ public class Town implements Comparable<Town> {
         return null;
     }
 
-    public void addShelter(String name, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
-        shelters.add(new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password));
+    public Shelter addShelter(String name, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
+        Shelter shelter = new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password)
+        shelters.add(shelter);
         MergeSort<Shelter> sorter = new MergeSort<Shelter>(shelters);
         sorter.sortGivenArray();
         this.shelters = sorter.getSortedArray();
+        return shelter;
     }
 
     /**
