@@ -76,7 +76,7 @@ public class Town implements Comparable<Town> {
                 return null;
             }
         }
-        Shelter shelter = new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password)
+        Shelter shelter = new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password);
         shelters.add(shelter);
         MergeSort<Shelter> sorter = new MergeSort<Shelter>(shelters);
         sorter.sortGivenArray();
