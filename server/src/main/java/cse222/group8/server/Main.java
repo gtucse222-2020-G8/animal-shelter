@@ -32,8 +32,7 @@ public class Main {
 		BinarySearchTree<City> cities 	= system.getCitiesBST();
 		City istanbul = cities.find(new City("Istanbul", 34));
 		Town kagithane = istanbul.getTown("Kagithane");
-		kagithane.addShelter("dogaevi",23,11,"Sultan selim mah. No 3","+902122222415","stockpass");
-
+		Shelter dogaevi = kagithane.addShelter("dogaevi",23,11,"Sultan selim mah. No 3","+902122222415","stockpass");
 		dogaevi.register();
 		dogaevi.addCat(new Animal("korpe","tekir",3,true,dogaevi));
 		dogaevi.addCat(new Animal("sari","sarman",6,true,dogaevi));

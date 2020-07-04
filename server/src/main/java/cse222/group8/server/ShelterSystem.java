@@ -197,7 +197,7 @@ public class ShelterSystem {
     		return false;
     	}
     	
-    	return town.getShelters().add(requestedShelter.shelter);
+    	return town.addShelter(requestedShelter.shelter);
     }
     
     

@@ -59,6 +59,17 @@ public class Town implements Comparable<Town> {
         return null;
     }
 
+    /**
+     * Adds new shelter.
+     *
+     * @param name the name
+     * @param catCapacity the cat capacity
+     * @param dogCapacity the dog capacity
+     * @param address the address
+     * @param phoneNumber the phone number
+     * @param password the password
+     * @return the shelter
+     */
     public Shelter addShelter(String name, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
         Shelter shelter = new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password)
         shelters.add(shelter);
@@ -66,6 +77,16 @@ public class Town implements Comparable<Town> {
         sorter.sortGivenArray();
         this.shelters = sorter.getSortedArray();
         return shelter;
+    }
+
+    /**
+     * Adds new shelter.
+     *
+     * @param shelter the shelter that will be added
+     * @return the shelter
+     */
+    public Shelter addShelter(Shelter shelter){
+        return addShelter(shelter.getName(),shelter.getCatCapacity(),shelter.getDogCapacity(),shelter.getAddress(),shelter.getPhoneNumber(),shelter.getPassword());
     }
 
     /**
