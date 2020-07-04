@@ -1,0 +1,81 @@
+01 Adana 31 80 46 38 51 33
+02 Adiyaman 63 21 44 46 27
+03 Afyonkarahisar 26 42 32 15 20 64 43
+04 Agri 76 36 25 49 13 65
+05 Amasya 55 60 66 19
+06 Ankara 71 40 68 42 26 14 18
+07 Antalya 48 15 32 42 70 33
+08 Artvin 75 25 53
+09 Aydin 35 45 20 48
+10 Balikesir 17 35 45 43 16
+11 Bilecik 16 43 26 14 54
+12 Bingol 25 49 21 23 62 24
+13 Bitlis 65 56 72 49 04
+14 Bolu 67 78 18 06 26 11 54 81
+15 Burdur 07 48 20 03 32
+16 Bursa 77 11 43 10
+17 Canakkale 10 22 59
+18 Cankiri 37 19 71 06 14 78
+19 Corum 05 66 71 18 37 67 55
+20 Denizli 64 03 15 48 09 45
+21 Diyarbakir 12 49 72 47 63 02 44 23
+22 Edirne 39 59
+23 Elazig 62 12 21 44
+24 Erzincan 29 69 25 62 12 44 58
+25 Erzurum 53 08 75 36 04 49 12 24 69
+26 Eskisehir 11 14 06 42 03 43
+27 Gaziantep 31 79 80 46 02 63
+28 Giresun 52 58 29 61
+29 Gumushane 28 24 69 61
+30 Hakkari 65 73
+31 Hatay 27 80 01
+32 Isparta 07 15 03 42
+33 Mersin 07 70 42 51 01
+34 Istanbul 39 59 41
+35 Izmir 10 45 09
+36 Kars 75 25 04 76
+37 Kastamonu 74 78 18 19 57
+38 Kayseri 66 58 46 01 51 50
+39 Kirklareli 22 59
+40 Kirsehir 71 66 50 68 06
+41 Kocaeli 34 77 54
+42 Konya 06 68 51 33 70 07 32 03 26
+43 Kutahya 10 16 11 26 03 64 45
+44 Malatya 58 24 23 02 46
+45 Manisa 10 43 64 20 09 35
+46 Kahramanmaras 58 44 02 27 80 01 38
+47 Mardin 63 21 72 56 73
+48 Mugla 09 20 15 07
+49 Mus 04 13 72 21 12 25
+50 Nevsehir 66 38 51 68 40
+51 Nigde 38 01 33 42 68 50
+52 Ordu 55 60 58 28
+53 Rize 61 69 25 08
+54 Sakarya 41 77 11 14 81
+55 Samsun57 19 05 60 52
+56 Siirt 13 65 73 47 72
+57 Sinop 37 19 55
+58 Sivas 60 52 28 24 44 46 38 66
+59 Tekirdag 17 22 39 34
+60 Tokat 55 52 58 66 05
+61 Trabzon 28 29 69 53
+62 Tunceli 24 12 23
+63 Sanliurfa 30 65 56 47
+64 Usak 43 45 20 03
+65 Van 04 13 56 73 30
+66 Yozgat 19 05 60 58 38 50 40 71
+67 Zonguldak 74 78 14 81
+68 Aksaray 40 50 51 42 06
+69 Bayburt 61 53 25 24 29
+70 Karaman 42 33 07
+71 Kirikkale 06 18 19 66 40 68
+72 Batman 49 13 56 47 21
+73 Sirnak 56 47 65 30
+74 Bartin 67 78 37
+75 Ardahan 08 36 25
+76 Igdir 36 04
+77 Yalova 41 16 54
+78 Karabuk 74 67 14 18 37
+79 Kilis 27
+80 Osmaniye 01 46 27 31
+81 Duzce 54 14 67
