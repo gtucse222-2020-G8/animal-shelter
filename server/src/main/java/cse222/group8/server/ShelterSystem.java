@@ -133,7 +133,7 @@ public class ShelterSystem {
      * @return List of cities
      */
     public List<City> getBorderCities(String cityName){
-    	City city = cities.find(new City(cityName, 0,this));
+    	City city = cities.find(new City(cityName, 0));
     	if( city == null) {
     		return null;
     	}
@@ -188,12 +188,11 @@ public class ShelterSystem {
      */
     public boolean addShelter(ShelterRequest requestedShelter) {
     	
-    	City city = cities.find(new City(requestedShelter.city, 0,this));
-    	if(city == null) {
+    	if(requestedShelter.city == null) {
     		return false;
     	}
     	
-    	Town town = city.getTown(requestedShelter.town);
+    	Town town = requestedShelter.city.getTown(requestedShelter.town);
     	if(town == null) {
     		return false;
     	}
@@ -223,7 +222,7 @@ public class ShelterSystem {
      * @return true if succeed
      */
     public boolean removeShelter(ShelterRequest shelter) {
-    	City city = cities.find(new City(shelter.city, 0,this));
+    	City city = cities.find(shelter.city);
     	if(city == null) {
     		return false;
     	}
@@ -247,7 +246,7 @@ public class ShelterSystem {
      * @return Shelter reference if succeed, else null.
      */
     public Shelter getShelter(String cityName, String townName, String shelterName) {
-    	City city = cities.find(new City(cityName, 0,this));
+    	City city = cities.find(new City(cityName, 0));
     	if(city == null) {
     		return null;
     	}
@@ -273,13 +272,13 @@ public class ShelterSystem {
      */
     public City getCity(String cityName) {
     	
-    	return cities.find(new City(cityName,0,this));
+    	return cities.find(new City(cityName,0));
     	
     }
     
 
     public City getCity(int cityId){
-		return cities.find(new City("",cityId,this));
+		return cities.find(new City("",cityId));
 	}
     
     
