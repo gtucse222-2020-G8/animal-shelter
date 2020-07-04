@@ -71,6 +71,11 @@ public class Town implements Comparable<Town> {
      * @return the shelter
      */
     public Shelter addShelter(String name, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
+        for(Shelter shelter: shelters){
+            if(shelter.getName().equals(name)){
+                return null;
+            }
+        }
         Shelter shelter = new Shelter(name,city,this,catCapacity,dogCapacity,address,phoneNumber,password)
         shelters.add(shelter);
         MergeSort<Shelter> sorter = new MergeSort<Shelter>(shelters);
