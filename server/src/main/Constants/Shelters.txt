@@ -1,0 +1,54 @@
+06, Shelter01 , Cavusbasi Caddesi Haluk Sokak No:50 , 0530 442 12 54
+06, Shelter02 , Yesildere Caddesi Cam Sokak No:42 , 0542 596 35 24
+06, Shelter03 , Cumhuriyet Caddesi Cicek Sokak No:3 , 0531 495 05 29
+06, Shelter04 , Inonu Caddesi No:7 , 0551 495 85 34
+06, Shelter05 , Kalamis Caddesi Fener Sokak No:13 , 0532 284 01 01
+06, Shelter06 , Huzur Caddesi Leblebi Sokak No:21 , 0507 952 31 26
+07, Shelter07 , Kirachane Caddesi Yali Sokak No:122 , 0535 495 29 49
+07, Shelter08 , Mahmudiye Caddesi Erdal Sokak No:85 , 0530 681 80 80
+07, Shelter09 , Golova Caddesi No:32 , 0543 681 83 83
+07, Shelter10 , Dumlupinar Caddesi Cafer Sokak No:33 , 0555 701 29 32
+07, Shelter11 , Menemen Caddesi Buruncuk Sokak No:77 , 0537 723 07 17
+07, Shelter12 , Yanikkoy Caddesi Yumurta Sokak No:89 , 0536 907 28 42
+10, Shelter13 , Sefa Caddesi Cefa Sokak No:49 , 0538 452 90 48
+10, Shelter14 , Orman Caddesi Kuntu Sokak No:155 , 0531 507 84 57
+10, Shelter15 , Peynirli Caddesi Oltu Sokak No:73 , 0545 367 12 82
+10, Shelter16 , Aydincik Caddesi Tursu Sokak No:12 , 0539 034 73 18 
+10, Shelter17 , Esentepe Caddesi Acar Sokak No:30 , 0543 495 28 11
+10, Shelter18 , Cevizli Caddesi Ayran Sokak No:21 , 0539 593 19 48
+16, Shelter19 , Macar Caddesi No:62 , 0538 384 28 17
+16, Shelter20 , Inegol Caddesi Orta Sokak No:48 , 0532 485 38 58
+16, Shelter21 , Pinar Caddesi Caf Sokak No:32 , 0555 701 54 32
+16, Shelter22 , Men Caddesi Burun Sokak No:27 , 0542 723 07 17
+16, Shelter23 , Yanik Caddesi Yurt Sokak No:32 , 0536 907 32 42
+16, Shelter24 , Saka Caddesi Akin Sokak No:49 , 0538 452 06 48
+34, Shelter25 , Okul Caddesi Kamp Sokak No:15 , 0531 507 34 27
+34, Shelter26 , Pas Caddesi Olta Sokak No:73 , 0545 357 22 82
+34, Shelter27 , Aydin Caddesi Tur Sokak No:14 , 0539 031 33 58 
+34, Shelter28 , Esen Caddesi Akin Sokak No:35 , 0543 295 48 61
+34, Shelter29 , Ceviz Caddesi Ayan Sokak No:41 , 0530 503 19 48
+34, Shelter30 , Melek Caddesi No:72 , 0538 384 28 16
+41, Shelter31 , Sevgi Caddesi Havuz Sokak No:68 , 0532 457 18 58
+41, Shelter32 , In Caddesi Alik Sokak No:55 , 0532 485 38 51
+41, Shelter33 , Pinar Caddesi Bebek Sokak No:32 , 0535 701 54 34
+41, Shelter34 , Mersin Caddesi Balik Sokak No:37 , 0552 723 07 17
+41, Shelter35 , Yanki Caddesi Yali Sokak No:35 , 0542 907 32 42
+41, Shelter36 , Selim Caddesi Akin Sokak No:47 , 0531 452 07 48
+42, Shelter37 , Otuz Caddesi Kaptan Sokak No:15 , 0534 507 34 57
+42, Shelter38 , Pekmez Caddesi Yun Sokak No:13 , 0532 357 02 82
+42, Shelter39 , Aylin Caddesi Turkuaz Sokak No:13 , 0531 031 39 58 
+42, Shelter40 , Eski Caddesi Akin Sokak No:35 , 0543 295 48 63
+42, Shelter41 , Ceylan Caddesi Lila Sokak No:46 , 0530 503 29 45
+42, Shelter42 , Bulut Caddesi No:32 , 0537 384 28 17
+52, Shelter43 , Saygi Caddesi Havlu Sokak No:62 , 0532 455 18 78
+52, Shelter44 , Tepekoy Caddesi Kartopu Sokak No:43 , 0532 596 34 63
+52, Shelter45 , Kozan Caddesi Keskin Sokak No:51 , 0531 745 92 46
+52, Shelter46 , Eren Caddesi Goldibi Sokak No:50 , 0543 643 50 24
+52, Shelter46 , Karakaya Caddesi Gazi Sokak No:101 , 0542 693 29 53
+52, Shelter47 , Koy Caddesi Halk Sokak No:74 , 0543 583 28 53
+58, Shelter48 , Cekirdek Caddsi Sazlik Sokak No:56 , 0542 563 24 96
+58, Shelter49 , Yassi Caddesi Emrez Sokak No:76 , 0532 595 35 74
+58, Shelter50 , Aslan Caddesi No:79 , 0532 865 39 76
+58, Shelter51 , As Caddesi Sicim Sokak No:66 , 0532 652 87 23
+58, Shelter52 , Beyaz Caddesi Zaman Sokak No:70 , 0542 694 28 53 
+58, Shelter53 , Kale Caddesi Pokemon Sokak No:01 , 0537 583 60 28

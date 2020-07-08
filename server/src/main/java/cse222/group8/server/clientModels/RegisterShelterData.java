@@ -25,6 +25,13 @@ public class RegisterShelterData extends ShelterAddressData{
      */
     public int dogCapacity;
 
+
+    /**
+     * Instantiates a new Register shelter data.
+     */
+    public RegisterShelterData(){
+        super();
+    }
     /**
      * Instantiates a new Register shelter data.
      *

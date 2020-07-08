@@ -95,20 +95,16 @@ public class Animal implements Comparable<Animal> {
 	 * @return the boolean
 	 */
 	public boolean updateAnimal(Animal animal) {
-		if(animal.id == id){
-			this.name = animal.name;
-			this.kind = animal.kind;
-			this.gender = animal.gender;
-			this.age = animal.age;
-			this.vaccination = animal.vaccination;
-			this.neutered = animal.neutered;
-			this.info = animal.info;
-			this.imageString = animal.imageString;
-			this.shelterDate = animal.shelterDate;
-			this.diseased = animal.diseased;
-			return true;
-		}
-		return false;
+		this.name = animal.name;
+		this.kind = animal.kind;
+		this.gender = animal.gender;
+		this.age = animal.age;
+		this.vaccination = animal.vaccination;
+		this.neutered = animal.neutered;
+		this.info = animal.info;
+		this.shelterDate = animal.shelterDate;
+		this.diseased = animal.diseased;
+		return true;
 	}
 
 	/**

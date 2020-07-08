@@ -9,6 +9,7 @@ import cse222.group8.desktop.client.models.AnimalData;
 import cse222.group8.desktop.client.models.GeneralShelterData;
 import cse222.group8.desktop.client.models.Token;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -20,14 +21,18 @@ public class ConsoleUI {
     private String cityName;
     private String townName;
     private String shelterName;
+    private String password;
     private GeneralShelterData generalShelterData;
 
-    private boolean getYN(String message){
-        System.out.print(message);
+    private boolean getYN(){
         String choice = scanner.nextLine();
         if(choice.equals("y")) return true;
         if(choice.equals("n")) return false;
-        return getYN(message);
+        return getYN();
+    }
+    private boolean getYN(String message){
+        System.out.print(message);
+        return getYN();
     }
     private void login() throws ConnectionError {
         System.out.println("Login");
@@ -49,6 +54,7 @@ public class ConsoleUI {
                             cityName = city;
                             townName = town;
                             shelterName = shelter;
+                            this.password = password;
                             return;
                         } catch (WrongPasswordException ignore) {
                             System.out.println("Wrong password");
@@ -77,7 +83,12 @@ public class ConsoleUI {
         int choice = -1;
         while(choice<0||choice>9){
             printMainMenu();
-            choice = scanner.nextInt();
+            String text = scanner.nextLine().trim();
+            try{
+                choice = Integer.parseInt(text);
+            }catch (NumberFormatException ignore){
+                choice = -1;
+            }
         }
         return choice;
     }
@@ -106,14 +117,14 @@ public class ConsoleUI {
         if(getYN("Do you want to change dog capacity?")) dogCapacityChangeRequest();
     }
     private void catCapacityChangeRequest() throws ConnectionError {
-        System.out.println("Enter new capacity for the cats, current is"+generalShelterData.catCapacity+":");
+        System.out.println("Enter new capacity for the cats, current is "+generalShelterData.catCapacity+":");
         int newCapacity = scanner.nextInt();
-        Client.updateCapacity(token,newCapacity,"cats");
+        Client.updateCapacity(token,newCapacity,"Cat");
     }
     private void dogCapacityChangeRequest() throws ConnectionError {
-        System.out.println("Enter new capacity for the cats, current is"+generalShelterData.catCapacity+":");
+        System.out.println("Enter new capacity for the dogs, current is "+generalShelterData.dogCapacity+":");
         int newCapacity = scanner.nextInt();
-        Client.updateCapacity(token,newCapacity,"dogs");
+        Client.updateCapacity(token,newCapacity,"Dog");
     }
     private void changeName() throws ConnectionError {
         System.out.print("Enter new name: ");
@@ -124,6 +135,9 @@ public class ConsoleUI {
         }
         Client.updateName(token,newName);
         this.shelterName = newName;
+        try {
+            token = Client.login(cityName,townName,shelterName,password);
+        } catch (WrongPasswordException ignore) {}
         generalShelterData = Client.getGeneralShelterData(token);
     }
     private void changePassword() throws ConnectionError {
@@ -137,7 +151,7 @@ public class ConsoleUI {
         try {
             animal = Client.getMostDiseasedAnimal(token);
             System.out.print("Most diseased animal is: ");
-            System.out.println("ID: " + animal.id + " Name " + animal.name + " Animal Type: " + animal.breed + " Kind: " + animal.kind);
+            System.out.println("ID:" + animal.id + " Name:" + animal.name + " Animal Type:" + animal.breed + " Kind:" + animal.kind);
         } catch (NotFound notFound) {
             System.out.println("There is no diseased animal");
         }

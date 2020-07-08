@@ -226,12 +226,22 @@ public class JavalinServer implements Runnable {
         RegisterShelterData data;
         try {
             data = mapper.readValue(ctx.body(), RegisterShelterData.class);
+
             City city = system.getCity(data.city);
+            City city2 = system.getCity(data.city);
+
             Town town = city.getTown(data.town);
-            system.addNewShelterRequest(new ShelterRequest(data.city,data.town,new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password,system)));
+            ShelterRequest shelterRequest = new ShelterRequest(city, data.town,
+                    new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password));
+            system.addNewShelterRequest(shelterRequest);
+            Token token = new Token();
+            token.accessToken = createShelterToken(data.city,data.town,data.shelterName);
+            ctx.json(token);
+
             ctx.status(200);
         } catch (Exception e) {
             ctx.status(432);
+            e.printStackTrace();
             return;
         }
     }
@@ -240,8 +250,13 @@ public class JavalinServer implements Runnable {
         String townName = ctx.header("Town");
         String shelterName = ctx.header("ShelterName");
         Shelter shelter = system.getShelter(cityName,townName,shelterName);
+        if(shelter == null){
+            ctx.json(false);
+        }
+        else{
+            ctx.json(true);
+        }
         ctx.status(200);
-        ctx.json(shelter.isRegistered());
     }
     private void shelterLogin(Context ctx){
         ObjectMapper mapper = JavalinJackson.getObjectMapper();
@@ -575,11 +590,11 @@ public class JavalinServer implements Runnable {
                     try {
                         data = mapper.readValue(ctx.body(), int.class);
                         String animalType = ctx.header("AnimalType");
-                        if(animalType == "Cat"){
-                            shelter.makeCapChangeRequest(data,shelter.getDogCapacity());
+                        if(animalType.equals("Cat")){
+                            shelter.makeCapChangeRequest(data,shelter.getDogCapacity(), system);
                         }
-                        else if(animalType == "Dog"){
-                            shelter.makeCapChangeRequest(shelter.getCatCapacity(),data);
+                        else if(animalType.equals("Dog")){
+                            shelter.makeCapChangeRequest(shelter.getCatCapacity(),data, system);
                         }
                         ctx.status(200);
                     }catch (Exception ignore){
@@ -887,6 +902,7 @@ public class JavalinServer implements Runnable {
                     Shelter shelter = getShelterFromJWT(jwt);
                     try {
                         Animal animal = shelter.getDiseasedAnimals().peek().getAnimal();
+                        System.out.println(shelter.getDiseasedAnimals());
                         ctx.json(new AnimalData(animal.getId(), animal.getName(), animal.getId() % 2 == 1 ? "Cat" : "Dog", animal.getKind(), animal.getGender(), animal.getAge(), animal.getVaccination(), animal.isNeutered(), animal.getInfo(), animal.getAdoptionRequest() != null));
                         ctx.status(200);
                     }catch (NullPointerException ignore){

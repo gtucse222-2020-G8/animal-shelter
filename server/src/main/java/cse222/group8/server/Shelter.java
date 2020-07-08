@@ -4,6 +4,7 @@ import cse222.group8.server.DataStructures.AVLTree;
 import cse222.group8.server.DataStructures.BinarySearchTree;
 import cse222.group8.server.DataStructures.SkipList;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -19,7 +20,6 @@ public class Shelter implements Comparable<Shelter> {
     private String password;
     private City city;
     private Town town;
-    private ShelterSystem shelterSystem;
     private int catCapacity;
     private int dogCapacity;
     private AVLTree<Animal> dogs;
@@ -46,8 +46,8 @@ public class Shelter implements Comparable<Shelter> {
         adopteds = new SkipList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
-        registered = false;
-
+        registered = true;
+        diseasedAnimals = new PriorityQueue<Disease>((o1, o2) -> Integer.compare(o2.getPriority(),o1.getPriority()));
     }
 
     /**
@@ -61,9 +61,8 @@ public class Shelter implements Comparable<Shelter> {
      * @param address     the address
      * @param phoneNumber the phone number
      * @param password    the password
-     * @param system      the system
      */
-    public Shelter(String name, City city, Town town, int catCapacity, int dogCapacity, String address, String phoneNumber, String password, ShelterSystem system){
+    public Shelter(String name, City city, Town town, int catCapacity, int dogCapacity, String address, String phoneNumber, String password){
         this.name = name;
         this.city = city;
         this.town = town;
@@ -74,13 +73,13 @@ public class Shelter implements Comparable<Shelter> {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        shelterSystem = system;
         cats = new AVLTree<Animal>();
         dogs = new AVLTree<Animal>();
         adopteds = new SkipList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
-        registered = false;
+        registered = true;
+        diseasedAnimals = new PriorityQueue<Disease>((o1, o2) -> Integer.compare(o2.getPriority(),o1.getPriority()));
     }
     /**
      * Approve adoption request.
@@ -90,7 +89,8 @@ public class Shelter implements Comparable<Shelter> {
     public boolean approveAdoptionRequest(int requestID) {
 
         if(requestID>=0 && requestID<getAdoptionRequests().size()) {
-
+            AdoptionRequest request = getAdoptionRequests().get(requestID);
+            request.getRequester().getRequests().remove(request);
             Animal reqAnimal = getAdoptionRequests().get(requestID).getRequestedAnimal(); // requested animal
             getAdoptionRequests().remove(requestID); //remove element at requestID index
             reqAnimal.setAdopted(true); // animal is adopted now
@@ -236,6 +236,14 @@ public class Shelter implements Comparable<Shelter> {
     	return false;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     /**
      * Make cap change request capacity change request.
      *
@@ -243,7 +251,7 @@ public class Shelter implements Comparable<Shelter> {
      * @param dogCap the dog cap
      * @return the capacity change request
      */
-    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap) {
+    public CapacityChangeRequest makeCapChangeRequest(int catCap, int dogCap, ShelterSystem shelterSystem) {
         CapacityChangeRequest newChangeRequest = new CapacityChangeRequest(city.getName(),town.getName(),this,dogCap,catCap);
         shelterSystem.addCapChangeRequest(newChangeRequest);
     	return newChangeRequest;

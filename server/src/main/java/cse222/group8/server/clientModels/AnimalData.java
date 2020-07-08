@@ -63,6 +63,7 @@ public class AnimalData {
      * @param info           the info
      * @param adoptRequested the adopt requested
      */
+    public AnimalData(){}
     public AnimalData(int id, String name, String breed, String kind, char gender, int age, String vaccination, boolean neutered, String info, boolean adoptRequested){
         this.id = id;
         this.name = name;

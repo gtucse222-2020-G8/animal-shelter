@@ -17,7 +17,7 @@
          <Insets/>
       </HBox.margin>
    </ImageView>
-   <Label fx:id="topPanelShelterName" text="Shelter Name">
+   <Label fx:id="topPanelShelterName" text="Animal Shelter">
       <font>
          <Font name="System Bold" size="34.0"/>
       </font>

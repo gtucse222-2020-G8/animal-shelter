@@ -3,6 +3,8 @@ package cse222.group8.server;
 
 import  cse222.group8.server.DataStructures.BinarySearchTree;
 
+import java.util.Iterator;
+
 /**
  * The type City.
  */
@@ -10,7 +12,8 @@ public class City implements Comparable<City>{
 
 	private int cityId;
     private String name;
-    private ShelterSystem shelterSystem;
+
+
     /**
      * The Towns.
      */
@@ -21,12 +24,10 @@ public class City implements Comparable<City>{
      *
      * @param cityName the city name
      * @param cityId   the city ıd
-     * @param system   the system
      */
-    public City(String cityName, int cityId, ShelterSystem system){
+    public City(String cityName, int cityId){
         this.name = cityName;
         this.cityId = cityId;
-        shelterSystem = system;
         towns = new BinarySearchTree<Town>();
     }
 
@@ -64,19 +65,28 @@ public class City implements Comparable<City>{
      * @return the town
      */
     public Town getTown(String townName){
-    	Town town = towns.find(new Town(townName,this,shelterSystem));
-    	if(town == null)
-    		return null;
-    	return town;
+        return towns.find(new Town(townName, this));
+    }
+
+
+    public Town getTownByNumber(int number){
+        if(number < 0 || number > towns.size()){
+            throw new NullPointerException();
+        }
+        Iterator<Town> iterator =  towns.iterator();
+        Town town;
+        int count = 0;
+        while(iterator.hasNext()){
+            town = iterator.next();
+            if(count == number) return town;
+            count++;
+        }
+        return null;
     }
 
     @Override
     public int compareTo(City o) {
-        if(cityId == o.cityId )
-            return 0;
-        else if(cityId > o.cityId) return 1;
-        else
-            return -1;
+        return name.compareTo(o.getName());
     }
 
     /**
