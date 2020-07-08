@@ -234,6 +234,9 @@ public class JavalinServer implements Runnable {
             ShelterRequest shelterRequest = new ShelterRequest(city, data.town,
                     new Shelter(data.shelterName,city,town,data.catCapacity,data.dogCapacity,data.address,data.phoneNumber,data.password));
             system.addNewShelterRequest(shelterRequest);
+            Token token = new Token();
+            token.accessToken = createShelterToken(data.city,data.town,data.shelterName);
+            ctx.json(token);
 
             ctx.status(200);
         } catch (Exception e) {

@@ -55,7 +55,9 @@ public class Main {
 			Thread.sleep(4000);
 		} catch (InterruptedException ignore) {}
 		ui.run();
+		executor.shutdown();
 		javalinThread.stop();
+		System.exit(0);
 	}
 
 	public static void systemTest(){
