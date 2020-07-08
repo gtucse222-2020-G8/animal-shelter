@@ -43,6 +43,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -75,6 +76,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -107,6 +109,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -141,6 +144,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -175,6 +179,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -211,6 +216,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -243,6 +249,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -282,6 +289,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -318,6 +326,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -357,6 +366,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -394,6 +404,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -426,6 +437,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -460,6 +472,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -484,6 +497,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -530,6 +544,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -586,6 +601,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -620,6 +636,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -652,6 +669,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -684,6 +702,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -719,6 +738,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -751,6 +771,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -783,6 +804,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -815,6 +837,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -847,6 +870,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -879,6 +903,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -914,6 +939,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -947,6 +973,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }
@@ -977,6 +1004,7 @@ public class Client {
                 throw new ConnectionError();
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             throw new ConnectionError();
         }
     }

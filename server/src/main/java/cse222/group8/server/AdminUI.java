@@ -188,7 +188,7 @@ public class AdminUI {
 				+ "Town: %s\n"
 				+ "Cat capacity: %s\n"
 				+ "Dog capacity: %s\n"
-				, shelter.getName(), request.city, request.town, 
+				, shelter.getName(), request.city.getName(), request.town,
 				shelter.getCatCapacity(), shelter.getDogCapacity());
 		
 	}

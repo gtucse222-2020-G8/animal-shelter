@@ -238,6 +238,7 @@ public class JavalinServer implements Runnable {
             ctx.status(200);
         } catch (Exception e) {
             ctx.status(432);
+            e.printStackTrace();
             return;
         }
     }
@@ -246,8 +247,13 @@ public class JavalinServer implements Runnable {
         String townName = ctx.header("Town");
         String shelterName = ctx.header("ShelterName");
         Shelter shelter = system.getShelter(cityName,townName,shelterName);
+        if(shelter == null){
+            ctx.json(false);
+        }
+        else{
+            ctx.json(shelter.isRegistered());
+        }
         ctx.status(200);
-        ctx.json(shelter.isRegistered());
     }
     private void shelterLogin(Context ctx){
         ObjectMapper mapper = JavalinJackson.getObjectMapper();

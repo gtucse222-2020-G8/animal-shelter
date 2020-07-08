@@ -196,6 +196,7 @@ public class ShelterSystem {
     	if(town == null) {
     		return false;
     	}
+    	requestedShelter.shelter.register();
     	return town.addShelter(requestedShelter.shelter)!=null;
     }
     
@@ -245,7 +246,7 @@ public class ShelterSystem {
      * @return Shelter reference if succeed, else null.
      */
     public Shelter getShelter(String cityName, String townName, String shelterName) {
-    	City city = cities.find(new City(cityName, 0));
+    	City city = getCity(cityName);
     	if(city == null) {
     		return null;
     	}
