@@ -270,14 +270,13 @@ public class ShelterSystem {
      * @return City reference
      */
     public City getCity(String cityName) {
-    	
     	return cities.find(new City(cityName,0));
     	
     }
     
 
     public City getCity(int cityId){
-		return cities.find(new City("",cityId));
+		return cityIds.get(cityId);
 	}
     
     

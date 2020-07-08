@@ -70,7 +70,9 @@ public class HomePageController implements PageWithTokenController {
         model.addListenerToTaskNames(change -> {
             LinkedList<Label> labels = new LinkedList<Label>();
             for(String text : model.getActiveTasks()){
-                labels.add(new Label(text));
+                Label label = new Label(text);
+                label.setPrefHeight(30);
+                labels.add(label);
             }
             dailyTaskVBox.getChildren().setAll(labels);
         });

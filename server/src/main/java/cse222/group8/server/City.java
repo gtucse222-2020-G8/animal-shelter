@@ -86,11 +86,7 @@ public class City implements Comparable<City>{
 
     @Override
     public int compareTo(City o) {
-        if(cityId == o.cityId )
-            return 0;
-        else if(cityId > o.cityId) return 1;
-        else
-            return -1;
+        return name.compareTo(o.getName());
     }
 
     /**
