@@ -46,7 +46,7 @@ public class Shelter implements Comparable<Shelter> {
         adopteds = new SkipList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
-        registered = true;
+        registered = false;
         diseasedAnimals = new PriorityQueue<Disease>((o1, o2) -> Integer.compare(o2.getPriority(),o1.getPriority()));
     }
 
@@ -78,7 +78,7 @@ public class Shelter implements Comparable<Shelter> {
         adopteds = new SkipList<Animal>();
         adoptionRequests = new LinkedList<AdoptionRequest>();
         tasks = new LinkedList<Task>();
-        registered = true;
+        registered = false;
         diseasedAnimals = new PriorityQueue<Disease>((o1, o2) -> Integer.compare(o2.getPriority(),o1.getPriority()));
     }
     /**
