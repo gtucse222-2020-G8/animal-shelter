@@ -254,7 +254,7 @@ public class JavalinServer implements Runnable {
             ctx.json(false);
         }
         else{
-            ctx.json(shelter.isRegistered());
+            ctx.json(true);
         }
         ctx.status(200);
     }
@@ -590,10 +590,10 @@ public class JavalinServer implements Runnable {
                     try {
                         data = mapper.readValue(ctx.body(), int.class);
                         String animalType = ctx.header("AnimalType");
-                        if(animalType == "Cat"){
+                        if(animalType.equals("Cat")){
                             shelter.makeCapChangeRequest(data,shelter.getDogCapacity(), system);
                         }
-                        else if(animalType == "Dog"){
+                        else if(animalType.equals("Dog")){
                             shelter.makeCapChangeRequest(shelter.getCatCapacity(),data, system);
                         }
                         ctx.status(200);

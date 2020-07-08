@@ -9,6 +9,7 @@ import cse222.group8.desktop.client.models.AnimalData;
 import cse222.group8.desktop.client.models.GeneralShelterData;
 import cse222.group8.desktop.client.models.Token;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -22,12 +23,15 @@ public class ConsoleUI {
     private String shelterName;
     private GeneralShelterData generalShelterData;
 
-    private boolean getYN(String message){
-        System.out.print(message);
+    private boolean getYN(){
         String choice = scanner.nextLine();
         if(choice.equals("y")) return true;
         if(choice.equals("n")) return false;
-        return getYN(message);
+        return getYN();
+    }
+    private boolean getYN(String message){
+        System.out.print(message);
+        return getYN();
     }
     private void login() throws ConnectionError {
         System.out.println("Login");
@@ -106,14 +110,14 @@ public class ConsoleUI {
         if(getYN("Do you want to change dog capacity?")) dogCapacityChangeRequest();
     }
     private void catCapacityChangeRequest() throws ConnectionError {
-        System.out.println("Enter new capacity for the cats, current is"+generalShelterData.catCapacity+":");
+        System.out.println("Enter new capacity for the cats, current is "+generalShelterData.catCapacity+":");
         int newCapacity = scanner.nextInt();
-        Client.updateCapacity(token,newCapacity,"cats");
+        Client.updateCapacity(token,newCapacity,"Cat");
     }
     private void dogCapacityChangeRequest() throws ConnectionError {
-        System.out.println("Enter new capacity for the cats, current is"+generalShelterData.catCapacity+":");
+        System.out.println("Enter new capacity for the dogs, current is "+generalShelterData.dogCapacity+":");
         int newCapacity = scanner.nextInt();
-        Client.updateCapacity(token,newCapacity,"dogs");
+        Client.updateCapacity(token,newCapacity,"Dog");
     }
     private void changeName() throws ConnectionError {
         System.out.print("Enter new name: ");

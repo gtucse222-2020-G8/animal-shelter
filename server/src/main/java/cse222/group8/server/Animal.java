@@ -102,7 +102,6 @@ public class Animal implements Comparable<Animal> {
 		this.vaccination = animal.vaccination;
 		this.neutered = animal.neutered;
 		this.info = animal.info;
-		this.imageString = animal.imageString;
 		this.shelterDate = animal.shelterDate;
 		this.diseased = animal.diseased;
 		return true;
