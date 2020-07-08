@@ -21,6 +21,7 @@ public class ConsoleUI {
     private String cityName;
     private String townName;
     private String shelterName;
+    private String password;
     private GeneralShelterData generalShelterData;
 
     private boolean getYN(){
@@ -53,6 +54,7 @@ public class ConsoleUI {
                             cityName = city;
                             townName = town;
                             shelterName = shelter;
+                            this.password = password;
                             return;
                         } catch (WrongPasswordException ignore) {
                             System.out.println("Wrong password");
@@ -81,7 +83,12 @@ public class ConsoleUI {
         int choice = -1;
         while(choice<0||choice>9){
             printMainMenu();
-            choice = scanner.nextInt();
+            String text = scanner.nextLine().trim();
+            try{
+                choice = Integer.parseInt(text);
+            }catch (NumberFormatException ignore){
+                choice = -1;
+            }
         }
         return choice;
     }
@@ -128,6 +135,9 @@ public class ConsoleUI {
         }
         Client.updateName(token,newName);
         this.shelterName = newName;
+        try {
+            token = Client.login(cityName,townName,shelterName,password);
+        } catch (WrongPasswordException ignore) {}
         generalShelterData = Client.getGeneralShelterData(token);
     }
     private void changePassword() throws ConnectionError {
@@ -141,7 +151,7 @@ public class ConsoleUI {
         try {
             animal = Client.getMostDiseasedAnimal(token);
             System.out.print("Most diseased animal is: ");
-            System.out.println("ID: " + animal.id + " Name " + animal.name + " Animal Type: " + animal.breed + " Kind: " + animal.kind);
+            System.out.println("ID:" + animal.id + " Name:" + animal.name + " Animal Type:" + animal.breed + " Kind:" + animal.kind);
         } catch (NotFound notFound) {
             System.out.println("There is no diseased animal");
         }

@@ -902,6 +902,7 @@ public class JavalinServer implements Runnable {
                     Shelter shelter = getShelterFromJWT(jwt);
                     try {
                         Animal animal = shelter.getDiseasedAnimals().peek().getAnimal();
+                        System.out.println(shelter.getDiseasedAnimals());
                         ctx.json(new AnimalData(animal.getId(), animal.getName(), animal.getId() % 2 == 1 ? "Cat" : "Dog", animal.getKind(), animal.getGender(), animal.getAge(), animal.getVaccination(), animal.isNeutered(), animal.getInfo(), animal.getAdoptionRequest() != null));
                         ctx.status(200);
                     }catch (NullPointerException ignore){

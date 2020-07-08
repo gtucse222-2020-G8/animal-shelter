@@ -960,6 +960,8 @@ public class Client {
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .setHeader("Content-Type", "application/json")
                 .setHeader("Authorization", "Bearer "+token.accessToken)
+                .setHeader("AnimalId",String.valueOf(animalId))
+                .setHeader("DiseaseLevel",String.valueOf(diseaseLevel))
                 .uri(uri)
                 .build();
         try {
